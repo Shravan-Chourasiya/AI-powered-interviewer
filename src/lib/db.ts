@@ -9,7 +9,7 @@ const connection: connectionObject={};
 async function dbConn(): Promise<void> {
     if (connection.isConnected) return console.log('DB Connection already exists !!')
     try {
-        let db=await mongoose.connect(process.env.MONGODB_URI || '')
+        const db=await mongoose.connect(process.env.MONGODB_URI || '')
         connection.isConnected=db.connections[0].readyState;
         console.log('DB Connection Successful !!');
 
