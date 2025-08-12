@@ -39,9 +39,9 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## API EndPoints 
+## API Endpoints
 
-registering user -->/sign-up
-Signing in user -->/sign-in
-verifying email -->/verify-mail
-check username availability -->/check-username
+- Register user: `/sign-up`
+- Sign in user: `/sign-in`
+- Verify email: `/verify-mail`
+- Check username availability: `/check-username`
