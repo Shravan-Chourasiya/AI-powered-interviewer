@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
         if (verifiedExistingUserByUsername) return retRes(false, 'Verified user exists with this Username ', 400)
 
-        const ExistingUserByEmail = await UserModel.findOne({email})
+        const ExistingUserByEmail = await UserModel.findOne({ email })
 
         if (ExistingUserByEmail) {
             if (ExistingUserByEmail.isVerified) {
@@ -20,6 +20,8 @@ export async function POST(request: Request) {
                 const verifyCode = Math.floor(100000 + Math.random() * 900000).toString()
                 const hasedPass = await bcrypt.hash(password, 15)
                 const codeExpiryDate = new Date(Date.now() + 3600000)
+                const emailResponse = await sendVerificationEmail(email, username, verifyCode)
+                if (!emailResponse.success) return retRes(false, emailResponse.message, 500)
 
                 ExistingUserByEmail.password = hasedPass
                 ExistingUserByEmail.verifyCode = verifyCode
@@ -47,6 +49,7 @@ export async function POST(request: Request) {
             const emailResponse = await sendVerificationEmail(email, username, verifyCode)
 
             if (!emailResponse.success) return retRes(false, emailResponse.message, 500)
+            console.log(emailResponse, emailResponse.success);
             return retRes(true, 'User registered Successfully | Please verify your Email!!', 201)
         }
 
