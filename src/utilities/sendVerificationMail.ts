@@ -1,6 +1,19 @@
-import { resend } from "@/lib/resendEmail";
 import VerificationEmail from "@/emailTemplates/verificationEmail";
 import { ApiResponse } from "../types/ApiResponse";
+import nodemailer from "nodemailer"
+import { render } from '@react-email/components';
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
+
+
 
 export async function sendVerificationEmail(
     email: string,
@@ -8,13 +21,21 @@ export async function sendVerificationEmail(
     verifycode: string
 ): Promise<ApiResponse> {
     try {
-        const emailSent = await resend.emails.send({
-            from: 'onboarding@resend.dev',
+        // const emailSent = await resend.emails.send({
+        //     from: 'onboarding@resend.dev',
+        //     to: email,
+        //     subject: 'Ai Interviewer | Verification Code ',
+        //     react: VerificationEmail({ username, verifycode })
+        // });
+        // console.log(emailSent);
+        const emailHtml = await render(VerificationEmail({ username, verifycode }));
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Ai Interviewer | Verification Code ',
-            react: VerificationEmail({ username, verifycode })
+            subject: 'Verification Code for Email | SyntheView.ai ',
+            html: emailHtml,
         });
-        console.log(emailSent);
+
         return {
             success: true,
             message: "Verification Email sent successfully !",
