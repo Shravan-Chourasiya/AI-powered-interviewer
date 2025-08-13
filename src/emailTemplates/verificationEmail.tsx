@@ -29,7 +29,10 @@ const VerificationEmail = ({ verifycode, username }: VerificationEmailProps) => 
             Thank you for signing up for <b>Ai Interviewer</b>.<br />
             Please use the following verification code to complete your registration:
           </Text>
-          <Section style={{ textAlign: "center", margin: "32px 0" }}>
+          <Text style={{ fontSize: 14, color: "#e53e3e", marginBottom: 24 }}>
+            <b>Note:</b> This verification code is only valid for 5 minutes.
+          </Text>
+          < Section style={{ textAlign: "center", margin: "32px 0" }}>
             <Text style={{
               display: "inline-block",
               fontSize: 32,
@@ -50,7 +53,7 @@ const VerificationEmail = ({ verifycode, username }: VerificationEmailProps) => 
         </Section>
       </Container>
     </Body>
-  </Html>
+  </Html >
 );
 
 export default VerificationEmail;
