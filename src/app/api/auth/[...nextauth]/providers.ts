@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import dbConn from "@/lib/db";
 import UserModel from "@/models/User.model";
 import { NextAuthOptions } from "next-auth";
