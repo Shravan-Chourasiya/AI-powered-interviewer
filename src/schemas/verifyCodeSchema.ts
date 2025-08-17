@@ -1,4 +1,4 @@
 import {z} from 'zod'
-export const verifyCode=z
-        .string()
-        .min(6,'Verification code must be atleast 6 Characters !')
+export const verifyCodeSchema=z.object({
+        code:z.string().length(6,'Verification code must be atleast 6 Characters !')
+})
