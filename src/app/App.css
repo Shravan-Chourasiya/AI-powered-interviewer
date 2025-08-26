@@ -1,0 +1,62 @@
+/* Dark Mode SignIn - Inline Styles Converted to CSS */
+
+/* Main Container Background */
+.dark-main-container {
+  background: #121212;
+}
+
+/* Card Container Background */
+.dark-card-container {
+  background-color: #1E1E1E;
+}
+
+/* Animated Background Elements */
+.dark-top-circle {
+  background: linear-gradient(135deg, #BB86FC, #03DAC6);
+}
+
+.dark-bottom-circle {
+  background: linear-gradient(45deg, #03DAC6, #CF6679);
+}
+
+/* Logo Icon Background */
+.dark-logo-icon {
+  background-color: #BB86FC;
+}
+
+/* Logo Text Color */
+.dark-logo-text {
+  color: #121212;
+}
+
+/* AI Interviewer Subtitle */
+.dark-subtitle {
+  color: #BB86FC;
+}
+
+/* Description Text */
+.dark-description {
+  color: #A1A1A1;
+}
+
+/* Form Labels */
+.dark-form-label {
+  color: #E0E0E0;
+}
+
+/* Submit Button */
+.dark-submit-button {
+  background: linear-gradient(135deg, #BB86FC, #03DAC6);
+  color: #121212;
+  border: none;
+}
+
+/* Footer Text */
+.dark-footer-text {
+  color: #A1A1A1;
+}
+
+/* Sign-up Link */
+.dark-signup-link {
+  color: #03DAC6;
+}
