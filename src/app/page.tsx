@@ -1,19 +1,29 @@
+import FieldCard from "@/components/FieldCard";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 export default function ComingSoon() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 text-white px-6">
-      <div className="text-center space-y-6">
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight animate-fade-in">
-          Something awesome is coming soon.
-        </h1>
-        <p className="text-lg md:text-xl text-gray-300">
-          We&apos;re working hard to launch our new experience. Stay tuned.
-        </p>
-        <div className="mt-8">
-          <span className="inline-block px-6 py-3 text-sm font-medium tracking-wide uppercase bg-white text-gray-900 rounded-full shadow-md hover:shadow-lg transition">
-            Notify Me
-          </span>
+    <main>
+      <div className="top-section flex flex-col justify-center items-center">
+        <div className="text-center flex flex-col justify-center items-center gap-4">
+          <h1>Know if you are Job ready</h1>
+          <h2>experience a real interview now </h2>
+          <div>
+            <h3>signup to Syntheview To tale ypu first interview</h3>
+            <h3>in you preffered field</h3>
+          </div>
+        </div>
+        <div className="btns flex justify-center items-center gap-5">
+          <Button><Link href='/sign-in'>get started &gt</Link>;</Button>
+          <Button><Link href='/about'>Know More ...</Link></Button>
         </div>
       </div>
-    </div>
+      <div className="image-sliders">
+       stacked carasoul
+
+       <FieldCard/>
+      </div>
+    </main>
   );
 }

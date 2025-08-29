@@ -1,0 +1,6 @@
+setup protected routes and unprotected routes
+implement isloggedin and not loggedin nvbar rendering 
+barebones structuring of each pages
+designing bareboned pages(Navbar and Footer)
+modify usermodel nd db to stores user given interviews list
+modify the shadcn Card to match my needs 
