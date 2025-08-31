@@ -11,6 +11,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
+import '../../../App.css'
 
 const VerifyAccount = () => {
     const router = useRouter()
@@ -34,125 +35,54 @@ const VerifyAccount = () => {
         }
     }
     return (
-        // copilot styling
-        // <div className="flex justify-center items-center min-h-screen bg-gray-50 px-4">
-        //     <div className="w-full max-w-md space-y-8 p-8 bg-white shadow-lg rounded-xl">
-        //         <div className="text-center space-y-2">
-        //             <h1 className="text-2xl font-bold text-gray-800">SyntheView – AI Interviewer</h1>
-        //             <p className="text-sm text-gray-600">Sign In To Take a Free Mock Interview</p>
-        //         </div>
-        //         <div>
-        //             <Form {...form}>
-        //                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        //                     <FormField
-        //                         name="code"
-        //                         control={form.control}
-        //                         render={({ field }) => (
-        //                             <FormItem>
-        //                                 <FormLabel className="text-sm font-medium text-gray-700">Verification Code</FormLabel>
-        //                                 <FormControl>
-        //                                     <Input
-        //                                         placeholder="Verification Code ..."
-        //                                         {...field}
-        //                                         className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        //                                     />
-        //                                 </FormControl>
-        //                                 <FormMessage className="text-sm text-red-500" />
-        //                             </FormItem>
-        //                         )}
-        //                     />
-        //                 </form>
-        //             </Form>
-        //         </div>
-        //     </div>
-        // </div>
-
-        //claude styling 
-        // <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-        //     <div className="w-full max-w-md space-y-8 p-8 bg-white shadow-2xl rounded-2xl border border-gray-100">
-        //         <div className="text-center space-y-3">
-        //             <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-        //                 SyntheView
-        //             </h1>
-        //             <div className="text-sm font-medium text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full inline-block">
-        //                 AI Interviewer
-        //             </div>
-        //             <p className="text-gray-600 text-sm leading-relaxed">
-        //                 Sign In To Take a Free Mock Interview
-        //             </p>
-        //         </div>
-
-        //         <div className="pt-4">
-        //             <Form {...form}>
-        //                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        //                     <FormField
-        //                         name="code"
-        //                         control={form.control}
-        //                         render={({ field }) => (
-        //                             <FormItem className="space-y-2">
-        //                                 <FormLabel className="text-sm font-medium text-gray-700">
-        //                                     Verification Code
-        //                                 </FormLabel>
-        //                                 <FormControl>
-        //                                     <Input
-        //                                         placeholder="Enter verification code..."
-        //                                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200 placeholder-gray-400"
-        //                                         {...field}
-        //                                     />
-        //                                 </FormControl>
-        //                                 <FormMessage className="text-sm text-red-600" />
-        //                             </FormItem>
-        //                         )}
-        //                     />
-
-        //                     <button
-        //                         type="submit"
-        //                         className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 shadow-lg hover:shadow-xl"
-        //                     >
-        //                         Verify & Continue
-        //                     </button>
-        //                 </form>
-        //             </Form>
-        //         </div>
-
-        //         <div className="text-center pt-4 border-t border-gray-100">
-        //             <p className="text-xs text-gray-500">
-        //                 Need help? <span className="text-indigo-600 hover:text-indigo-700 cursor-pointer font-medium">Contact Support</span>
-        //             </p>
-        //         </div>
-        //     </div>
-        // </div>
-
-
-        //My initial Styling  
-        <div className="flex justify-center items-center min-h-screen">
-            <div className="w-full max-w-md space-y-8 p-8 shadow-md rounded-lg">
-                <div>
-                    <h1>SyntheView - AI Interviewer </h1>
-                    <p>{`Sign In To Take a Free Mock Interview`}</p>
+        <div className="flex justify-center items-center min-h-screen dark-main-container">
+            <div className="w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl border border-gray-800 backdrop-blur-sm relative overflow-hidden dark-card-container">
+                
+                {/* Animated Background Elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-20 animate-pulse dark-top-circle"></div>
+                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10 animate-pulse dark-bottom-circle"></div>
+                
+                {/* Header Section */}
+                <div className="text-center space-y-3 pt-4">
+                    <div className="flex items-center justify-center space-x-2 mb-4">
+                        <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+                            SyntheView - AI Interviewer
+                        </h1>
+                    </div>
+                    <p className="text-sm opacity-80 dark-description">
+                        Enter the verification code sent to your email
+                    </p>
                 </div>
-                <div>
-                    <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                            <FormField
-                                name="code"
-                                control={form.control}
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Verification Code</FormLabel>
-                                        <FormControl>
-                                            <Input placeholder="Verification Code ..." {...field} />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <Button type="submit" >
-                                Sign In
-                            </Button>
-                        </form>
-                    </Form>
-                </div>
+                
+                {/* Form Section */}
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        <FormField
+                            name="code"
+                            control={form.control}
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className="dark-form-label">Verification Code</FormLabel>
+                                    <FormControl>
+                                        <Input 
+                                            className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 transition-all duration-200"
+                                            placeholder="Enter 6-digit code..." 
+                                            {...field} 
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button 
+                            type="submit" 
+                            className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform dark-submit-button"
+                        >
+                            Verify Account
+                            <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                        </Button>
+                    </form>
+                </Form>
             </div>
         </div>
     )

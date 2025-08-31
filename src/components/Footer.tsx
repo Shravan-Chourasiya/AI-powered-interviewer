@@ -5,38 +5,44 @@ import { Button } from './ui/button'
 
 function Footer() {
   return (
-    <footer className='bg-blue-400'>
-      <div className='flex justify-between items-start gap-4 p-4'>
-        <div className='flex justify-center items-start gap-4 w-2/3 h-full p-4 '>
-          <div className='bg-amber-700 w-1/2 h-full ml-0'>
-            <h2 className='text-xl'>Popular : </h2>
-            <ul className='text-lg'>
-              <li>DSA</li>
-              <li>AIML</li>
-              <li>Full Stack</li>
-              <li>Data Science</li>
-              <li>Java Developer</li>
-              <li>Frontend</li>
+    <footer className='bg-gray-900 border-t border-gray-800'>
+      <div className='flex flex-col lg:flex-row justify-between items-start gap-8 p-6 lg:p-8 max-w-6xl mx-auto'>
+        <div className='flex flex-col sm:flex-row justify-start items-start gap-8 w-full lg:w-2/3'>
+          <div className='w-full sm:w-1/2'>
+            <h2 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text '>Popular Categories</h2>
+            <ul className='space-y-2 text-gray-300'>
+              <li className='hover:text-purple-400 transition-colors duration-200'>DSA</li>
+              <li className='hover:text-purple-400 transition-colors duration-200'>AI/ML</li>
+              <li className='hover:text-purple-400 transition-colors duration-200'>Full Stack</li>
+              <li className='hover:text-purple-400 transition-colors duration-200'>Data Science</li>
+              <li className='hover:text-purple-400 transition-colors duration-200'>Java Developer</li>
+              <li className='hover:text-purple-400 transition-colors duration-200'>Frontend</li>
             </ul>
           </div>
-          <div className='bg-amber-500 w-1/2 h-full'>
-            <h3 className='text-xl'>Quick Links:</h3>
-            <ul className='text-lg'>
-              <li><Link href='/dashboard'>DashBoard</Link></li>
-              <li><Link href='/interviews'>Interviews</Link></li>
-              <li><Link href='/contact'>Contact Us</Link></li>
-              <li><Link href='/about'>About Us</Link></li>
+          <div className='w-full sm:w-1/2'>
+            <h3 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text'>Quick Links</h3>
+            <ul className='space-y-2 text-gray-300'>
+              <li><Link href='/dashboard' className='hover:text-purple-400 transition-colors duration-200'>Dashboard</Link></li>
+              <li><Link href='/interviews' className='hover:text-purple-400 transition-colors duration-200'>Interviews</Link></li>
+              <li><Link href='/contact' className='hover:text-purple-400 transition-colors duration-200'>Contact Us</Link></li>
+              <li><Link href='/about' className='hover:text-purple-400 transition-colors duration-200'>About Us</Link></li>
+              <li><Link href='/faqs' className='hover:text-purple-400 transition-colors duration-200'>FAQs</Link></li>
             </ul>
           </div>
         </div>
-        <div className='w-1/3 h-full'>
-          <Input className='w-full p-3' placeholder='Your Email...'/>
-          <textarea rows={7} placeholder='Your Message...'/>
-          <Button className='w-full p-3'>Send Message</Button>
+        <div className='w-full lg:w-1/3 space-y-4'>
+          <h3 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text '>Contact Us</h3>
+          <Input className='bg-gray-800/50 border-gray-700 focus:border-purple-400 text-white placeholder-gray-400' placeholder='Your Email...'/>
+          <textarea 
+            rows={4} 
+            placeholder='Your Message...'
+            className='w-full p-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 resize-none'
+          />
+          <Button className='w-full bg-gradient-to-r from-purple-500 to-teal-500 hover:scale-105 transition-all duration-300'>Send Message</Button>
         </div>
       </div>
-      <div className='text-center text-lg'>
-        © 2025 Sytheview AI. All rights reserved. <Link href='/privacy'>Privacy Policy</Link> | <Link href='/termspolicy'>Terms of Service</Link>
+      <div className='text-center py-4 border-t border-gray-800 text-gray-400'>
+        © 2025 SyntheView AI. All rights reserved. <Link href='/termsandpolicy' className='text-purple-400 hover:text-teal-400 transition-colors duration-200'>Privacy Policy</Link> | <Link href='/termsandpolicy' className='text-purple-400 hover:text-teal-400 transition-colors duration-200'>Terms of Service</Link>
       </div>
     </footer>
   )

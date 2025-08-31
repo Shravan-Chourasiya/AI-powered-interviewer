@@ -14,6 +14,7 @@ import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Loader2Icon } from 'lucide-react'
 import Link from "next/link"
+import '../../App.css'
 
 const SignUp = () => {
     const [username, setUsername] = useState('')
@@ -161,11 +162,23 @@ const SignUp = () => {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen">
-            <div className="w-full max-w-md space-y-8 p-8 shadow-md rounded-lg">
-                <div>
-                    <h1>SyntheView - AI Interviewer </h1>
-                    <p>{`Register To Take a Free ${selectedTechStack} Mock Interview`}</p>
+        <div className="flex justify-center items-center min-h-screen dark-main-container">
+            <div className="w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl border border-gray-800 backdrop-blur-sm relative overflow-hidden dark-card-container">
+                
+                {/* Animated Background Elements */}
+                <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-20 animate-pulse dark-top-circle"></div>
+                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10 animate-pulse dark-bottom-circle"></div>
+                
+                {/* Header Section */}
+                <div className="text-center space-y-3 pt-4">
+                    <div className="flex items-center justify-center space-x-2 mb-4">
+                        <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+                            SyntheView - AI Interviewer
+                        </h1>
+                    </div>
+                    <p className="text-sm opacity-80 dark-description">
+                        {`Register To Take a Free ${selectedTechStack} Mock Interview`}
+                    </p>
                 </div>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -174,17 +187,21 @@ const SignUp = () => {
                             name="username"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Username</FormLabel>
+                                    <FormLabel className="dark-form-label">Username</FormLabel>
                                     <FormControl>
-                                        <Input type="text" placeholder="Username ..." {...field}
+                                        <Input 
+                                            type="text" 
+                                            className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 transition-all duration-200"
+                                            placeholder="Username ..." 
+                                            {...field}
                                             onChange={(e) => {
                                                 field.onChange(e)
                                                 debounced(e.target.value)
                                             }}
                                         />
                                     </FormControl>
-                                    {isCheckingUsername && <Loader2Icon className="animate-spin" />}
-                                    <p className={`text-sm ${userMsg === "Username Is Available" ? "text-green-500" : "text-red-700"}`}>{userMsg}</p>
+                                    {isCheckingUsername && <Loader2Icon className="animate-spin text-purple-400" />}
+                                    <p className={`text-sm ${userMsg === "Username Is Available" ? "text-green-400" : "text-red-400"}`}>{userMsg}</p>
                                     <FormMessage />
                                 </FormItem>
                             )}
@@ -194,9 +211,13 @@ const SignUp = () => {
                             name="email"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Email</FormLabel>
+                                    <FormLabel className="dark-form-label">Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="Email ..." {...field} />
+                                        <Input 
+                                            className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 transition-all duration-200"
+                                            placeholder="Email ..." 
+                                            {...field} 
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -207,25 +228,47 @@ const SignUp = () => {
                             name="password"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Password</FormLabel>
+                                    <FormLabel className="dark-form-label">Password</FormLabel>
                                     <FormControl>
-                                        <Input type='password' placeholder="Password ..." {...field} />
+                                        <Input 
+                                            type='password' 
+                                            className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 transition-all duration-200"
+                                            placeholder="Password ..." 
+                                            {...field} 
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" disabled={isSubmitting}>
+                        <Button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform dark-submit-button"
+                        >
                             {isSubmitting ? (<>
-                                <Loader2Icon className="mr-4 h-4 w-4 animate-spin" />Please Wait!
-                            </>) : "Sign Up"}
+                                <Loader2Icon className="animate-spin mr-2" />
+                                Signing Up...
+                            </>) : (
+                                <>
+                                    Sign Up
+                                    <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                                </>
+                            )}
                         </Button>
                     </form>
                 </Form>
-                <div>
-                    <h1>Already Registered ? <Link href="/sign-in" className="text-blue-500 hover:text-blue-900">Click here</Link> To Login</h1>
+                
+                {/* Footer Section */}
+                <div className="text-center pt-4 border-t border-gray-800">
+                    <h1 className="text-sm dark-footer-text">
+                        Already have an account? {' '}
+                        <Link href="/sign-in" className="font-medium transition-colors duration-200 hover:underline dark-signup-link">
+                            Sign In
+                        </Link>
+                    </h1>
                 </div>
-            </div >
+            </div>
         </div>
     )
 }
