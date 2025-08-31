@@ -1,3 +1,181 @@
-setup protected routes and unprotected routes
-barebones structuring of each pages---> ongoing
-modify usermodel nd db to stores user given interviews list
+Setup protected routes and unprotected routes
+Barebones structuring of each page --> ongoing
+Modify user model and database to store user's interview history
+
+SELECTED APPROACH - Batch Evaluation:
+Most cost-effective with single AI API call
+
+DETAILED FLOW:
+
+1. Interview Initialization:
+   - Generate all questions using AI prompt (1 API call)
+   - Store questions in session/database
+   - Initialize empty answers array
+
+2. Question Display & Answer Collection:
+   - Display questions sequentially by round
+   - Store all answers locally in format:
+   [
+       { qid: 1, answer: "response", timeSpent: 120, round: "technical" },
+       { qid: 2, answer: "response", timeSpent: 180, round: "coding" },
+       { qid: 3, answer: "response", timeSpent: 90, round: "personality" }
+   ]
+   - No API calls during interview process
+   - Auto-save answers to prevent data loss
+
+3. Interview Completion:
+   - Send complete answers array to AI (1 API call)
+   - AI evaluates all answers with full context
+   - Generate comprehensive analysis and decision
+
+4. Results Display:
+   - Show final score and decision
+   - Display detailed feedback report
+   - Generate PDF reports if needed
+
+TOTAL API CALLS: 2 (Question generation + Final evaluation)
+
+OPTIMIZED AI PROMPTS:
+
+1. Question Generation:
+"You are an expert technical interviewer. Generate questions for a {position} role at {company}.
+
+Input Parameters (use either time OR count):
+- Technical: {techTime} minutes OR {techCount} questions
+- Coding: Always 1 question ({codingDifficulty} difficulty)
+- Personality: {personalityTime} minutes OR {personalityCount} questions
+
+Return ONLY valid JSON:
+[
+  {
+    "qid": 1,
+    "content": "question text",
+    "difficulty": "beginner|intermediate|expert",
+    "round": "technical|coding|personality",
+    "timeLimit": 300
+  }
+]
+
+Requirements:
+- Technical: Core concepts, algorithms, system design
+- Coding: Single practical problem, {codingDifficulty} level
+- Personality: Leadership, teamwork, problem-solving scenarios
+- If time provided: Generate appropriate question count for time limit
+- If count provided: Set reasonable time per question
+- Coding difficulty: intermediate for junior roles, expert for senior roles"
+
+2. Complete Interview Evaluation:
+"You are an expert interview evaluator. Analyze the candidate's complete interview performance.
+
+INPUT DATA:
+Questions: {questions}
+Answers: {allAnswers}
+
+Return ONLY valid JSON:
+{
+  "technicalRound": {
+    "correctAnswers": 0,
+    "totalQuestions": 0,
+    "score": 0,
+    "feedback": ["answer1 feedback", "answer2 feedback"]
+  },
+  "codingRound": {
+    "functionalityScore": 0,
+    "codeQuality": 0,
+    "optimizedSolution": "code here",
+    "feedback": "detailed feedback"
+  },
+  "personalityRound": {
+    "communicationScore": 0,
+    "culturalFit": 0,
+    "feedback": "assessment summary"
+  },
+  "finalDecision": {
+    "selected": true,
+    "reason": "explanation",
+    "message": "professional response"
+  },
+  "report": {
+    "strengths": ["strength1", "strength2"],
+    "weaknesses": ["weakness1", "weakness2"],
+    "improvements": ["tip1", "tip2"],
+    "nextSteps": ["advice1", "advice2"]
+  }
+}
+
+EVALUATION CRITERIA:
+- Technical: ≥5 correct = pass
+- Coding: ≥70% functionality = pass
+- Selection: Both criteria must be met
+- Scores: 0-100 scale"
+
+SELECTION CRITERIA:
+- Technical: ≥5 correct answers (out of total)
+- Coding: ≥70% functionality score
+- Final decision: Both criteria must be met for selection
+- Scoring: All scores on 0-100 scale for consistency
+
+PDF GENERATION FLOW:
+
+Approach: Client-side PDF generation (No additional API costs)
+
+1. Receive AI evaluation JSON response
+2. Parse evaluation data into structured format
+3. Generate PDF using client-side library (jsPDF or Puppeteer)
+4. Create two separate PDFs:
+
+Answer Key PDF:
+- Questions with correct answers
+- Explanations for each answer
+- Optimized code solutions
+- Scoring breakdown
+
+Interview Analysis PDF:
+- Candidate performance summary
+- Round-wise scores and feedback
+- Strengths and weaknesses
+- Improvement recommendations
+- Final decision with reasoning
+
+Implementation:
+```
+const generatePDFs = (evaluationData) => {
+  // Answer Key PDF
+  const answerKeyPDF = new jsPDF();
+  answerKeyPDF.text('Interview Answer Key', 20, 20);
+  // Add questions, answers, explanations
+  
+  // Analysis PDF
+  const analysisPDF = new jsPDF();
+  analysisPDF.text('Interview Analysis Report', 20, 20);
+  // Add scores, feedback, recommendations
+  
+  return { answerKeyPDF, analysisPDF };
+};
+```
+
+FREE PDF LIBRARIES:
+
+Client-side (Browser):
+- jsPDF: Lightweight, pure JavaScript, good for simple text/tables
+- PDFLib: Modern, supports forms, annotations, encryption
+- html2pdf.js: Convert HTML/CSS directly to PDF
+- Fabric.js + jsPDF: For complex layouts with graphics
+- React-PDF: Component-based PDF generation for React apps
+
+Server-side (Node.js):
+- Puppeteer: HTML to PDF, excellent formatting, headless Chrome
+- PDFKit: Programmatic PDF creation, vector graphics support
+- jsPDF (Node): Same as client-side but server-rendered
+- html-pdf: HTML string to PDF conversion
+- wkhtmltopdf: Command-line tool, high-quality output
+
+Installation:
+```
+npm install jspdf html2pdf.js puppeteer pdfkit
+```
+
+Recommended Approach:
+1. Client-side: html2pdf.js (HTML/CSS to PDF)
+2. Server-side: Puppeteer (best quality)
+3. Lightweight: jsPDF (minimal bundle size)
