@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import StackedImageSlider from "@/components/StackedImageSlider";
 import '../App.css';
 
 const Homepage = () => {
@@ -34,10 +35,12 @@ const Homepage = () => {
                 </div>
             </div>
             
-            <div className="pb-16 text-center">
-                <div className="text-gray-400 text-lg">
-                    Interview carousel coming soon...
+            <div className="pb-16 px-4">
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl font-bold text-white mb-4">Experience AI-Powered Interviews</h2>
+                    <p className="text-gray-400 text-lg">Discover how our platform helps you ace your next interview</p>
                 </div>
+                <StackedImageSlider />
             </div>
         </main>
     );

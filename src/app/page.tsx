@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import './App.css';
 
-export default function ComingSoon() {
+export default function LandingPage() {
   return (
     <main className="min-h-screen bg-gray-900 relative overflow-hidden">
       {/* Animated Background Elements */}
