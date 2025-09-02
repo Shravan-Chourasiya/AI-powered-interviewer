@@ -2,6 +2,12 @@ Setup protected routes and unprotected routes
 Barebones structuring of each page --> ongoing
 Modify user model and database to store user's interview history
 
+
+
+Gemini 2.5 Flash
+Gemini 2.5 Flash Preview TTS
+
+
 SELECTED APPROACH - Batch Evaluation:
 Most cost-effective with single AI API call
 
@@ -45,7 +51,7 @@ Input Parameters (use either time OR count):
 - Coding: Always 1 question ({codingDifficulty} difficulty)
 - Personality: {personalityTime} minutes OR {personalityCount} questions
 
-Return ONLY valid JSON:
+Return ONLY in JSON:
 [
   {
     "qid": 1,
@@ -71,7 +77,7 @@ INPUT DATA:
 Questions: {questions}
 Answers: {allAnswers}
 
-Return ONLY valid JSON:
+Return in JSON:
 {
   "technicalRound": {
     "correctAnswers": 0,

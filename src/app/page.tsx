@@ -1,4 +1,4 @@
-import FieldCard from "@/components/FieldCard";
+'use client'
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import './App.css';
@@ -40,7 +40,6 @@ export default function ComingSoon() {
       </div>
       
       <div className="pb-16">
-        <FieldCard/>
       </div>
     </main>
   );
