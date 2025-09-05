@@ -43,32 +43,51 @@ TOTAL API CALLS: 2 (Question generation + Final evaluation)
 
 OPTIMIZED AI PROMPTS:
 
-1. Question Generation:
-"You are an expert technical interviewer. Generate questions for a {position} role at {company}.
+# Technical Interview Question Generator
 
-Input Parameters (use either time OR count):
-- Technical: {techTime} minutes OR {techCount} questions
-- Coding: Always 1 question ({codingDifficulty} difficulty)
-- Personality: {personalityTime} minutes OR {personalityCount} questions
+You are an expert technical interviewer hiring a {fieldname}{experience}. Generate questions for a {position} role at {company}.
 
-Return ONLY in JSON:
+## Interview Structure (70 minutes total):
+- **Technical Round**: 25 minutes (10 questions)
+- **Coding Round**: 30 minutes 
+- **Behavioral Round**: 15 minutes (5 questions)
+## Coding Round Options (30 minutes):
+**Option A**: 1 comprehensive intermediate-level problem (uses full 30 minutes)
+**Option B**: 3-4 shorter problems (6-8 minutes each)
+
+## Question Generation:
+
+### Technical Round:
+- 10 questions covering core concepts, system design, and advanced topics
+
+### Coding Round: 
+- Choose Option A for senior roles or Option B for junior roles
+- All problems should be intermediate difficulty level
+
+### Behavioral Round:
+- 5 questions covering leadership, teamwork, problem-solving, and culture fit
+
+## JSON Output Format:
+
+json
 [
   {
     "qid": 1,
     "content": "question text",
     "difficulty": "beginner|intermediate|expert",
-    "round": "technical|coding|personality",
-    "timeLimit": 300
+    "round": "technical|coding|behavioral",
+    "timeLimit": 180
   }
 ]
 
-Requirements:
-- Technical: Core concepts, algorithms, system design
-- Coding: Single practical problem, {codingDifficulty} level
-- Personality: Leadership, teamwork, problem-solving scenarios
-- If time provided: Generate appropriate question count for time limit
-- If count provided: Set reasonable time per question
-- Coding difficulty: intermediate for junior roles, expert for senior roles"
+
+## Requirements:
+- Technical: Focus on job-relevant skills and concepts
+- Coding: Practical problems suitable for screen sharing
+- Behavioral: Use scenario-based questions
+- All questions should be professional and assess real job capabilities
+
+Generate questions that effectively evaluate candidates while providing a positive interview experience.and return the questions in the above json format only .
 
 2. Complete Interview Evaluation:
 "You are an expert interview evaluator. Analyze the candidate's complete interview performance.
@@ -185,3 +204,7 @@ Recommended Approach:
 1. Client-side: html2pdf.js (HTML/CSS to PDF)
 2. Server-side: Puppeteer (best quality)
 3. Lightweight: jsPDF (minimal bundle size)
+
+
+prompt for pdf data generation:
+Generate two complete HTML documents with embedded CSS for PDF conversion, referring to the provided ${interviewAnalysis} data structure. The first document should be a clean technical answer key PDF displaying question-answer pairs with professional formatting, sequential numbering, and proper spacing. The second document should be a comprehensive interview analysis report PDF featuring charts and graphs if needed ,executive summary, detailed round breakdowns (technical, coding, personality), strengths/weaknesses analysis, scores, and recommendations. Both documents must be print-optimized with A4 dimensions, embedded CSS for PDF library compatibility, semantic HTML5 structure, proper page breaks, and professional typography. The code should be ready for immediate use with PDF generation tools like Puppeteer or wkhtmltopdf. Provide the complete HTML code as plain text for both documents.

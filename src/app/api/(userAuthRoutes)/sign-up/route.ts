@@ -32,9 +32,10 @@ export async function POST(request: Request) {
                     const redis = new Redis(process.env.REDIS_URL!);
                     await redis.setex(email, 300, verifyCode);
                 } catch (redisError) {
-                    console.warn('Redis failed, using MongoDB for verification code storage');
+                    console.warn('Redis failed, using MongoDB for verification code storage',redisError);
                     // Code already stored in ExistingUserByEmail.verifyCode
                 }
+    
                 const emailResponse = await sendVerificationEmail(email, username, verifyCode)
                 if (!emailResponse.success) return retRes(false, emailResponse.message, 500)
 
@@ -66,7 +67,7 @@ export async function POST(request: Request) {
                 const redis = new Redis(process.env.REDIS_URL!);
                 await redis.setex(email, 300, verifyCode);
             } catch (redisError) {
-                console.warn('Redis failed, using MongoDB for verification code storage');
+                console.warn('Redis failed, using MongoDB for verification code storage',redisError);
                 // Code already stored in newUser.verifyCode
             }
             const emailResponse = await sendVerificationEmail(email, username, verifyCode)
