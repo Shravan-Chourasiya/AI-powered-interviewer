@@ -6,12 +6,20 @@ import { Card } from '@/components/ui/card'
 import { Clock, ChevronLeft, ChevronRight, Flag, Loader2, Brain, Code, MessageCircle } from 'lucide-react'
 import axios from 'axios'
 
+interface Question {
+    qid: number
+    content: string
+    difficulty: string
+    round: string
+    timeLimit: number
+}
+
 export default function InterviewPage() {
     const { id } = useParams()
     const router = useRouter()
-    const [questions, setQuestions] = useState(null)
+    const [questions, setQuestions] = useState<Question[] | null>(null)
     const [currentQ, setCurrentQ] = useState(0)
-    const [answers, setAnswers] = useState({})
+    const [answers, setAnswers] = useState<Record<number, string>>({})
     const [timeLeft, setTimeLeft] = useState(180)
     const [loading, setLoading] = useState(true)
     const [evaluating, setEvaluating] = useState(false)
@@ -114,7 +122,8 @@ export default function InterviewPage() {
             router.push(`/interview/${id}/results`)
         } catch (error) {
             console.error('Error evaluating interview:', error)
-            if (error.code === 'ECONNABORTED' || error.response?.status === 500) {
+            if (error instanceof Error && 'code' in error && error.code === 'ECONNABORTED' || 
+                (error && typeof error === 'object' && 'response' in error && (error as {response: {status: number}}).response?.status === 500)) {
                 alert('Interview evaluation is taking longer than expected. Please wait and try again.')
             } else {
                 alert('Error evaluating interview. Please try again.')

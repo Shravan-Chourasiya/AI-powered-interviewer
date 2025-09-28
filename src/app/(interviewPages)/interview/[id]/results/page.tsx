@@ -7,7 +7,7 @@ import { CheckCircle, XCircle, Download, Home, Trophy, Award, TrendingUp, Target
 
 export default function ResultsPage() {
     const router = useRouter()
-    const [results, setResults] = useState(null)
+    const [results, setResults] = useState<any>(null)
     
     useEffect(() => {
         // Check if URL has old data parameter and extract it
@@ -24,11 +24,11 @@ export default function ResultsPage() {
                 
                 // Save to interview history
                 const interviewId = Date.now().toString()
+                const interviewDataStr = localStorage.getItem('interviewData')
                 const historyData = {
                     ...resultData,
                     date: new Date().toISOString(),
-                    position: localStorage.getItem('interviewData') ? 
-                        JSON.parse(localStorage.getItem('interviewData')).fieldname : 'Unknown Position'
+                    position: interviewDataStr ? JSON.parse(interviewDataStr).fieldname : 'Unknown Position'
                 }
                 localStorage.setItem(`interview_${interviewId}`, JSON.stringify(historyData))
             } catch (error) {
@@ -47,8 +47,10 @@ export default function ResultsPage() {
                     const historyData = {
                         ...resultData,
                         date: new Date().toISOString(),
-                        position: localStorage.getItem('interviewData') ? 
-                            JSON.parse(localStorage.getItem('interviewData')).fieldname : 'Unknown Position'
+                        position: (() => {
+                            const data = localStorage.getItem('interviewData')
+                            return data ? JSON.parse(data).fieldname : 'Unknown Position'
+                        })()
                     }
                     localStorage.setItem(`interview_${interviewId}`, JSON.stringify(historyData))
                 } catch (error) {
@@ -59,7 +61,8 @@ export default function ResultsPage() {
     }, [])
 
     const downloadPDF = () => {
-        // Simple client-side PDF generation using print
+        if (!results) return
+        
         const printWindow = window.open('', '_blank')
         const htmlContent = `
             <html>
@@ -96,30 +99,30 @@ export default function ResultsPage() {
                 <div class="section">
                     <h3>Strengths</h3>
                     <ul>
-                        ${results.report?.strengths?.map(s => `<li>${s}</li>`).join('') || '<li>No strengths recorded</li>'}
+                        ${results.report?.strengths?.map((s: string) => `<li>${s}</li>`).join('') || '<li>No strengths recorded</li>'}
                     </ul>
                 </div>
                 
                 <div class="section">
                     <h3>Areas for Improvement</h3>
                     <ul>
-                        ${results.report?.weaknesses?.map(w => `<li>${w}</li>`).join('') || '<li>No weaknesses recorded</li>'}
+                        ${results.report?.weaknesses?.map((w: string) => `<li>${w}</li>`).join('') || '<li>No weaknesses recorded</li>'}
                     </ul>
                 </div>
                 
                 <div class="section">
                     <h3>Recommendations</h3>
                     <ul>
-                        ${results.report?.improvements?.map(i => `<li>${i}</li>`).join('') || '<li>No recommendations available</li>'}
+                        ${results.report?.improvements?.map((i: string) => `<li>${i}</li>`).join('') || '<li>No recommendations available</li>'}
                     </ul>
                 </div>
             </body>
             </html>
         `
         
-        printWindow.document.write(htmlContent)
-        printWindow.document.close()
-        printWindow.print()
+        printWindow?.document.write(htmlContent)
+        printWindow?.document.close()
+        printWindow?.print()
     }
 
     if (!results) {

@@ -78,8 +78,8 @@ const CreateInterview = () => {
       
       // Navigate to interview
       window.location.href = `/interview/${interviewId}`
-    } catch (error) {
-      console.error('Error creating interview:', error)
+    } catch {
+      console.error('Error creating interview')
       alert('Error creating interview. Please try again.')
     }
     setIsSubmitting(false)

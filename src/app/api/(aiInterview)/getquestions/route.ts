@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-function retRes(success: boolean, data: any, status: number) {
+function retRes(success: boolean, data: unknown, status: number) {
   return NextResponse.json({ success, message: data }, { status });
 }
 import { google } from "@ai-sdk/google"

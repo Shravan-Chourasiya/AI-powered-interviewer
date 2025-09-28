@@ -19,10 +19,18 @@ import DoughnutChart from '@/components/DoughnutChart'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
 
+interface InterviewData {
+    id: string
+    date: string
+    position: string
+    score: number
+    selected: boolean
+    data: unknown
+}
 
 const Dashboard = () => {
     const { data: session } = useSession()
-    const [interviewHistory, setInterviewHistory] = useState<any[]>([])
+    const [interviewHistory, setInterviewHistory] = useState<InterviewData[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
     const [stats] = useState({ completed: 0, failed: 0, saved: 0 })
@@ -35,8 +43,9 @@ const Dashboard = () => {
             await new Promise(resolve => setTimeout(resolve, 800))
             
             // Load interview history from localStorage
-            const history: any[] = []
-            let completed = 0, failed = 0, saved = 0
+            const history: InterviewData[] = []
+            let completed = 0, failed = 0
+            const saved = Math.floor(Math.random() * 10)
             
             for (let i = 0; i < localStorage.length; i++) {
                 const key = localStorage.key(i)
@@ -63,7 +72,7 @@ const Dashboard = () => {
             }
             
             setInterviewHistory(history.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()))
-            setStats({ completed, failed, saved: Math.floor(Math.random() * 10) })
+            setStats({ completed, failed, saved })
             
             // Check if user is admin
             setIsAdmin(session?.user?.username === 'AdminDev' || session?.user?.email === 'AdminDev')
@@ -75,7 +84,7 @@ const Dashboard = () => {
         }
     }, [session])
 
-    const downloadReport = (interviewData: any) => {
+    const downloadReport = (interviewData: InterviewData) => {
         const printWindow = window.open('', '_blank')
         const htmlContent = `
             <html>
