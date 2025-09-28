@@ -11,12 +11,12 @@ function Footer() {
           <div className='w-full sm:w-1/2'>
             <h2 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text '>Popular Categories</h2>
             <ul className='space-y-2 text-gray-300'>
-              <li><a href='/interview/CreateInterview?field=DSA' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>DSA</a></li>
-              <li><a href='/interview/CreateInterview?field=AI/ML' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>AI/ML</a></li>
-              <li><a href='/interview/CreateInterview?field=Full Stack' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Full Stack</a></li>
-              <li><a href='/interview/CreateInterview?field=Data Science' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Data Science</a></li>
-              <li><a href='/interview/CreateInterview?field=Java Developer' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Java Developer</a></li>
-              <li><a href='/interview/CreateInterview?field=Frontend' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Frontend</a></li>
+              <li><Link href='/interview/CreateInterview?field=DSA' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>DSA</Link></li>
+              <li><Link href='/interview/CreateInterview?field=AI/ML' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>AI/ML</Link></li>
+              <li><Link href='/interview/CreateInterview?field=Full Stack' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Full Stack</Link></li>
+              <li><Link href='/interview/CreateInterview?field=Data Science' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Data Science</Link></li>
+              <li><Link href='/interview/CreateInterview?field=Java Developer' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Java Developer</Link></li>
+              <li><Link href='/interview/CreateInterview?field=Frontend' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Frontend</Link></li>
             </ul>
           </div>
           <div className='w-full sm:w-1/2'>

@@ -1,4 +1,8 @@
-import retRes from "@/utilities/returnResponse";
+import { NextResponse } from 'next/server';
+
+function retRes(success: boolean, data: any, status: number) {
+  return NextResponse.json({ success, message: data }, { status });
+}
 import { google } from "@ai-sdk/google"
 import { generateText } from 'ai';
 

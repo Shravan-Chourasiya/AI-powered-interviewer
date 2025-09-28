@@ -46,30 +46,30 @@ const Homepage = () => {
                 
                 {/* Quick Categories */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto mb-12">
-                    <a href='/interview/CreateInterview?field=Frontend' className="bg-gradient-to-br from-purple-900/30 to-purple-800/30 border border-purple-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-purple-400/20 group">
+                    <Link href='/interview/CreateInterview?field=Frontend' className="bg-gradient-to-br from-purple-900/30 to-purple-800/30 border border-purple-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-purple-400/20 group">
                         <div className="text-3xl mb-3">💻</div>
                         <h3 className="text-white font-semibold text-sm">Frontend</h3>
-                    </a>
-                    <a href='/interview/CreateInterview?field=Backend' className="bg-gradient-to-br from-teal-900/30 to-teal-800/30 border border-teal-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-teal-400/20 group">
+                    </Link>
+                    <Link href='/interview/CreateInterview?field=Backend' className="bg-gradient-to-br from-teal-900/30 to-teal-800/30 border border-teal-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-teal-400/20 group">
                         <div className="text-3xl mb-3">⚙️</div>
                         <h3 className="text-white font-semibold text-sm">Backend</h3>
-                    </a>
-                    <a href='/interview/CreateInterview?field=Full Stack' className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 border border-blue-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-blue-400/20 group">
+                    </Link>
+                    <Link href='/interview/CreateInterview?field=Full Stack' className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 border border-blue-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-blue-400/20 group">
                         <div className="text-3xl mb-3">🚀</div>
                         <h3 className="text-white font-semibold text-sm">Full Stack</h3>
-                    </a>
-                    <a href='/interview/CreateInterview?field=Data Science' className="bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-green-400/20 group">
+                    </Link>
+                    <Link href='/interview/CreateInterview?field=Data Science' className="bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-green-400/20 group">
                         <div className="text-3xl mb-3">📈</div>
                         <h3 className="text-white font-semibold text-sm">Data Science</h3>
-                    </a>
-                    <a href='/interview/CreateInterview?field=AI/ML' className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 border border-yellow-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/20 group">
+                    </Link>
+                    <Link href='/interview/CreateInterview?field=AI/ML' className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 border border-yellow-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/20 group">
                         <div className="text-3xl mb-3">🤖</div>
                         <h3 className="text-white font-semibold text-sm">AI/ML</h3>
-                    </a>
-                    <a href='/interview/CreateInterview?field=DSA' className="bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-red-400/20 group">
+                    </Link>
+                    <Link href='/interview/CreateInterview?field=DSA' className="bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-red-400/20 group">
                         <div className="text-3xl mb-3">🧠</div>
                         <h3 className="text-white font-semibold text-sm">DSA</h3>
-                    </a>
+                    </Link>
                 </div>
                 
                 <StackedImageSlider />

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { Clock, ChevronLeft, ChevronRight, Flag, Loader2, Brain, Code, MessageCircle } from 'lucide-react'
 import axios from 'axios'
 
 export default function InterviewPage() {
@@ -127,9 +128,11 @@ export default function InterviewPage() {
     
     if (loading) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex items-center justify-center p-6">
+            <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-6">
                 <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-purple-400/30 border-t-purple-400 rounded-full animate-spin mx-auto mb-6"></div>
+                    <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-purple-500/30">
+                        <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
+                    </div>
                     <div className="text-white text-xl sm:text-2xl font-semibold mb-2">Preparing Your Interview</div>
                     <div className="text-gray-400">Generating personalized questions with AI...</div>
                 </div>
@@ -139,12 +142,14 @@ export default function InterviewPage() {
 
     if (!questions || questions.length === 0) {
         return (
-            <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex items-center justify-center p-6">
+            <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-6">
                 <div className="text-center">
-                    <div className="text-6xl mb-6">🤔</div>
+                    <div className="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                        <Brain className="w-10 h-10 text-slate-500" />
+                    </div>
                     <div className="text-white text-xl sm:text-2xl font-semibold mb-2">No Questions Available</div>
                     <div className="text-gray-400 mb-6">There seems to be an issue loading your interview questions.</div>
-                    <Button onClick={() => window.location.reload()} className="bg-purple-600 hover:bg-purple-700">
+                    <Button onClick={() => window.location.reload()} className="bg-purple-600 hover:bg-purple-700 hover:scale-[1.02] transition-all">
                         Try Again
                     </Button>
                 </div>
@@ -158,38 +163,49 @@ export default function InterviewPage() {
         <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-3 sm:p-6">
             <div className="max-w-5xl mx-auto">
                 {/* Enhanced Header */}
-                <div className="bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-4 sm:p-6 mb-6 shadow-2xl">
+                <div className="bg-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-4 sm:p-6 mb-6 shadow-2xl">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                        <div>
-                            <h1 className="text-white text-xl sm:text-2xl font-bold mb-1">
+                        <div className="flex-1">
+                            <h1 className="text-white text-xl sm:text-2xl font-bold mb-3 flex items-center gap-3">
+                                <div className="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                    <Brain className="w-5 h-5 text-purple-400" />
+                                </div>
                                 Question {currentQ + 1} of {questions?.length || 0}
                             </h1>
-                            <div className="w-full bg-gray-800 rounded-full h-2 mb-2">
+                            <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
                                 <div 
-                                    className="bg-gradient-to-r from-purple-400 to-teal-400 h-2 rounded-full transition-all duration-500"
+                                    className="bg-gradient-to-r from-purple-500 to-teal-500 h-3 rounded-full transition-all duration-500"
                                     style={{ width: `${questions?.length ? ((currentQ + 1) / questions.length) * 100 : 0}%` }}
                                 />
                             </div>
                         </div>
                         <div className="flex items-center gap-3">
-                            <div className={`text-lg sm:text-xl font-bold px-4 py-2 rounded-full border-2 transition-all ${
-                                timeLeft <= 30 ? 'text-red-400 border-red-400 bg-red-400/10 animate-pulse' :
-                                timeLeft <= 60 ? 'text-yellow-400 border-yellow-400 bg-yellow-400/10' :
-                                'text-green-400 border-green-400 bg-green-400/10'
+                            <div className={`flex items-center gap-2 text-lg sm:text-xl font-bold px-4 py-2 rounded-xl border transition-all ${
+                                timeLeft <= 30 ? 'text-red-400 border-red-500/50 bg-red-500/20 animate-pulse' :
+                                timeLeft <= 60 ? 'text-amber-400 border-amber-500/50 bg-amber-500/20' :
+                                'text-emerald-400 border-emerald-500/50 bg-emerald-500/20'
                             }`}>
-                                ⏱️ {Math.floor(timeLeft/60)}:{(timeLeft%60).toString().padStart(2,'0')}
+                                <Clock className="w-5 h-5" />
+                                {Math.floor(timeLeft/60)}:{(timeLeft%60).toString().padStart(2,'0')}
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 {/* Enhanced Question Card */}
-                <Card className="bg-gray-900/70 backdrop-blur-sm border-gray-800 p-4 sm:p-8 mb-6 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+                <Card className="bg-slate-900/80 backdrop-blur-sm border-slate-700/50 p-4 sm:p-8 mb-6 shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-2">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-purple-400 to-teal-400 text-white">
+                        <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border ${
+                            currentQuestion?.round === 'technical' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
+                            currentQuestion?.round === 'coding' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
+                            'bg-purple-500/20 text-purple-300 border-purple-500/30'
+                        }`}>
+                            {currentQuestion?.round === 'technical' ? <Brain className="w-4 h-4" /> :
+                             currentQuestion?.round === 'coding' ? <Code className="w-4 h-4" /> :
+                             <MessageCircle className="w-4 h-4" />}
                             {currentQuestion?.round?.toUpperCase()} ROUND
                         </span>
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-sm bg-gray-800 text-gray-300 border border-gray-700">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm bg-slate-800/50 text-gray-300 border border-slate-600/50">
                             Difficulty: {currentQuestion?.difficulty}
                         </span>
                     </div>
@@ -199,17 +215,20 @@ export default function InterviewPage() {
                 </Card>
 
                 {/* Enhanced Answer Input */}
-                <Card className="bg-gray-900/70 backdrop-blur-sm border-gray-800 p-4 sm:p-6 mb-6 shadow-2xl">
+                <Card className="bg-slate-900/80 backdrop-blur-sm border-slate-700/50 p-4 sm:p-6 mb-6 shadow-2xl">
                     <label className="text-gray-300 block mb-3 font-medium">Your Answer:</label>
                     <textarea
                         id="answer"
                         placeholder="Type your detailed answer here... Be specific and provide examples where possible."
-                        className="w-full h-48 sm:h-64 bg-gray-800/50 text-white p-4 rounded-xl border border-gray-700 resize-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 focus:outline-none transition-all duration-200 placeholder-gray-500"
+                        className="w-full h-48 sm:h-64 bg-slate-800/50 text-white p-4 rounded-xl border border-slate-700/50 resize-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition-all duration-200 placeholder-gray-500"
                         defaultValue={answers[currentQ] || ''}
                         key={currentQ}
                     />
                     <div className="flex justify-between items-center mt-3 text-sm text-gray-400">
-                        <span>💡 Tip: Provide detailed explanations and examples</span>
+                        <span className="flex items-center gap-1">
+                            <Brain className="w-4 h-4" />
+                            Tip: Provide detailed explanations and examples
+                        </span>
                         <span>{(answers[currentQ] || '').length} characters</span>
                     </div>
                 </Card>
@@ -219,23 +238,34 @@ export default function InterviewPage() {
                     <Button 
                         onClick={previousQuestion}
                         disabled={currentQ === 0}
-                        className="bg-gray-700/80 hover:bg-gray-600 disabled:opacity-50 backdrop-blur-sm border border-gray-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-105 disabled:hover:scale-100"
+                        className="bg-slate-700/80 hover:bg-slate-600 disabled:opacity-50 backdrop-blur-sm border border-slate-600/50 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-[1.02] disabled:hover:scale-100"
                     >
-                        ← Previous Question
+                        <ChevronLeft className="w-4 h-4 mr-2" />
+                        Previous Question
                     </Button>
                     
                     <Button 
                         onClick={nextQuestion}
                         disabled={evaluating}
-                        className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
                         {evaluating ? (
                             <>
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                                 Evaluating...
                             </>
                         ) : (
-                            questions?.length && currentQ === questions.length - 1 ? '🏁 Finish Interview' : 'Next Question →'
+                            questions?.length && currentQ === questions.length - 1 ? (
+                                <>
+                                    <Flag className="w-4 h-4 mr-2" />
+                                    Finish Interview
+                                </>
+                            ) : (
+                                <>
+                                    Next Question
+                                    <ChevronRight className="w-4 h-4 ml-2" />
+                                </>
+                            )
                         )}
                     </Button>
                 </div>

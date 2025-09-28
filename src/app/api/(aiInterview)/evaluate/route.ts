@@ -1,4 +1,8 @@
-import retRes from "@/utilities/returnResponse";
+import { NextResponse } from 'next/server';
+
+function retRes(success: boolean, data: any, status: number) {
+  return NextResponse.json({ success, message: data }, { status });
+}
 import { google } from "@ai-sdk/google"
 import { generateText } from 'ai';
 
@@ -81,6 +85,6 @@ export async function POST(req: Request) {
         return retRes(true, evaluation, 200)
     } catch (error) {
         console.error('API Error:', error)
-        return retRes(false, `Server error: ${error.message}`, 500)
+        return retRes(false, `Server error: ${error instanceof Error ? error.message : 'Unknown error'}`, 500)
     }
 }

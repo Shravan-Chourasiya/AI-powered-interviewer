@@ -2,12 +2,12 @@
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { Users, FileText, TrendingUp, Home, Shield, Database, Activity, Settings } from 'lucide-react'
+import { Users, FileText, TrendingUp, Home, Shield, Database, Activity } from 'lucide-react'
 
 export default function AdminDashboard() {
     const { data: session } = useSession()
     const router = useRouter()
-    const [stats, setStats] = useState({
+    const [stats] = useState({
         totalUsers: 1247,
         totalInterviews: 3891,
         successRate: 73,

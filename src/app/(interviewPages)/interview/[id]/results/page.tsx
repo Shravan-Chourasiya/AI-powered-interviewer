@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { CheckCircle, XCircle, Download, Home } from 'lucide-react'
+import { CheckCircle, XCircle, Download, Home, Trophy, Award, TrendingUp, Target, Zap } from 'lucide-react'
 
 export default function ResultsPage() {
     const router = useRouter()
@@ -140,8 +140,8 @@ export default function ResultsPage() {
             <div className="max-w-7xl mx-auto">
                 {/* Enhanced Header */}
                 <div className="text-center mb-8 sm:mb-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-purple-400 to-teal-400 rounded-full mb-6 animate-pulse">
-                        🏆
+                    <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-purple-500/20 to-teal-500/20 rounded-2xl mb-6 border border-purple-500/30 backdrop-blur-sm">
+                        <Trophy className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400 animate-pulse" />
                     </div>
                     <h1 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">
                         Interview Results
@@ -165,8 +165,18 @@ export default function ResultsPage() {
                             {isSelected ? 'CONGRATULATIONS!' : 'KEEP IMPROVING!'}
                         </span>
                     </div>
-                    <div className={`text-lg sm:text-2xl mb-6 font-semibold ${isSelected ? 'text-green-300' : 'text-red-300'}`}>
-                        {isSelected ? '✨ You have been selected for the next round!' : '💪 Keep practicing and try again!'}
+                    <div className={`text-lg sm:text-2xl mb-6 font-semibold flex items-center justify-center gap-2 ${isSelected ? 'text-green-300' : 'text-red-300'}`}>
+                        {isSelected ? (
+                            <>
+                                <Zap className="w-6 h-6" />
+                                You have been selected for the next round!
+                            </>
+                        ) : (
+                            <>
+                                <Target className="w-6 h-6" />
+                                Keep practicing and try again!
+                            </>
+                        )}
                     </div>
                     <p className="text-gray-300 max-w-3xl mx-auto text-base sm:text-lg leading-relaxed">
                         {results.finalDecision?.message}
@@ -175,9 +185,9 @@ export default function ResultsPage() {
 
                 {/* Enhanced Score Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-                    <Card className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 border-blue-400/30 p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-blue-400/20">
-                        <div className="w-16 h-16 bg-blue-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            💻
+                    <Card className="bg-slate-900/80 border-slate-700/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-blue-500/20 hover:border-blue-500/50">
+                        <div className="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <Award className="w-8 h-8 text-blue-400" />
                         </div>
                         <h3 className="text-blue-300 font-bold text-lg mb-3">Technical Round</h3>
                         <div className="relative mb-4">
@@ -194,9 +204,9 @@ export default function ResultsPage() {
                         </div>
                     </Card>
 
-                    <Card className="bg-gradient-to-br from-green-900/30 to-green-800/30 border-green-400/30 p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-green-400/20">
-                        <div className="w-16 h-16 bg-green-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            🚀
+                    <Card className="bg-slate-900/80 border-slate-700/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-green-500/20 hover:border-green-500/50">
+                        <div className="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <TrendingUp className="w-8 h-8 text-green-400" />
                         </div>
                         <h3 className="text-green-300 font-bold text-lg mb-3">Coding Round</h3>
                         <div className="relative mb-4">
@@ -213,9 +223,9 @@ export default function ResultsPage() {
                         </div>
                     </Card>
 
-                    <Card className="bg-gradient-to-br from-purple-900/30 to-purple-800/30 border-purple-400/30 p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-purple-400/20 sm:col-span-2 lg:col-span-1">
-                        <div className="w-16 h-16 bg-purple-400/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                            💬
+                    <Card className="bg-slate-900/80 border-slate-700/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 sm:col-span-2 lg:col-span-1">
+                        <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <Target className="w-8 h-8 text-purple-400" />
                         </div>
                         <h3 className="text-purple-300 font-bold text-lg mb-3">Communication</h3>
                         <div className="relative mb-4">
@@ -236,8 +246,11 @@ export default function ResultsPage() {
                 {/* Detailed Report */}
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
                     {/* Strengths */}
-                    <Card className="bg-gray-900 border-gray-800 p-6">
-                        <h3 className="text-green-400 font-bold text-xl mb-4">Strengths</h3>
+                    <Card className="bg-slate-900/80 border-slate-700/50 p-6 hover:shadow-emerald-500/10 transition-all">
+                        <h3 className="text-emerald-400 font-bold text-xl mb-4 flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5" />
+                            Strengths
+                        </h3>
                         <ul className="space-y-2">
                             {results.report?.strengths?.map((strength, index) => (
                                 <li key={index} className="text-gray-300 flex items-start gap-2">
@@ -249,8 +262,11 @@ export default function ResultsPage() {
                     </Card>
 
                     {/* Areas for Improvement */}
-                    <Card className="bg-gray-900 border-gray-800 p-6">
-                        <h3 className="text-yellow-400 font-bold text-xl mb-4">Areas for Improvement</h3>
+                    <Card className="bg-slate-900/80 border-slate-700/50 p-6 hover:shadow-amber-500/10 transition-all">
+                        <h3 className="text-amber-400 font-bold text-xl mb-4 flex items-center gap-2">
+                            <XCircle className="w-5 h-5" />
+                            Areas for Improvement
+                        </h3>
                         <ul className="space-y-2">
                             {results.report?.weaknesses?.map((weakness, index) => (
                                 <li key={index} className="text-gray-300 flex items-start gap-2">
@@ -263,8 +279,11 @@ export default function ResultsPage() {
                 </div>
 
                 {/* Recommendations */}
-                <Card className="bg-gray-900 border-gray-800 p-6 mb-8">
-                    <h3 className="text-teal-400 font-bold text-xl mb-4">Recommendations</h3>
+                <Card className="bg-slate-900/80 border-slate-700/50 p-6 mb-8 hover:shadow-teal-500/10 transition-all">
+                    <h3 className="text-teal-400 font-bold text-xl mb-4 flex items-center gap-2">
+                        <Target className="w-5 h-5" />
+                        Recommendations
+                    </h3>
                     <div className="grid md:grid-cols-2 gap-6">
                         <div>
                             <h4 className="text-white font-semibold mb-2">Improvement Tips</h4>
@@ -305,9 +324,10 @@ export default function ResultsPage() {
                     
                     <Button 
                         onClick={() => router.push('/interview/CreateInterview')}
-                        className="bg-gray-800/50 hover:bg-gray-700 border border-gray-600 text-gray-300 hover:text-white px-6 py-3 font-medium transition-all duration-200 hover:scale-105 w-full sm:w-auto"
+                        className="bg-slate-800/50 hover:bg-slate-700 border border-slate-600/50 text-gray-300 hover:text-white px-6 py-3 font-medium transition-all duration-200 hover:scale-[1.02] w-full sm:w-auto"
                     >
-                        🔄 Take Another Interview
+                        <Zap className="w-4 h-4 mr-2" />
+                        Take Another Interview
                     </Button>
                 </div>
             </div>

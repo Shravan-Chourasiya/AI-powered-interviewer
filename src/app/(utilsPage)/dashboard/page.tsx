@@ -12,19 +12,20 @@ import {
     SidebarInset,
     SidebarTrigger
 } from '@/components/ui/sidebar'
-import { Home, FileText, Bookmark, LogOut, User, CheckCircle, XCircle, Download, Calendar, Settings, Users, TrendingUp, Trophy, Loader2, BarChart3, Clock, Award, Zap, Activity } from 'lucide-react'
+import { Home, FileText, Bookmark, LogOut, User, Download, Calendar, Settings, Users, TrendingUp, Trophy, Loader2, BarChart3, Clock, Award, Zap, Activity } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import DoughnutChart from '@/components/DoughnutChart'
 import Footer from '@/components/Footer'
+import Link from 'next/link'
 
 
-const page = () => {
+const Dashboard = () => {
     const { data: session } = useSession()
     const [interviewHistory, setInterviewHistory] = useState<any[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    const [stats, setStats] = useState({ completed: 0, failed: 0, saved: 0 })
+    const [stats] = useState({ completed: 0, failed: 0, saved: 0 })
 
     useEffect(() => {
         const loadData = async () => {
@@ -55,7 +56,7 @@ const page = () => {
                         // Calculate stats
                         if (interview.selected) completed++
                         else failed++
-                    } catch (e) {
+                    } catch {
                         // Ignore parsing errors
                     }
                 }
@@ -276,18 +277,18 @@ const page = () => {
                             <SidebarMenu>
                                 <SidebarMenuItem>
                                     <SidebarMenuButton asChild className="hover:bg-gray-800 text-gray-300 hover:text-white">
-                                        <a href="/dashboard">
+                                        <Link href="/dashboard">
                                             <Home className="w-4 h-4" />
                                             <span>Dashboard</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 <SidebarMenuItem>
                                     <SidebarMenuButton asChild className="hover:bg-purple-800 text-gray-300 hover:text-white">
-                                        <a href="/interview/CreateInterview">
+                                        <Link href="/interview/CreateInterview">
                                             <FileText className="w-4 h-4" />
                                             <span>Start Interview</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 <SidebarMenuItem>
@@ -298,19 +299,19 @@ const page = () => {
                                 </SidebarMenuItem>
                                 <SidebarMenuItem>
                                     <SidebarMenuButton asChild className="hover:bg-gray-800 text-gray-300 hover:text-white">
-                                        <a href="/about">
+                                        <Link href="/about">
                                             <Home className="w-4 h-4" />
                                             <span>About</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
                                 {(session?.user?.username === 'AdminDev' || session?.user?.email === 'AdminDev') && (
                                     <SidebarMenuItem>
                                         <SidebarMenuButton asChild className="hover:bg-red-800 text-gray-300 hover:text-white">
-                                            <a href="/admin">
+                                            <Link href="/admin">
                                                 <Settings className="w-4 h-4" />
                                                 <span>Admin Panel</span>
-                                            </a>
+                                            </Link>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 )}
@@ -343,15 +344,15 @@ const page = () => {
                                         <p className="text-gray-400 mt-1">Ready to practice your interview skills?</p>
                                     </div>
                                 </div>
-                                <a href="/interview/CreateInterview" className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-8 py-4 rounded-2xl text-white font-bold text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 text-center">
+                                <Link href="/interview/CreateInterview" className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-8 py-4 rounded-2xl text-white font-bold text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 text-center">
                                     ✨ Start Interview
-                                </a>
+                                </Link>
                             </div>
                         </div>
 
                         {/* Quick Actions */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                            <a href="/interview/CreateInterview" className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 overflow-hidden">
+                            <Link href="/interview/CreateInterview" className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div className="relative z-10">
                                     <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
@@ -360,7 +361,7 @@ const page = () => {
                                     <h3 className="text-white font-semibold mb-1 group-hover:text-purple-300 transition-colors">New Interview</h3>
                                     <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">Start fresh interview</p>
                                 </div>
-                            </a>
+                            </Link>
                             
                             <div className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50 cursor-pointer overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -464,9 +465,9 @@ const page = () => {
                         <div className="bg-gradient-to-r from-purple-900/30 to-teal-900/30 border border-purple-400/30 rounded-2xl p-8 mb-8 text-center">
                             <h2 className="text-3xl font-bold text-white mb-4">🚀 Ready for Your Next Interview?</h2>
                             <p className="text-gray-300 mb-6">Start practicing with AI-powered mock interviews tailored to your field</p>
-                            <a href="/interview/CreateInterview" className="inline-block bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+                            <Link href="/interview/CreateInterview" className="inline-block bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-8 py-4 rounded-xl text-white font-bold text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25">
                                 ✨ Start New Interview
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Interview History Section */}
@@ -538,10 +539,10 @@ const page = () => {
                                         <FileText className="w-8 h-8 text-slate-500" />
                                     </div>
                                     <p className="text-gray-400 mb-4">No interviews completed yet</p>
-                                    <a href="/interview/CreateInterview" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors font-medium">
+                                    <Link href="/interview/CreateInterview" className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors font-medium">
                                         Start your first interview
                                         <Zap className="w-4 h-4" />
-                                    </a>
+                                    </Link>
                                 </div>
                             )}
                         </div>
@@ -553,4 +554,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Dashboard

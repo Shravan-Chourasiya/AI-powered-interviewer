@@ -20,7 +20,7 @@ export async function POST(req: Request) {
       const filename = type === 'answerkey' ? 'answerkey.pdf' : 'review.pdf';
       await redis.quit();
       
-      return new Response(fetchedBuffer, {
+      return new Response(fetchedBuffer as BodyInit, {
           headers: {
               'Content-Type': 'application/pdf',
               'Content-Disposition': `attachment; filename="${filename}"`
