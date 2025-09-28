@@ -13,6 +13,7 @@ import { ApiResponse } from "@/types/ApiResponse"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { Loader2Icon } from 'lucide-react'
+import { useSession } from "next-auth/react"
 import Link from "next/link"
 import '../../App.css'
 
@@ -23,6 +24,17 @@ const SignUp = () => {
     const [isSubmitting, setIsSubmitting] = useState(false)
     const debounced = useDebounceCallback(setUsername, 900)
     const router = useRouter()
+    const { data: session } = useSession()
+    
+    useEffect(() => {
+        if (session) {
+            if (session.user?.username === 'AdminDev' || session.user?.email === 'AdminDev') {
+                router.replace('/admin')
+            } else {
+                router.replace('/dashboard')
+            }
+        }
+    }, [session, router])
 
     const techstack: string[] = [
         "Data Scientist",

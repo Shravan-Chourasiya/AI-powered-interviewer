@@ -13,6 +13,10 @@ interface evaluateQuestionsParams {
 export async function POST(req: Request) {
     try {
         const { questions, allAnswers }: evaluateQuestionsParams = await req.json()
+        console.log('=== EVALUATE API START ===')
+        console.log('Received data:', { questionsCount: questions?.length, answersCount: allAnswers?.length })
+        console.log('Questions:', JSON.stringify(questions, null, 2))
+        console.log('Answers:', JSON.stringify(allAnswers, null, 2))
         
         const evaluateQuestionsPrompt = `"You are an expert interview evaluator. Analyze the candidate's complete interview performance.
          INPUT DATA:
@@ -57,21 +61,26 @@ export async function POST(req: Request) {
          - Final decision: Both criteria must be met for selection
          - Scoring: All scores on 0-100 scale for consistency`
 
+        console.log('Calling AI model...')
         const result = await generateText({
             model: google("gemini-2.5-flash"),
             prompt: evaluateQuestionsPrompt
         });
+        console.log('AI Response received:', result.text?.substring(0, 200) + '...')
         
         let evaluation;
         try {
             evaluation = JSON.parse(result.text);
         } catch (parseError) {
-            return retRes(false,`${parseError} : Failed to parse evaluation response`, 500);
+            console.error('Parse error:', parseError, 'Raw text:', result.text)
+            return retRes(false,`Failed to parse evaluation response`, 500);
         }
         
+        console.log('Evaluation successful, returning result')
+        console.log('=== EVALUATE API END ===')
         return retRes(true, evaluation, 200)
     } catch (error) {
-        console.error('Error parsing request:', error)
-        return retRes(false, "Invalid request body", 400)
+        console.error('API Error:', error)
+        return retRes(false, `Server error: ${error.message}`, 500)
     }
 }

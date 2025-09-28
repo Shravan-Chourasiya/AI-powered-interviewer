@@ -46,5 +46,5 @@ const InterviewSchema: Schema<Interview> = new Schema({
     },
 })
 
-const InterviewModel = mongoose.models.User as mongoose.Model<Interview> || mongoose.model<Interview>("Interview", InterviewSchema)
+const InterviewModel = mongoose.models.Interview as mongoose.Model<Interview> || mongoose.model<Interview>("Interview", InterviewSchema)
 export default InterviewModel;

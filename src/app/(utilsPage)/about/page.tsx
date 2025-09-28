@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Users, Target, Zap, Shield } from 'lucide-react'
-import '../App.css'
+
 import { Button } from '@/components/ui/button'
 
 const AboutUs = () => {
@@ -107,9 +107,11 @@ const AboutUs = () => {
           <div className="bg-gradient-to-r from-purple-500 to-teal-500 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Ready to Ace Your Next Interview?</h3>
             <p className="text-white/90 mb-6">Join thousands of successful candidates who&apos;ve improved their interview skills with SyntheView.</p>
-            <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
-              Start Practicing Today
-            </Button>
+            <a href="/interview/CreateInterview">
+              <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                🚀 Start Practicing Today
+              </Button>
+            </a>
           </div>
         </div>
       </div>

@@ -11,19 +11,19 @@ function Footer() {
           <div className='w-full sm:w-1/2'>
             <h2 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text '>Popular Categories</h2>
             <ul className='space-y-2 text-gray-300'>
-              <li className='hover:text-purple-400 transition-colors duration-200'>DSA</li>
-              <li className='hover:text-purple-400 transition-colors duration-200'>AI/ML</li>
-              <li className='hover:text-purple-400 transition-colors duration-200'>Full Stack</li>
-              <li className='hover:text-purple-400 transition-colors duration-200'>Data Science</li>
-              <li className='hover:text-purple-400 transition-colors duration-200'>Java Developer</li>
-              <li className='hover:text-purple-400 transition-colors duration-200'>Frontend</li>
+              <li><a href='/interview/CreateInterview?field=DSA' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>DSA</a></li>
+              <li><a href='/interview/CreateInterview?field=AI/ML' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>AI/ML</a></li>
+              <li><a href='/interview/CreateInterview?field=Full Stack' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Full Stack</a></li>
+              <li><a href='/interview/CreateInterview?field=Data Science' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Data Science</a></li>
+              <li><a href='/interview/CreateInterview?field=Java Developer' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Java Developer</a></li>
+              <li><a href='/interview/CreateInterview?field=Frontend' className='hover:text-purple-400 transition-colors duration-200 cursor-pointer'>Frontend</a></li>
             </ul>
           </div>
           <div className='w-full sm:w-1/2'>
             <h3 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text'>Quick Links</h3>
             <ul className='space-y-2 text-gray-300'>
               <li><Link href='/dashboard' className='hover:text-purple-400 transition-colors duration-200'>Dashboard</Link></li>
-              <li><Link href='/interviews' className='hover:text-purple-400 transition-colors duration-200'>Interviews</Link></li>
+              <li><Link href='/interview/CreateInterview' className='hover:text-purple-400 transition-colors duration-200'>Start Interview</Link></li>
               <li><Link href='/contact' className='hover:text-purple-400 transition-colors duration-200'>Contact Us</Link></li>
               <li><Link href='/about' className='hover:text-purple-400 transition-colors duration-200'>About Us</Link></li>
               <li><Link href='/faqs' className='hover:text-purple-400 transition-colors duration-200'>FAQs</Link></li>

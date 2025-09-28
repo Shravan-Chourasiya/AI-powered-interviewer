@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Block unauthenticated users from protected routes
-  if (!token && url.pathname.startsWith('/dashboard')) {
+  if (!token && (url.pathname.startsWith('/dashboard') || url.pathname.startsWith('/interview'))) {
     return NextResponse.redirect(new URL('/sign-in', request.url))
   }
 

@@ -15,12 +15,24 @@ import * as z from "zod"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import { signInSchema } from "@/schemas/signInSchema"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
+import { useEffect } from "react"
 import '../../App.css'
 
 const SignIn = () => {
   const router = useRouter()
+  const { data: session } = useSession()
+  
+  useEffect(() => {
+    if (session) {
+      if (session.user?.username === 'AdminDev' || session.user?.email === 'AdminDev') {
+        router.replace('/admin')
+      } else {
+        router.replace('/dashboard')
+      }
+    }
+  }, [session, router])
   
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -44,7 +56,11 @@ const SignIn = () => {
     )
     
     if (result?.url) {
-      router.replace('/dashboard')
+      if (data.identifier === 'AdminDev') {
+        router.replace('/admin')
+      } else {
+        router.replace('/dashboard')
+      }
     }
   }
 

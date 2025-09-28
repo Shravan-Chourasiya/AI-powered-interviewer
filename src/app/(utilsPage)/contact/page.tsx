@@ -3,7 +3,7 @@ import React from 'react'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import '../App.css'
+
 
 const ContactUs = () => {
   return (

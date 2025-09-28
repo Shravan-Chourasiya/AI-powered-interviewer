@@ -19,7 +19,6 @@ import {
   MessageSquare,
   Zap
 } from 'lucide-react'
-import axios from 'axios'
 
 const interviewSchema = z.object({
   jobTitle: z.string().min(2, 'Job title must be at least 2 characters'),
@@ -39,6 +38,15 @@ const CreateInterview = () => {
       duration: ''
     }
   })
+  
+  // Get field from URL params
+  React.useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search)
+    const field = urlParams.get('field')
+    if (field) {
+      form.setValue('jobTitle', field)
+    }
+  }, [form])
 
   const experienceLevels = [
     { value: 'entry', label: 'Entry Level (0-2 years)', icon: '🌱' },
@@ -57,16 +65,22 @@ const CreateInterview = () => {
   const onSubmit = async (data: z.infer<typeof interviewSchema>) => {
     setIsSubmitting(true)
     try {
-      const payload = {
+      // Generate a unique interview ID and navigate directly
+      const interviewId = Date.now().toString()
+      
+      // Store interview data in localStorage for the interview page
+      localStorage.setItem('interviewData', JSON.stringify({
         position: data.jobTitle,
         company: 'General',
         fieldname: data.experienceLevel,
         duration: data.duration
-      }
-      const response = await axios.post('/api/InterviewHandler', payload)
-      console.log('Interview created:', response.data)
+      }))
+      
+      // Navigate to interview
+      window.location.href = `/interview/${interviewId}`
     } catch (error) {
       console.error('Error creating interview:', error)
+      alert('Error creating interview. Please try again.')
     }
     setIsSubmitting(false)
   }
@@ -147,10 +161,10 @@ const CreateInterview = () => {
                 <div
                   key={level.value}
                   onClick={() => field.onChange(level.value)}
-                  className={`p-4 rounded-xl border-2 cursor-pointer transition-all duration-300 hover:scale-105 ${
+                  className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
                     field.value === level.value
-                      ? 'border-purple-400 bg-purple-400/10 shadow-lg'
-                      : 'border-gray-700 bg-gray-800/30 hover:border-gray-600'
+                      ? 'border-purple-500/50 bg-purple-500/20 shadow-lg shadow-purple-500/25'
+                      : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50 hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="text-2xl mb-2">{level.icon}</div>
@@ -174,10 +188,10 @@ const CreateInterview = () => {
                 <div
                   key={duration.value}
                   onClick={() => field.onChange(duration.value)}
-                  className={`p-3 rounded-lg border cursor-pointer transition-all duration-300 hover:scale-105 text-center ${
+                  className={`p-3 rounded-lg border cursor-pointer transition-all duration-300 hover:scale-[1.02] text-center ${
                     field.value === duration.value
-                      ? 'border-teal-400 bg-teal-400/10 shadow-lg'
-                      : 'border-gray-700 bg-gray-800/30 hover:border-gray-600'
+                      ? 'border-teal-500/50 bg-teal-500/20 shadow-lg shadow-teal-500/25'
+                      : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50 hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="text-xl mb-1">{duration.icon}</div>
@@ -192,22 +206,25 @@ const CreateInterview = () => {
     </div>
   )
   return (
-    <div className="min-h-screen bg-gray-950 p-6">
-      <div className="max-w-4xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-3 sm:p-6">
+      <div className="max-w-5xl mx-auto">
+        {/* Enhanced Header */}
+        <div className="text-center mb-8 sm:mb-12">
+          <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-purple-500/20 to-teal-500/20 rounded-2xl mb-6 border border-purple-500/30 backdrop-blur-sm">
+            <BrainCircuit className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400 animate-pulse" />
+          </div>
+          <h1 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">
             Create AI Interview
           </h1>
-          <p className="text-gray-400 text-lg">Design your personalized AI-powered interview experience</p>
+          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Design your personalized AI-powered interview experience with advanced evaluation</p>
         </div>
 
         {/* Step Indicator */}
         {renderStepIndicator()}
 
-        {/* Main Form Card */}
-        <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm shadow-2xl">
-          <CardContent className="p-8">
+        {/* Enhanced Main Form Card */}
+        <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-sm shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
+          <CardContent className="p-4 sm:p-8">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 {currentStep === 1 && renderStep1()}
@@ -220,7 +237,7 @@ const CreateInterview = () => {
                     onClick={prevStep}
                     disabled={currentStep === 1}
                     variant="outline"
-                    className="bg-gray-800 border-gray-700 text-white hover:bg-gray-700 disabled:opacity-50"
+                    className="bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 disabled:opacity-50 hover:scale-[1.02] transition-all duration-300"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Previous
@@ -230,7 +247,7 @@ const CreateInterview = () => {
                     <Button
                       type="button"
                       onClick={nextStep}
-                      className="bg-gradient-to-r from-purple-400 to-teal-400 text-white hover:scale-105 transition-all duration-300"
+                      className="bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
                     >
                       Next
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -239,7 +256,7 @@ const CreateInterview = () => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-gradient-to-r from-purple-400 to-teal-400 text-white hover:scale-105 transition-all duration-300 min-w-32"
+                      className="bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:scale-[1.02] transition-all duration-300 min-w-32 shadow-lg hover:shadow-purple-500/25 disabled:opacity-70 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>
@@ -260,22 +277,28 @@ const CreateInterview = () => {
           </CardContent>
         </Card>
 
-        {/* Feature Highlights */}
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 text-center hover:border-purple-400 transition-all duration-300 hover:scale-105">
-            <Code className="w-12 h-12 text-purple-400 mx-auto mb-4" />
-            <h3 className="text-white font-semibold mb-2">AI-Powered Questions</h3>
-            <p className="text-gray-400 text-sm">Dynamic questions tailored to your role and experience</p>
+        {/* Enhanced Feature Highlights */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
+          <div className="group bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50">
+            <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
+              <Code className="w-8 h-8 text-purple-400" />
+            </div>
+            <h3 className="text-white font-semibold mb-3 text-lg group-hover:text-purple-300 transition-colors">AI-Powered Questions</h3>
+            <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">Dynamic questions tailored to your role and experience level</p>
           </div>
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 text-center hover:border-teal-400 transition-all duration-300 hover:scale-105">
-            <MessageSquare className="w-12 h-12 text-teal-400 mx-auto mb-4" />
-            <h3 className="text-white font-semibold mb-2">Real-time Feedback</h3>
-            <p className="text-gray-400 text-sm">Instant analysis and improvement suggestions</p>
+          <div className="group bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50">
+            <div className="w-16 h-16 bg-teal-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-teal-500/30 transition-all group-hover:scale-110">
+              <MessageSquare className="w-8 h-8 text-teal-400" />
+            </div>
+            <h3 className="text-white font-semibold mb-3 text-lg group-hover:text-teal-300 transition-colors">Real-time Feedback</h3>
+            <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">Instant analysis and improvement suggestions</p>
           </div>
-          <div className="bg-gray-900/30 border border-gray-800 rounded-xl p-6 text-center hover:border-yellow-400 transition-all duration-300 hover:scale-105">
-            <Users className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-            <h3 className="text-white font-semibold mb-2">Industry Standards</h3>
-            <p className="text-gray-400 text-sm">Questions based on real industry practices</p>
+          <div className="group bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-amber-500/20 hover:border-amber-500/50 sm:col-span-2 lg:col-span-1">
+            <div className="w-16 h-16 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-500/30 transition-all group-hover:scale-110">
+              <Users className="w-8 h-8 text-amber-400" />
+            </div>
+            <h3 className="text-white font-semibold mb-3 text-lg group-hover:text-amber-300 transition-colors">Industry Standards</h3>
+            <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">Questions based on real industry practices</p>
           </div>
         </div>
       </div>

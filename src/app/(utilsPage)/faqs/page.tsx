@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { HelpCircle, Zap, Shield, Users } from 'lucide-react'
-import '../App.css'
+
 import { Button } from '@/components/ui/button'
 
 const FAQs = () => {
@@ -154,9 +154,11 @@ const FAQs = () => {
             <p className="text-white/90 mb-6">
               Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
             </p>
-            <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
-              Contact Support
-            </Button>
+            <a href="/contact">
+              <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                📞 Contact Support
+              </Button>
+            </a>
           </div>
         </div>
       </div>
