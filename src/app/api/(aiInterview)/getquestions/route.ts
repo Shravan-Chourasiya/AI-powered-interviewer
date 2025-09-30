@@ -19,10 +19,10 @@ export async function POST(req: Request) {
   const { fieldname, position, company, experience }: getQuestionsParams = await req.json();
   const getQuestionsPrompt: string = `Generate interview questions for ${position} (${fieldname}, ${experience} level) at ${company}.
 
-Structure (70min total):
-- Technical: 10 questions (25min) - core concepts, system design, advanced topics
-- Coding: ${experience.includes('senior') ? '1 comprehensive problem (30min)' : '3-4 short problems (6-8min each)'} - intermediate difficulty
-- Behavioral: 5 questions (15min) - leadership, teamwork, problem-solving, culture fit
+Structure (40min total):
+- Technical: 8 questions () - core concepts, system design, advanced topics
+- Coding: ${experience.includes('senior') ? '1 comprehensive problem ()' : '3-4 short problems )'} - intermediate difficulty
+- Behavioral: 5 questions () - leadership, teamwork, problem-solving, culture fit
 
 Return JSON array ONLY (no markdown):
 [{"qid":1,"content":"question text","difficulty":"beginner|intermediate|expert","round":"technical|coding|behavioral","timeLimit":180}]
