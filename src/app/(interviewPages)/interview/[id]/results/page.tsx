@@ -7,7 +7,13 @@ import { CheckCircle, XCircle, Download, Home, Trophy, Award, TrendingUp, Target
 
 export default function ResultsPage() {
     const router = useRouter()
-    const [results, setResults] = useState<any>(null)
+    const [results, setResults] = useState<{
+        finalDecision?: { selected?: boolean; message?: string };
+        technicalRound?: { score?: number; correctAnswers?: number; totalQuestions?: number };
+        codingRound?: { functionalityScore?: number; codeQuality?: number };
+        personalityRound?: { communicationScore?: number; culturalFit?: number };
+        report?: { strengths?: string[]; weaknesses?: string[]; improvements?: string[]; nextSteps?: string[] };
+    } | null>(null)
     
     useEffect(() => {
         // Check if URL has old data parameter and extract it

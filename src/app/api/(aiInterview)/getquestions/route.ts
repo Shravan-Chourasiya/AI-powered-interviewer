@@ -53,6 +53,13 @@ export async function POST(req: Request) {
         model: google("gemini-2.5-flash"),
         prompt: getQuestionsPrompt
     });
-    const questions = JSON.parse(result.text);
+    // Extract JSON from markdown code blocks if present
+    let jsonText = result.text.trim();
+    if (jsonText.startsWith('```json')) {
+        jsonText = jsonText.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+    } else if (jsonText.startsWith('```')) {
+        jsonText = jsonText.replace(/^```\s*/, '').replace(/\s*```$/, '');
+    }
+    const questions = JSON.parse(jsonText);
     return retRes(true, questions, 200);
 }

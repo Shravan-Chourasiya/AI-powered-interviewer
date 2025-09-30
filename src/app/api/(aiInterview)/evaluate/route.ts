@@ -74,7 +74,14 @@ export async function POST(req: Request) {
         
         let evaluation;
         try {
-            evaluation = JSON.parse(result.text);
+            // Extract JSON from markdown code blocks if present
+            let jsonText = result.text.trim();
+            if (jsonText.startsWith('```json')) {
+                jsonText = jsonText.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+            } else if (jsonText.startsWith('```')) {
+                jsonText = jsonText.replace(/^```\s*/, '').replace(/\s*```$/, '');
+            }
+            evaluation = JSON.parse(jsonText);
         } catch (parseError) {
             console.error('Parse error:', parseError, 'Raw text:', result.text)
             return retRes(false,`Failed to parse evaluation response`, 500);

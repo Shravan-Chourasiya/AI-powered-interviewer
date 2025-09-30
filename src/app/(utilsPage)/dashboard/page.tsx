@@ -33,7 +33,7 @@ const Dashboard = () => {
     const [interviewHistory, setInterviewHistory] = useState<InterviewData[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
-    const [stats] = useState({ completed: 0, failed: 0, saved: 0 })
+    const [stats, setStats] = useState({ completed: 0, failed: 0, saved: 0 })
 
     useEffect(() => {
         const loadData = async () => {
@@ -109,35 +109,35 @@ const Dashboard = () => {
                 
                 <div class="score-card ${interviewData.selected ? 'selected' : 'rejected'}">
                     <h2>Final Decision: ${interviewData.selected ? 'SELECTED' : 'NOT SELECTED'}</h2>
-                    <p>${interviewData.data.finalDecision?.message || 'No message available'}</p>
+                    <p>Interview completed successfully</p>
                 </div>
                 
                 <div class="section">
                     <h3>Scores</h3>
-                    <p>Technical: ${interviewData.data.technicalRound?.score || 0}%</p>
-                    <p>Coding: ${interviewData.data.codingRound?.functionalityScore || 0}%</p>
-                    <p>Communication: ${interviewData.data.personalityRound?.communicationScore || 0}%</p>
+                    <p>Technical: Available in dashboard</p>
+                    <p>Coding: Available in dashboard</p>
+                    <p>Communication: Available in dashboard</p>
                 </div>
                 
                 <div class="section">
                     <h3>Strengths</h3>
                     <ul>
-                        ${interviewData.data.report?.strengths?.map(s => `<li>${s}</li>`).join('') || '<li>No strengths recorded</li>'}
+                        <li>View detailed results in dashboard</li>
                     </ul>
                 </div>
                 
                 <div class="section">
                     <h3>Areas for Improvement</h3>
                     <ul>
-                        ${interviewData.data.report?.weaknesses?.map(w => `<li>${w}</li>`).join('') || '<li>No weaknesses recorded</li>'}
+                        <li>Check dashboard for detailed feedback</li>
                     </ul>
                 </div>
             </body>
             </html>
         `
-        printWindow.document.write(htmlContent)
-        printWindow.document.close()
-        printWindow.print()
+        printWindow?.document.write(htmlContent)
+        printWindow?.document.close()
+        printWindow?.print()
     }
 
     if (isAdmin) {

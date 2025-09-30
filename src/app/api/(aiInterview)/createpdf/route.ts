@@ -45,8 +45,8 @@ export async function POST(req: Request) {
 
             // Store PDFs in Redis for 48 hours
             const ttl = 48 * 60 * 60; // 48 hours in seconds
-            await redis.setex(`${user_email}:answerkey`, ttl, answerKeyBuffer);
-            await redis.setex(`${user_email}:review`, ttl, reviewBuffer);
+            await redis.setex(`${user_email}:answerkey`, ttl, Buffer.from(answerKeyBuffer));
+            await redis.setex(`${user_email}:review`, ttl, Buffer.from(reviewBuffer));
             
             const totalResponse = {
                 "message": "PDFs generated successfully. NOTE: These are available for 48hrs only!",

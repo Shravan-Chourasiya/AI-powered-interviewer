@@ -71,6 +71,6 @@ export async function POST(req: Request) {
         return retRes(true, generatedData, 200)
     } catch (error) {
         console.error('PDFRAWDATA API Error:', error)
-        return retRes(false, `Server error: ${error.message}`, 500)
+        return retRes(false, `Server error: ${error instanceof Error ? error.message : 'Unknown error'}`, 500)
     }
 }
