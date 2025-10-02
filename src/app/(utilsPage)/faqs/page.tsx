@@ -152,7 +152,7 @@ const FAQs = () => {
           <div className="bg-gradient-to-r from-purple-500 to-teal-500 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
             <p className="text-white/90 mb-6">
-              Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
+              Can't find the answer you're looking for? Our support team is here to help.
             </p>
             <a href="/contact">
               <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">

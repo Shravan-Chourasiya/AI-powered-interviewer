@@ -211,7 +211,7 @@ const TermsAndPrivacyPage: React.FC = () => {
             <Section title="Terms of Service" icon={FileText}>
               <SubSection title="1. Acceptance of Terms">
                 <ContentCard>
-                  By accessing or using SyntheView (&quot;the Service&quot;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.
+                  By accessing or using SyntheView ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our service.
                 </ContentCard>
               </SubSection>
 
@@ -292,7 +292,7 @@ const TermsAndPrivacyPage: React.FC = () => {
 
               <SubSection title="7. Limitation of Liability">
                 <ContentCard variant="muted">
-                  <p className="mb-4 text-white">SyntheView is provided &quot;as is&quot; without warranties. We are not liable for:</p>
+                  <p className="mb-4 text-white">SyntheView is provided "as is" without warranties. We are not liable for:</p>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <ListItem>Any direct, indirect, or consequential damages</ListItem>
                     <ListItem>Interview outcomes or employment decisions</ListItem>

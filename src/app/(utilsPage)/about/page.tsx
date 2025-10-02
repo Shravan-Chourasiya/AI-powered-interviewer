@@ -33,7 +33,7 @@ const AboutUs = () => {
               boost you need to succeed.
             </p>
             <p className="text-gray-300 text-lg leading-relaxed">
-              We&apos;re democratizing interview preparation by making high-quality practice accessible to everyone, 
+              We're democratizing interview preparation by making high-quality practice accessible to everyone, 
               regardless of their background or resources.
             </p>
           </div>
@@ -102,11 +102,11 @@ const AboutUs = () => {
           <h2 className="text-3xl font-bold text-white mb-6">Built by Interview Experts</h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-8">
             Our team combines years of hiring experience, AI expertise, and a passion for helping people succeed. 
-            We&apos;ve been on both sides of the interview table and understand what it takes to make a great impression.
+            We've been on both sides of the interview table and understand what it takes to make a great impression.
           </p>
           <div className="bg-gradient-to-r from-purple-500 to-teal-500 rounded-2xl p-8 text-white">
             <h3 className="text-2xl font-bold mb-4">Ready to Ace Your Next Interview?</h3>
-            <p className="text-white/90 mb-6">Join thousands of successful candidates who&apos;ve improved their interview skills with SyntheView.</p>
+            <p className="text-white/90 mb-6">Join thousands of successful candidates who've improved their interview skills with SyntheView.</p>
             <Link href="/interview/CreateInterview">
               <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
                 🚀 Start Practicing Today
