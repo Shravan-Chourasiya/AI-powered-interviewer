@@ -17,38 +17,33 @@ interface getQuestionsParams {
 
 export async function POST(req: Request) {
   const { fieldname, position, duration, experience }: getQuestionsParams = await req.json();
-  const getQuestionsPrompt: string = `You are an expert technical interviewer hiring a ${fieldname} ${experience}. Generate questions for a ${position} role at ${duration}.
-    Interview Structure (70 minutes total):
-    - **Technical Round**: 25 minutes (10 questions)
-    - **Coding Round**: 30 minutes 
-    - **Behavioral Round**: 15 minutes (5 questions)
-    ## Coding Round Options (30 minutes):
-    **Option A**: 1 comprehensive intermediate-level problem (uses full 30 minutes)
-    **Option B**: 3-4 shorter problems (6-8 minutes each)
-    ## Question Generation:
-    ### Technical Round:
-    - 10 questions covering core concepts, system design, and advanced topics
-    ### Coding Round: 
-    - Choose Option A for senior roles or Option B for junior roles
-    - All problems should be intermediate difficulty level
-    ### Behavioral Round:
-    - 5 questions covering leadership, teamwork, problem-solving, and culture fit
-    ## JSON Output Format:
-    [
-      {
-        "qid": 1,
-        "content": "question text",
-        "difficulty": "beginner|intermediate|expert",
-        "round": "technical|coding|behavioral",
-        "durationLimit": 180
-      }
-    ]
-    Requirements:
-    - Technical: Focus on job-relevant skills and concepts
-    - Coding: Practical problems suitable for screen sharing
-    - Behavioral: Use scenario-based questions
-    - All questions should be professional and assess real job capabilities
-    Generate questions that effectively evaluate candidates while providing a positive interview experience.and return the questions in text format following the above json structure only .And dont wrp thejson array in tildes or quots`;
+  
+  const totalQuestions = Math.floor(duration / 3);
+  const technicalCount = Math.floor(totalQuestions * 0.4);
+  const codingCount = Math.floor(totalQuestions * 0.4);
+  const behavioralCount = totalQuestions - technicalCount - codingCount;
+
+  const getQuestionsPrompt: string = `Generate ${totalQuestions} interview questions for ${fieldname} ${position} role (${experience} level) for ${duration} minutes.
+
+Distribution:
+- Technical: ${technicalCount} questions (40%)
+- Coding: ${codingCount} questions (40%)
+- Behavioral: ${behavioralCount} questions (20%)
+
+Difficulty by experience:
+- Beginner: mostly beginner/intermediate
+- Intermediate: balanced intermediate/expert
+- Expert: mostly expert level
+
+${fieldname} focus:
+- Technical: Core concepts, architecture, best practices
+- Coding: Algorithms, problem-solving, optimization
+- Behavioral: Leadership, teamwork, culture fit
+
+Return JSON array:
+[{"qid":1,"content":"question","difficulty":"beginner|intermediate|expert","round":"technical|coding|behavioral","timeLimit":180}]
+
+No markdown.`;
 
   const result = await generateText({
     model: google("gemini-2.5-flash"),
