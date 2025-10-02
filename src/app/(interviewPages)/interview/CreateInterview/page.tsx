@@ -167,20 +167,20 @@ const CreateInterview = () => {
         name="experienceLevel"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-slate-900 dark:text-white text-lg mb-4 block">Experience Level</FormLabel>
-            <div className="grid grid-cols-2 gap-4">
+            <FormLabel className="text-slate-900 dark:text-white text-base sm:text-lg mb-3 sm:mb-4 block">Experience Level</FormLabel>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {experienceLevels.map((level) => (
                 <div
                   key={level.value}
                   onClick={() => field.onChange(level.value)}
-                  className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
+                  className={`p-4 sm:p-5 rounded-xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] touch-manipulation min-h-[80px] flex flex-col justify-center ${
                     field.value === level.value
                       ? 'border-purple-500/50 bg-purple-100/50 dark:bg-purple-500/20 shadow-lg shadow-purple-500/25'
                       : 'border-slate-300/50 dark:border-slate-700/50 bg-slate-50/30 dark:bg-slate-800/30 hover:border-slate-400/50 dark:hover:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-800/50'
                   }`}
                 >
-                  <div className="text-2xl mb-2">{level.icon}</div>
-                  <div className="text-slate-900 dark:text-white font-medium">{level.label}</div>
+                  <div className="text-xl sm:text-2xl mb-2 text-center">{level.icon}</div>
+                  <div className="text-slate-900 dark:text-white font-medium text-sm sm:text-base text-center leading-tight">{level.label}</div>
                 </div>
               ))}
             </div>
@@ -194,20 +194,20 @@ const CreateInterview = () => {
         name="duration"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-slate-900 dark:text-white text-lg mb-4 block">Interview Duration</FormLabel>
-            <div className="grid grid-cols-4 gap-3">
+            <FormLabel className="text-slate-900 dark:text-white text-base sm:text-lg mb-3 sm:mb-4 block">Interview Duration</FormLabel>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {durations.map((duration) => (
                 <div
                   key={duration.value}
                   onClick={() => field.onChange(duration.value)}
-                  className={`p-3 rounded-lg border cursor-pointer transition-all duration-300 hover:scale-[1.02] text-center ${
+                  className={`p-3 sm:p-4 rounded-lg border cursor-pointer transition-all duration-300 hover:scale-[1.02] text-center touch-manipulation min-h-[70px] flex flex-col justify-center ${
                     field.value === duration.value
                       ? 'border-teal-500/50 bg-teal-100/50 dark:bg-teal-500/20 shadow-lg shadow-teal-500/25'
                       : 'border-slate-300/50 dark:border-slate-700/50 bg-slate-50/30 dark:bg-slate-800/30 hover:border-slate-400/50 dark:hover:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-800/50'
                   }`}
                 >
-                  <div className="text-xl mb-1">{duration.icon}</div>
-                  <div className="text-slate-900 dark:text-white text-sm font-medium">{duration.label}</div>
+                  <div className="text-lg sm:text-xl mb-1">{duration.icon}</div>
+                  <div className="text-slate-900 dark:text-white text-xs sm:text-sm font-medium leading-tight">{duration.label}</div>
                 </div>
               ))}
             </div>
@@ -243,13 +243,13 @@ const CreateInterview = () => {
                 {currentStep === 2 && renderStep2()}
                 
                 {/* Navigation Buttons */}
-                <div className="flex justify-between pt-8 border-t border-slate-200 dark:border-gray-800">
+                <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 pt-6 sm:pt-8 border-t border-slate-200 dark:border-gray-800">
                   <Button
                     type="button"
                     onClick={prevStep}
                     disabled={currentStep === 1}
                     variant="outline"
-                    className="bg-slate-100/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-700/50 text-slate-900 dark:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50 disabled:opacity-50 hover:scale-[1.02] transition-all duration-300"
+                    className="bg-slate-100/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-700/50 text-slate-900 dark:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50 disabled:opacity-50 hover:scale-[1.02] transition-all duration-300 h-12 touch-manipulation order-2 sm:order-1"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Previous
@@ -259,7 +259,7 @@ const CreateInterview = () => {
                     <Button
                       type="button"
                       onClick={nextStep}
-                      className="bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-purple-500/25"
+                      className="bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:scale-[1.02] transition-all duration-300 shadow-lg hover:shadow-purple-500/25 h-12 touch-manipulation order-1 sm:order-2"
                     >
                       Next
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -268,7 +268,7 @@ const CreateInterview = () => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:scale-[1.02] transition-all duration-300 min-w-32 shadow-lg hover:shadow-purple-500/25 disabled:opacity-70 disabled:cursor-not-allowed"
+                      className="bg-gradient-to-r from-purple-500 to-teal-500 text-white hover:scale-[1.02] transition-all duration-300 min-w-32 shadow-lg hover:shadow-purple-500/25 disabled:opacity-70 disabled:cursor-not-allowed h-12 touch-manipulation order-1 sm:order-2"
                     >
                       {isSubmitting ? (
                         <>
@@ -291,25 +291,25 @@ const CreateInterview = () => {
 
         {/* Enhanced Feature Highlights */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
-          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50">
-            <div className="w-16 h-16 bg-purple-100/80 dark:bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200/80 dark:group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
-              <Code className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 touch-manipulation">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100/80 dark:bg-purple-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-purple-200/80 dark:group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
+              <Code className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600 dark:text-purple-400" />
             </div>
-            <h3 className="text-slate-900 dark:text-white font-semibold mb-3 text-lg group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">AI-Powered Questions</h3>
+            <h3 className="text-slate-900 dark:text-white font-semibold mb-2 sm:mb-3 text-base sm:text-lg group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">AI-Powered Questions</h3>
             <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">Dynamic questions tailored to your role and experience level</p>
           </div>
-          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50">
-            <div className="w-16 h-16 bg-teal-100/80 dark:bg-teal-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-teal-200/80 dark:group-hover:bg-teal-500/30 transition-all group-hover:scale-110">
-              <MessageSquare className="w-8 h-8 text-teal-600 dark:text-teal-400" />
+          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50 touch-manipulation">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-teal-100/80 dark:bg-teal-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-teal-200/80 dark:group-hover:bg-teal-500/30 transition-all group-hover:scale-110">
+              <MessageSquare className="w-6 h-6 sm:w-8 sm:h-8 text-teal-600 dark:text-teal-400" />
             </div>
-            <h3 className="text-slate-900 dark:text-white font-semibold mb-3 text-lg group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">Real-time Feedback</h3>
+            <h3 className="text-slate-900 dark:text-white font-semibold mb-2 sm:mb-3 text-base sm:text-lg group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">Real-time Feedback</h3>
             <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">Instant analysis and improvement suggestions</p>
           </div>
-          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-amber-500/20 hover:border-amber-500/50 sm:col-span-2 lg:col-span-1">
-            <div className="w-16 h-16 bg-amber-100/80 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-200/80 dark:group-hover:bg-amber-500/30 transition-all group-hover:scale-110">
-              <Users className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-amber-500/20 hover:border-amber-500/50 sm:col-span-2 lg:col-span-1 touch-manipulation">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-amber-100/80 dark:bg-amber-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-amber-200/80 dark:group-hover:bg-amber-500/30 transition-all group-hover:scale-110">
+              <Users className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600 dark:text-amber-400" />
             </div>
-            <h3 className="text-slate-900 dark:text-white font-semibold mb-3 text-lg group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">Industry Standards</h3>
+            <h3 className="text-slate-900 dark:text-white font-semibold mb-2 sm:mb-3 text-base sm:text-lg group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">Industry Standards</h3>
             <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">Questions based on real industry practices</p>
           </div>
         </div>

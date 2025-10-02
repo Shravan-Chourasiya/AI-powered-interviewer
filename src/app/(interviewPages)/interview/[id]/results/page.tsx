@@ -186,14 +186,14 @@ export default function ResultsPage() {
                 </Card>
 
                 {/* Enhanced Score Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-blue-500/20 hover:border-blue-500/50">
-                        <div className="w-16 h-16 bg-blue-100/80 dark:bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <Award className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-blue-500/20 hover:border-blue-500/50 touch-manipulation">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100/80 dark:bg-blue-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                            <Award className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 dark:text-blue-400" />
                         </div>
-                        <h3 className="text-blue-700 dark:text-blue-300 font-bold text-lg mb-3">Technical Round</h3>
-                        <div className="relative mb-4">
-                            <div className="text-4xl sm:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">{technicalScore}%</div>
+                        <h3 className="text-blue-700 dark:text-blue-300 font-bold text-base sm:text-lg mb-2 sm:mb-3">Technical Round</h3>
+                        <div className="relative mb-3 sm:mb-4">
+                            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">{technicalScore}%</div>
                             <div className="w-full bg-slate-200 dark:bg-gray-800 rounded-full h-2">
                                 <div 
                                     className="bg-gradient-to-r from-blue-400 to-blue-500 h-2 rounded-full transition-all duration-1000"
@@ -201,18 +201,18 @@ export default function ResultsPage() {
                                 />
                             </div>
                         </div>
-                        <div className="text-slate-600 dark:text-gray-400 text-sm">
+                        <div className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm">
                             {results.technicalRound?.correctAnswers || 0} / {results.technicalRound?.totalQuestions || 0} correct
                         </div>
                     </Card>
 
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-green-500/20 hover:border-green-500/50">
-                        <div className="w-16 h-16 bg-green-100/80 dark:bg-green-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <TrendingUp className="w-8 h-8 text-green-600 dark:text-green-400" />
+                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-green-500/20 hover:border-green-500/50 touch-manipulation">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100/80 dark:bg-green-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 dark:text-green-400" />
                         </div>
-                        <h3 className="text-green-700 dark:text-green-300 font-bold text-lg mb-3">Skills Round</h3>
-                        <div className="relative mb-4">
-                            <div className="text-4xl sm:text-5xl font-bold text-green-600 dark:text-green-400 mb-2">{codingScore}%</div>
+                        <h3 className="text-green-700 dark:text-green-300 font-bold text-base sm:text-lg mb-2 sm:mb-3">Skills Round</h3>
+                        <div className="relative mb-3 sm:mb-4">
+                            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600 dark:text-green-400 mb-2">{codingScore}%</div>
                             <div className="w-full bg-slate-200 dark:bg-gray-800 rounded-full h-2">
                                 <div 
                                     className="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-1000"
@@ -220,18 +220,18 @@ export default function ResultsPage() {
                                 />
                             </div>
                         </div>
-                        <div className="text-slate-600 dark:text-gray-400 text-sm">
+                        <div className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm">
                             Code Quality: {results.codingRound?.codeQuality || 0}%
                         </div>
                     </Card>
 
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 sm:col-span-2 lg:col-span-1">
-                        <div className="w-16 h-16 bg-purple-100/80 dark:bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <Target className="w-8 h-8 text-purple-600 dark:text-purple-400" />
+                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 sm:col-span-2 lg:col-span-1 touch-manipulation">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100/80 dark:bg-purple-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                            <Target className="w-6 h-6 sm:w-8 sm:h-8 text-purple-600 dark:text-purple-400" />
                         </div>
-                        <h3 className="text-purple-700 dark:text-purple-300 font-bold text-lg mb-3">Communication</h3>
-                        <div className="relative mb-4">
-                            <div className="text-4xl sm:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2">{communicationScore}%</div>
+                        <h3 className="text-purple-700 dark:text-purple-300 font-bold text-base sm:text-lg mb-2 sm:mb-3">Communication</h3>
+                        <div className="relative mb-3 sm:mb-4">
+                            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-purple-600 dark:text-purple-400 mb-2">{communicationScore}%</div>
                             <div className="w-full bg-slate-200 dark:bg-gray-800 rounded-full h-2">
                                 <div 
                                     className="bg-gradient-to-r from-purple-400 to-purple-500 h-2 rounded-full transition-all duration-1000"
@@ -239,97 +239,102 @@ export default function ResultsPage() {
                                 />
                             </div>
                         </div>
-                        <div className="text-slate-600 dark:text-gray-400 text-sm">
+                        <div className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm">
                             Cultural Fit: {results.personalityRound?.culturalFit || 0}%
                         </div>
                     </Card>
                 </div>
 
                 {/* Detailed Report */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     {/* Strengths */}
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-6 hover:shadow-emerald-500/10 transition-all">
-                        <h3 className="text-emerald-600 dark:text-emerald-400 font-bold text-xl mb-4 flex items-center gap-2">
-                            <CheckCircle className="w-5 h-5" />
+                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 hover:shadow-emerald-500/10 transition-all">
+                        <h3 className="text-emerald-600 dark:text-emerald-400 font-bold text-lg sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
+                            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                             Strengths
                         </h3>
                         <ul className="space-y-2">
                             {results.report?.strengths?.map((strength, index) => (
-                                <li key={index} className="text-slate-700 dark:text-gray-300 flex items-start gap-2">
-                                    <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
-                                    {strength}
+                                <li key={index} className="text-slate-700 dark:text-gray-300 flex items-start gap-2 text-sm sm:text-base">
+                                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
+                                    <span className="leading-relaxed">{strength}</span>
                                 </li>
-                            )) || <li className="text-slate-600 dark:text-gray-400">No strengths recorded</li>}
+                            )) || <li className="text-slate-600 dark:text-gray-400 text-sm sm:text-base">No strengths recorded</li>}
                         </ul>
                     </Card>
 
                     {/* Areas for Improvement */}
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-6 hover:shadow-amber-500/10 transition-all">
-                        <h3 className="text-amber-600 dark:text-amber-400 font-bold text-xl mb-4 flex items-center gap-2">
-                            <XCircle className="w-5 h-5" />
+                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 hover:shadow-amber-500/10 transition-all">
+                        <h3 className="text-amber-600 dark:text-amber-400 font-bold text-lg sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
+                            <XCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                             Areas for Improvement
                         </h3>
                         <ul className="space-y-2">
                             {results.report?.weaknesses?.map((weakness, index) => (
-                                <li key={index} className="text-slate-700 dark:text-gray-300 flex items-start gap-2">
-                                    <XCircle className="w-4 h-4 text-yellow-600 dark:text-yellow-400 mt-1 flex-shrink-0" />
-                                    {weakness}
+                                <li key={index} className="text-slate-700 dark:text-gray-300 flex items-start gap-2 text-sm sm:text-base">
+                                    <XCircle className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-600 dark:text-yellow-400 mt-1 flex-shrink-0" />
+                                    <span className="leading-relaxed">{weakness}</span>
                                 </li>
-                            )) || <li className="text-slate-600 dark:text-gray-400">No weaknesses recorded</li>}
+                            )) || <li className="text-slate-600 dark:text-gray-400 text-sm sm:text-base">No weaknesses recorded</li>}
                         </ul>
                     </Card>
                 </div>
 
                 {/* Recommendations */}
-                <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-6 mb-8 hover:shadow-teal-500/10 transition-all">
-                    <h3 className="text-teal-600 dark:text-teal-400 font-bold text-xl mb-4 flex items-center gap-2">
-                        <Target className="w-5 h-5" />
+                <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 mb-6 sm:mb-8 hover:shadow-teal-500/10 transition-all">
+                    <h3 className="text-teal-600 dark:text-teal-400 font-bold text-lg sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
+                        <Target className="w-4 h-4 sm:w-5 sm:h-5" />
                         Recommendations
                     </h3>
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         <div>
-                            <h4 className="text-slate-900 dark:text-white font-semibold mb-2">Improvement Tips</h4>
+                            <h4 className="text-slate-900 dark:text-white font-semibold mb-2 text-sm sm:text-base">Improvement Tips</h4>
                             <ul className="space-y-1">
                                 {results.report?.improvements?.map((tip, index) => (
-                                    <li key={index} className="text-slate-700 dark:text-gray-300 text-sm">• {tip}</li>
-                                )) || <li className="text-slate-600 dark:text-gray-400">No tips available</li>}
+                                    <li key={index} className="text-slate-700 dark:text-gray-300 text-xs sm:text-sm leading-relaxed">• {tip}</li>
+                                )) || <li className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm">No tips available</li>}
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-slate-900 dark:text-white font-semibold mb-2">Next Steps</h4>
+                            <h4 className="text-slate-900 dark:text-white font-semibold mb-2 text-sm sm:text-base">Next Steps</h4>
                             <ul className="space-y-1">
                                 {results.report?.nextSteps?.map((step, index) => (
-                                    <li key={index} className="text-slate-700 dark:text-gray-300 text-sm">• {step}</li>
-                                )) || <li className="text-slate-600 dark:text-gray-400">No next steps available</li>}
+                                    <li key={index} className="text-slate-700 dark:text-gray-300 text-xs sm:text-sm leading-relaxed">• {step}</li>
+                                )) || <li className="text-slate-600 dark:text-gray-400 text-xs sm:text-sm">No next steps available</li>}
                             </ul>
                         </div>
                     </div>
                 </Card>
 
                 {/* Enhanced Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Button 
-                        onClick={() => router.push('/dashboard')}
-                        className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto"
-                    >
-                        <Home className="w-4 h-4 mr-2" />
-                        Back to Dashboard
-                    </Button>
-                    
-                    <Button 
-                        onClick={() => downloadPDF()}
-                        className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-teal-500/25 w-full sm:w-auto"
-                    >
-                        <Download className="w-4 h-4 mr-2" />
-                        Download Report Again
-                    </Button>
+                <div className="flex flex-col gap-3 sm:gap-4 justify-center items-center">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                        <Button 
+                            onClick={() => router.push('/dashboard')}
+                            className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 px-4 sm:px-6 py-3 sm:py-4 text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 w-full sm:w-auto touch-manipulation h-12 sm:h-auto"
+                        >
+                            <Home className="w-4 h-4 mr-2" />
+                            <span className="hidden sm:inline">Back to Dashboard</span>
+                            <span className="sm:hidden">Dashboard</span>
+                        </Button>
+                        
+                        <Button 
+                            onClick={() => downloadPDF()}
+                            className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 px-4 sm:px-6 py-3 sm:py-4 text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-teal-500/25 w-full sm:w-auto touch-manipulation h-12 sm:h-auto"
+                        >
+                            <Download className="w-4 h-4 mr-2" />
+                            <span className="hidden sm:inline">Download Report</span>
+                            <span className="sm:hidden">Download</span>
+                        </Button>
+                    </div>
                     
                     <Button 
                         onClick={() => router.push('/interview/CreateInterview')}
-                        className="bg-slate-200/50 dark:bg-slate-800/50 hover:bg-slate-300/50 dark:hover:bg-slate-700 border border-slate-300/50 dark:border-slate-600/50 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white px-6 py-3 font-medium transition-all duration-200 hover:scale-[1.02] w-full sm:w-auto"
+                        className="bg-slate-200/50 dark:bg-slate-800/50 hover:bg-slate-300/50 dark:hover:bg-slate-700 border border-slate-300/50 dark:border-slate-600/50 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white px-4 sm:px-6 py-3 sm:py-4 font-medium transition-all duration-200 hover:scale-[1.02] w-full sm:w-auto touch-manipulation h-12 sm:h-auto"
                     >
                         <Zap className="w-4 h-4 mr-2" />
-                        Take Another Interview
+                        <span className="hidden sm:inline">Take Another Interview</span>
+                        <span className="sm:hidden">New Interview</span>
                     </Button>
                 </div>
             </div>

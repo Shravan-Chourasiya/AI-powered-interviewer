@@ -64,17 +64,17 @@ const SignIn = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950">
-      <div className="w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl border border-slate-200 dark:border-gray-800 backdrop-blur-sm relative overflow-hidden bg-white dark:bg-gray-900">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950 px-4 py-8">
+      <div className="w-full max-w-md space-y-6 sm:space-y-8 p-6 sm:p-8 rounded-2xl shadow-2xl border border-slate-200 dark:border-gray-800 backdrop-blur-sm relative overflow-hidden bg-white dark:bg-gray-900">
         
         {/* Animated Background Elements */}
-        <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/20 dark:bg-purple-500/10 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-teal-500/20 dark:bg-teal-500/10 rounded-full opacity-10 animate-pulse"></div>
+        <div className="absolute -top-4 -right-4 w-20 h-20 sm:w-24 sm:h-24 bg-purple-500/20 dark:bg-purple-500/10 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-24 h-24 sm:w-32 sm:h-32 bg-teal-500/20 dark:bg-teal-500/10 rounded-full opacity-10 animate-pulse"></div>
         
         {/* Header Section */}
-        <div className="text-center space-y-3 pt-4">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+        <div className="text-center space-y-3 pt-2 sm:pt-4">
+          <div className="flex items-center justify-center space-x-2 mb-3 sm:mb-4">
+            <h1 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
               SyntheView - AI Interviewer
             </h1>
           </div>
@@ -85,16 +85,16 @@ const SignIn = () => {
         
         {/* Form Section */}
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 sm:space-y-6">
             <FormField
               control={form.control}
               name="identifier"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700 dark:text-gray-300">Email/Username</FormLabel>
+                  <FormLabel className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">Email/Username</FormLabel>
                   <FormControl>
                     <Input 
-                      className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
+                      className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm h-12 text-base" 
                       placeholder="Email/Username ..." 
                       {...field} 
                     />
@@ -108,10 +108,10 @@ const SignIn = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700 dark:text-gray-300">Password</FormLabel>
+                  <FormLabel className="text-slate-700 dark:text-gray-300 text-sm sm:text-base">Password</FormLabel>
                   <FormControl>
                     <Input 
-                      className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
+                      className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm h-12 text-base" 
                       type='password' 
                       placeholder="Password ..." 
                       {...field} 
@@ -124,11 +124,11 @@ const SignIn = () => {
             <Button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 h-14 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation"
             >
               {isSubmitting ? (
                 <>
-                  <Loader2Icon className="animate-spin mr-2" />
+                  <Loader2Icon className="animate-spin mr-2 w-5 h-5" />
                   Signing In...
                 </>
               ) : (
@@ -142,14 +142,14 @@ const SignIn = () => {
         </Form>
         
         {/* Footer Section */}
-        <div className="text-center pt-4 border-t border-slate-200 dark:border-gray-800">
-          <h1 className="text-sm text-slate-600 dark:text-gray-400">
-            New User ? {' '}
-            <Link href="/sign-up" className="font-medium transition-colors duration-200 hover:underline text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300">
+        <div className="text-center pt-4 sm:pt-6 border-t border-slate-200 dark:border-gray-800">
+          <p className="text-sm text-slate-600 dark:text-gray-400">
+            New User? {' '}
+            <Link href="/sign-up" className="font-medium transition-colors duration-200 hover:underline text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 touch-manipulation">
               Click here
             </Link>
-            {' '} To Sign Up
-          </h1>
+            {' '} to Sign Up
+          </p>
         </div>
       </div>
     </div>

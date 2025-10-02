@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.11",
+    "@ai-sdk/openai": "^2.0.42",
     "@ai-sdk/react": "^2.0.29",
     "@hookform/resolvers": "^5.2.1",
     "@nextui-org/theme": "^2.4.5",

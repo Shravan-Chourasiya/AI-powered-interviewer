@@ -202,72 +202,76 @@ export default function InterviewPage() {
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 p-3 sm:p-6">
             <div className="max-w-5xl mx-auto">
                 {/* Enhanced Header */}
-                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-4 sm:p-6 mb-6 shadow-2xl">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                        <div className="flex-1">
-                            <h1 className="text-slate-900 dark:text-white text-xl sm:text-2xl font-bold mb-3 flex items-center gap-3">
-                                <div className="w-8 h-8 bg-purple-100/80 dark:bg-purple-500/20 rounded-lg flex items-center justify-center">
-                                    <Brain className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6 shadow-2xl">
+                    <div className="flex flex-col gap-4">
+                        <div className="flex items-center justify-between">
+                            <h1 className="text-slate-900 dark:text-white text-lg sm:text-xl lg:text-2xl font-bold flex items-center gap-2 sm:gap-3">
+                                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-purple-100/80 dark:bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                    <Brain className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-400" />
                                 </div>
-                                Question {currentQ + 1} of {questions?.length || 0}
+                                <span className="text-base sm:text-lg lg:text-xl">Question {currentQ + 1} of {questions?.length || 0}</span>
                             </h1>
-                            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
-                                <div 
-                                    className="bg-gradient-to-r from-purple-500 to-teal-500 h-3 rounded-full transition-all duration-500"
-                                    style={{ width: `${questions?.length ? ((currentQ + 1) / questions.length) * 100 : 0}%` }}
-                                />
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                            <div className={`flex items-center gap-2 text-lg sm:text-xl font-bold px-4 py-2 rounded-xl border transition-all ${
+                            <div className={`flex items-center gap-1 sm:gap-2 text-sm sm:text-base lg:text-lg font-bold px-3 sm:px-4 py-2 rounded-lg sm:rounded-xl border transition-all ${
                                 !timerActive ? 'text-gray-400 border-gray-500/50 bg-gray-500/20' :
                                 timeLeft <= 30 ? 'text-red-400 border-red-500/50 bg-red-500/20 animate-pulse' :
                                 timeLeft <= 60 ? 'text-amber-400 border-amber-500/50 bg-amber-500/20' :
                                 'text-emerald-400 border-emerald-500/50 bg-emerald-500/20'
                             }`}>
-                                <Clock className="w-5 h-5" />
-                                {!timerActive ? 'Time Up' : `${Math.floor(timeLeft/60)}:${(timeLeft%60).toString().padStart(2,'0')}`}
+                                <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
+                                <span className="text-xs sm:text-sm lg:text-base">
+                                    {!timerActive ? 'Time Up' : `${Math.floor(timeLeft/60)}:${(timeLeft%60).toString().padStart(2,'0')}`}
+                                </span>
                             </div>
+                        </div>
+                        <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 sm:h-3 overflow-hidden">
+                            <div 
+                                className="bg-gradient-to-r from-purple-500 to-teal-500 h-2 sm:h-3 rounded-full transition-all duration-500"
+                                style={{ width: `${questions?.length ? ((currentQ + 1) / questions.length) * 100 : 0}%` }}
+                            />
                         </div>
                     </div>
                 </div>
                 
                 {/* Enhanced Question Card */}
-                <Card className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-8 mb-6 shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-2">
-                        <span className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold border ${
-                            currentQuestion?.round === 'technical' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
-                            currentQuestion?.round === 'coding' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
-                            'bg-purple-500/20 text-purple-300 border-purple-500/30'
-                        }`}>
-                            {currentQuestion?.round === 'technical' ? <Brain className="w-4 h-4" /> :
-                             currentQuestion?.round === 'coding' ? <Code className="w-4 h-4" /> :
-                             <MessageCircle className="w-4 h-4" />}
-                            {currentQuestion?.round === 'coding' ? 'SKILLS' : currentQuestion?.round?.toUpperCase()} ROUND
-                        </span>
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-sm bg-slate-800/50 text-gray-300 border border-slate-600/50">
-                            Difficulty: {currentQuestion?.difficulty}
-                        </span>
+                <Card className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 lg:p-8 mb-4 sm:mb-6 shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
+                    <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-3">
+                            <span className={`inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg sm:rounded-xl text-xs sm:text-sm font-semibold border w-fit ${
+                                currentQuestion?.round === 'technical' ? 'bg-blue-500/20 text-blue-300 border-blue-500/30' :
+                                currentQuestion?.round === 'coding' ? 'bg-green-500/20 text-green-300 border-green-500/30' :
+                                'bg-purple-500/20 text-purple-300 border-purple-500/30'
+                            }`}>
+                                {currentQuestion?.round === 'technical' ? <Brain className="w-3 h-3 sm:w-4 sm:h-4" /> :
+                                 currentQuestion?.round === 'coding' ? <Code className="w-3 h-3 sm:w-4 sm:h-4" /> :
+                                 <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />}
+                                {currentQuestion?.round === 'coding' ? 'SKILLS' : currentQuestion?.round?.toUpperCase()} ROUND
+                            </span>
+                            <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs sm:text-sm bg-slate-800/50 text-gray-300 border border-slate-600/50 w-fit">
+                                Difficulty: {currentQuestion?.difficulty}
+                            </span>
+                        </div>
                     </div>
-                    <h2 className="text-slate-900 dark:text-white text-lg sm:text-xl leading-relaxed">
+                    <h2 className="text-slate-900 dark:text-white text-base sm:text-lg lg:text-xl leading-relaxed">
                         {currentQuestion?.content}
                     </h2>
                 </Card>
 
                 {/* Enhanced Answer Input */}
-                <Card className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 mb-6 shadow-2xl">
-                    <label className="text-slate-700 dark:text-gray-300 block mb-3 font-medium">Your Answer:</label>
+                <Card className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 mb-4 sm:mb-6 shadow-2xl">
+                    <label className="text-slate-700 dark:text-gray-300 block mb-3 font-medium text-sm sm:text-base">Your Answer:</label>
                     <textarea
                         id="answer"
                         placeholder="Type your detailed answer here... Be specific and provide examples where possible."
-                        className="w-full h-48 sm:h-64 bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white p-4 rounded-xl border border-slate-300/50 dark:border-slate-700/50 resize-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-500/20 focus:outline-none transition-all duration-200 placeholder-slate-500 dark:placeholder-gray-500 shadow-sm"
+                        className="w-full h-40 sm:h-48 lg:h-64 bg-white dark:bg-slate-800/50 text-slate-900 dark:text-white p-3 sm:p-4 rounded-lg sm:rounded-xl border border-slate-300/50 dark:border-slate-700/50 resize-none focus:border-purple-500/50 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-500/20 focus:outline-none transition-all duration-200 placeholder-slate-500 dark:placeholder-gray-500 shadow-sm text-sm sm:text-base"
                         defaultValue={answers[currentQ] || ''}
                         key={currentQ}
+                        style={{ fontSize: '16px' }}
                     />
-                    <div className="flex justify-between items-center mt-3 text-sm text-slate-600 dark:text-gray-400">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mt-3 text-xs sm:text-sm text-slate-600 dark:text-gray-400">
                         <span className="flex items-center gap-1">
-                            <Brain className="w-4 h-4" />
-                            Tip: Provide detailed explanations and examples
+                            <Brain className="w-3 h-3 sm:w-4 sm:h-4" />
+                            <span className="hidden sm:inline">Tip: Provide detailed explanations and examples</span>
+                            <span className="sm:hidden">Provide detailed explanations</span>
                         </span>
                         <span>{(answers[currentQ] || '').length} characters</span>
                     </div>
@@ -278,31 +282,35 @@ export default function InterviewPage() {
                     <Button 
                         onClick={previousQuestion}
                         disabled={currentQ === 0}
-                        className="bg-slate-200/80 dark:bg-slate-700/80 hover:bg-slate-300/80 dark:hover:bg-slate-600 disabled:opacity-50 backdrop-blur-sm border border-slate-300/50 dark:border-slate-600/50 px-6 py-3 text-slate-900 dark:text-white font-medium transition-all duration-200 hover:scale-[1.02] disabled:hover:scale-100"
+                        className="bg-slate-200/80 dark:bg-slate-700/80 hover:bg-slate-300/80 dark:hover:bg-slate-600 disabled:opacity-50 backdrop-blur-sm border border-slate-300/50 dark:border-slate-600/50 px-4 sm:px-6 py-3 sm:py-4 text-slate-900 dark:text-white font-medium transition-all duration-200 hover:scale-[1.02] disabled:hover:scale-100 touch-manipulation h-12 sm:h-auto order-2 sm:order-1"
                     >
                         <ChevronLeft className="w-4 h-4 mr-2" />
-                        Previous Question
+                        <span className="hidden sm:inline">Previous Question</span>
+                        <span className="sm:hidden">Previous</span>
                     </Button>
                     
                     <Button 
                         onClick={nextQuestion}
                         disabled={evaluating}
-                        className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                        className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-4 sm:px-6 py-3 sm:py-4 text-white font-medium transition-all duration-200 hover:scale-[1.02] shadow-lg hover:shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 touch-manipulation h-12 sm:h-auto order-1 sm:order-2"
                     >
                         {evaluating ? (
                             <>
                                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                                Evaluating...
+                                <span className="hidden sm:inline">Evaluating...</span>
+                                <span className="sm:hidden">Evaluating</span>
                             </>
                         ) : (
                             questions?.length && currentQ === questions.length - 1 ? (
                                 <>
                                     <Flag className="w-4 h-4 mr-2" />
-                                    Finish Interview
+                                    <span className="hidden sm:inline">Finish Interview</span>
+                                    <span className="sm:hidden">Finish</span>
                                 </>
                             ) : (
                                 <>
-                                    Next Question
+                                    <span className="hidden sm:inline">Next Question</span>
+                                    <span className="sm:hidden">Next</span>
                                     <ChevronRight className="w-4 h-4 ml-2" />
                                 </>
                             )
@@ -313,18 +321,18 @@ export default function InterviewPage() {
                 {/* Time Up Popup */}
                 {showTimeUpPopup && (
                     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                        <div className="bg-white dark:bg-slate-900 rounded-2xl p-6 max-w-md w-full border border-slate-200 dark:border-slate-700 shadow-2xl">
+                        <div className="bg-white dark:bg-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 max-w-sm sm:max-w-md w-full border border-slate-200 dark:border-slate-700 shadow-2xl">
                             <div className="text-center">
-                                <div className="w-16 h-16 bg-amber-100 dark:bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                                    <Clock className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+                                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-amber-100 dark:bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                                    <Clock className="w-6 h-6 sm:w-8 sm:h-8 text-amber-600 dark:text-amber-400" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Time&apos;s Up!</h3>
-                                <p className="text-slate-600 dark:text-gray-400 mb-6">
+                                <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mb-2">Time&apos;s Up!</h3>
+                                <p className="text-slate-600 dark:text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
                                     The suggested time for this question has ended. You can continue answering without a timer.
                                 </p>
                                 <Button 
                                     onClick={() => setShowTimeUpPopup(false)}
-                                    className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-6 py-2 text-white font-medium transition-all duration-200 hover:scale-105"
+                                    className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-4 sm:px-6 py-2 sm:py-3 text-white font-medium transition-all duration-200 hover:scale-105 touch-manipulation w-full sm:w-auto"
                                 >
                                     Continue Answering
                                 </Button>

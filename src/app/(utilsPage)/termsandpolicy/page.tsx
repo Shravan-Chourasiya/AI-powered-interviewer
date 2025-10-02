@@ -63,38 +63,38 @@ const TermsAndPrivacyPage: React.FC = () => {
   const NavButton: React.FC<NavButtonProps> = ({ id, label, icon: Icon }) => (
     <button
       onClick={() => setActiveSection(id)}
-      className={`flex items-center space-x-2 px-4 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base whitespace-nowrap transform hover:scale-105 ${
+      className={`flex items-center space-x-2 px-3 sm:px-4 py-2 sm:py-3 rounded-lg font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base whitespace-nowrap transform hover:scale-105 touch-manipulation ${
         activeSection === id
           ? 'bg-gradient-to-r from-purple-500 to-teal-500 text-white shadow-lg'
           : 'bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:border-purple-500 hover:shadow-lg'
       }`}
       type="button"
     >
-      <Icon size={16} className="sm:w-5 sm:h-5" />
+      <Icon size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" />
       <span className="font-medium hidden sm:inline">{label}</span>
-      <span className="font-medium sm:hidden">{label.split(' ')[0]}</span>
+      <span className="font-medium sm:hidden text-xs">{label.split(' ')[0]}</span>
     </button>
   );
 
   const Section: React.FC<SectionProps> = ({ title, children, icon: Icon }) => (
-    <div className="mb-8 sm:mb-12">
-      <div className="flex items-center space-x-3 mb-6 sm:mb-8">
-        <div className="p-3 rounded-lg bg-gradient-to-r from-purple-500 to-teal-500 shadow-lg">
-          <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+    <div className="mb-6 sm:mb-8 lg:mb-12">
+      <div className="flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6 lg:mb-8">
+        <div className="p-2 sm:p-3 rounded-lg bg-gradient-to-r from-purple-500 to-teal-500 shadow-lg flex-shrink-0">
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" />
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">{title}</h2>
+        <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent break-words">{title}</h2>
       </div>
       {children}
     </div>
   );
 
   const SubSection: React.FC<SubSectionProps> = ({ title, children }) => (
-    <div className="mb-8">
-      <h3 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center">
-        <ChevronRight className="w-5 h-5 mr-2 flex-shrink-0 text-purple-400" />
-        <span className="break-words">{title}</span>
+    <div className="mb-6 sm:mb-8">
+      <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-white mb-3 sm:mb-4 flex items-start">
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0 text-purple-400 mt-0.5" />
+        <span className="break-words leading-tight">{title}</span>
       </h3>
-      <div className="text-gray-300 leading-relaxed space-y-4">
+      <div className="text-gray-300 leading-relaxed space-y-3 sm:space-y-4">
         {children}
       </div>
     </div>
@@ -102,15 +102,15 @@ const TermsAndPrivacyPage: React.FC = () => {
 
   const ContentCard: React.FC<ContentCardProps> = ({ children, variant = 'default' }) => {
     const variants: Record<ContentCardVariant, string> = {
-      default: 'p-4 sm:p-6 bg-gray-800 border border-gray-700 rounded-xl shadow-lg hover:border-purple-400 transition-all duration-300',
-      highlight: 'p-4 bg-gradient-to-r from-purple-500/20 to-teal-500/20 border border-purple-400 rounded-xl shadow-lg',
-      warning: 'p-4 bg-orange-500/20 border border-orange-500 rounded-xl shadow-lg',
-      muted: 'p-4 sm:p-6 bg-gray-900 border border-gray-600 rounded-xl shadow-lg',
-      secondary: 'p-4 bg-gray-700 border border-gray-600 rounded-xl shadow-lg'
+      default: 'p-3 sm:p-4 lg:p-6 bg-gray-800 border border-gray-700 rounded-lg sm:rounded-xl shadow-lg hover:border-purple-400 transition-all duration-300',
+      highlight: 'p-3 sm:p-4 bg-gradient-to-r from-purple-500/20 to-teal-500/20 border border-purple-400 rounded-lg sm:rounded-xl shadow-lg',
+      warning: 'p-3 sm:p-4 bg-orange-500/20 border border-orange-500 rounded-lg sm:rounded-xl shadow-lg',
+      muted: 'p-3 sm:p-4 lg:p-6 bg-gray-900 border border-gray-600 rounded-lg sm:rounded-xl shadow-lg',
+      secondary: 'p-3 sm:p-4 bg-gray-700 border border-gray-600 rounded-lg sm:rounded-xl shadow-lg'
     };
     
     return (
-      <div className={`${variants[variant]} text-sm sm:text-base text-gray-300`}>
+      <div className={`${variants[variant]} text-xs sm:text-sm lg:text-base text-gray-300`}>
         {children}
       </div>
     );
@@ -165,28 +165,28 @@ const TermsAndPrivacyPage: React.FC = () => {
       </div>
 
       {/* Hero section */}
-      <div className="relative pt-16 sm:pt-20 pb-12 sm:pb-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative pt-12 sm:pt-16 lg:pt-20 pb-8 sm:pb-12 lg:pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-6 sm:mb-8 shadow-lg">
-              <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
-              <span className="text-sm sm:text-base text-slate-600 dark:text-gray-300 font-medium">Legal Documentation</span>
+            <div className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-full px-3 py-2 sm:px-4 sm:py-2 md:px-6 md:py-3 mb-4 sm:mb-6 lg:mb-8 shadow-lg">
+              <Shield className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-purple-400 flex-shrink-0" />
+              <span className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-gray-300 font-medium">Legal Documentation</span>
             </div>
             
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-3 sm:mb-4 lg:mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent px-2">
               SyntheView - AI Interviewer
             </h1>
             
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-slate-900 dark:text-white">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-4 sm:mb-6 text-slate-900 dark:text-white px-2">
               Terms & Privacy Policy
             </h2>
             
-            <p className="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-600 dark:text-gray-400 max-w-2xl mx-auto mb-4 sm:mb-6 lg:mb-8 px-4 leading-relaxed">
               Transparency and trust are at the core of SyntheView. Review our policies to understand how we protect your data and ensure a secure interview preparation experience.
             </p>
             
-            <div className="text-sm sm:text-base text-slate-500 dark:text-gray-500 flex items-center justify-center space-x-2">
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+            <div className="text-xs sm:text-sm md:text-base text-slate-500 dark:text-gray-500 flex items-center justify-center space-x-2">
+              <Calendar className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 flex-shrink-0" />
               <span>Last updated: August 29, 2025</span>
             </div>
           </div>
@@ -195,8 +195,8 @@ const TermsAndPrivacyPage: React.FC = () => {
 
       {/* Navigation */}
       <div className="sticky top-1 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-gray-800">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-          <div className="flex flex-wrap gap-3 sm:gap-6 justify-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 lg:py-6">
+          <div className="flex flex-wrap gap-2 sm:gap-3 lg:gap-6 justify-center">
             <NavButton id="terms" label="Terms of Service" icon={FileText} />
             <NavButton id="privacy" label="Privacy Policy" icon={Shield} />
             <NavButton id="cookies" label="Cookie Policy" icon={Eye} />
@@ -205,7 +205,7 @@ const TermsAndPrivacyPage: React.FC = () => {
       </div>
 
       {/* Main content */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12">
         {activeSection === 'terms' && (
           <div className="space-y-8 sm:space-y-12">
             <Section title="Terms of Service" icon={FileText}>
@@ -615,19 +615,19 @@ const TermsAndPrivacyPage: React.FC = () => {
         )}
 
         {/* Agreement footer */}
-        <div className="mt-16 sm:mt-20 pt-8 sm:pt-10 border-t border-gray-800">
-          <div className="bg-gradient-to-r from-purple-500 to-teal-500 rounded-2xl p-6 sm:p-8 text-white shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
+        <div className="mt-12 sm:mt-16 lg:mt-20 pt-6 sm:pt-8 lg:pt-10 border-t border-gray-800">
+          <div className="bg-gradient-to-r from-purple-500 to-teal-500 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 text-white shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden">
             {/* Background decoration */}
-            <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-white/10 animate-pulse"></div>
-            <div className="absolute -bottom-4 -left-4 w-20 h-20 rounded-full bg-white/5 animate-pulse"></div>
+            <div className="absolute -top-4 -right-4 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 animate-pulse"></div>
+            <div className="absolute -bottom-4 -left-4 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/5 animate-pulse"></div>
             
-            <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 relative z-10">
-              <div className="p-3 rounded-lg bg-white/20 flex-shrink-0 shadow-lg">
-                <Globe className="w-5 h-5 sm:w-6 sm:h-6" />
+            <div className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 lg:space-x-6 relative z-10">
+              <div className="p-2 sm:p-3 rounded-lg bg-white/20 flex-shrink-0 shadow-lg">
+                <Globe className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
               </div>
               <div>
-                <h3 className="text-lg sm:text-xl font-bold mb-3">Agreement</h3>
-                <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold mb-2 sm:mb-3">Agreement</h3>
+                <p className="text-white/90 text-xs sm:text-sm lg:text-base leading-relaxed">
                   By using SyntheView, you acknowledge that you have read and understood our Terms of Service and Privacy Policy. Your continued use of our platform constitutes acceptance of these terms.
                 </p>
               </div>

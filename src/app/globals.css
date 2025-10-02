@@ -91,6 +91,43 @@ html.dark *,
     @apply bg-background text-foreground font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    touch-action: manipulation;
+  }
+  
+  /* Mobile-first responsive base styles */
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Improve mobile touch targets */
+  button, 
+  [role="button"], 
+  input[type="submit"], 
+  input[type="button"], 
+  input[type="reset"] {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Better mobile link handling */
+  a {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Prevent horizontal scroll on mobile */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Mobile-optimized form elements */
+  input, textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
 }
 
@@ -109,6 +146,62 @@ html.dark *,
   
   .theme-transition {
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  
+  /* Mobile-first responsive utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  .tap-highlight-none {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+  
+  /* Mobile-optimized text sizes */
+  .text-mobile-xs { font-size: 0.75rem; line-height: 1rem; }
+  .text-mobile-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .text-mobile-base { font-size: 1rem; line-height: 1.5rem; }
+  .text-mobile-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .text-mobile-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  
+  /* Touch-friendly button sizes */
+  .btn-touch {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Mobile-optimized spacing */
+  .mobile-padding { padding: 1rem; }
+  .mobile-margin { margin: 1rem; }
+  
+  /* Prevent zoom on input focus (iOS) */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  input[type="search"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+  
+  /* Mobile-friendly scrollbars */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  
+  /* Improved mobile focus states */
+  .mobile-focus:focus {
+    outline: 2px solid #8B5CF6;
+    outline-offset: 2px;
   }
 }
 
@@ -158,6 +251,18 @@ html.dark *,
   html.dark body {
     background: rgb(15, 23, 42) !important;
     color: rgb(248, 250, 252) !important;
+  }
+  
+  /* Mobile-specific dark mode optimizations */
+  @media (max-width: 768px) {
+    .dark {
+      background: rgb(15, 23, 42) !important;
+    }
+    
+    .dark .mobile-card {
+      background: rgba(30, 41, 59, 0.8) !important;
+      backdrop-filter: blur(8px);
+    }
   }
   
   .dark,
