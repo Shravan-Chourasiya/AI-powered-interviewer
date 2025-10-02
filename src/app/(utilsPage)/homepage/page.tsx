@@ -3,10 +3,16 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Zap, BarChart3, Clock, Settings, Calendar, Award, Activity, Bookmark } from 'lucide-react'
+import { Zap, BarChart3, Clock, Settings, Calendar, Award, Activity } from 'lucide-react'
 
 function RecentActivity() {
-    const [activities, setActivities] = useState<any[]>([])
+    const [activities, setActivities] = useState<{
+        id: string
+        position: string
+        score: number
+        date: string
+        selected: boolean
+    }[]>([])
     
     useEffect(() => {
         const loadActivities = () => {
