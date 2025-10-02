@@ -1,9 +1,47 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
+import { Send, CheckCircle } from 'lucide-react'
 
 function Footer() {
+  const [email, setEmail] = useState('')
+  const [message, setMessage] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email || !message) return
+    
+    setIsSubmitting(true)
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: 'Footer',
+          lastName: 'Contact',
+          email,
+          subject: 'Footer Contact Form',
+          message
+        })
+      })
+      
+      if (response.ok) {
+        setIsSubmitted(true)
+        setEmail('')
+        setMessage('')
+        setTimeout(() => setIsSubmitted(false), 3000)
+      }
+    } catch (error) {
+      console.error('Error sending message:', error)
+    }
+    
+    setIsSubmitting(false)
+  }
   return (
     <footer className='bg-gray-900 border-t border-gray-800'>
       <div className='flex flex-col lg:flex-row justify-between items-start gap-8 p-6 lg:p-8 max-w-6xl mx-auto'>
@@ -27,18 +65,54 @@ function Footer() {
               <li><Link href='/contact' className='hover:text-purple-400 transition-colors duration-200'>Contact Us</Link></li>
               <li><Link href='/about' className='hover:text-purple-400 transition-colors duration-200'>About Us</Link></li>
               <li><Link href='/faqs' className='hover:text-purple-400 transition-colors duration-200'>FAQs</Link></li>
+              <li><Link href='/termsandpolicy' className='hover:text-purple-400 transition-colors duration-200'>Terms & Privacy</Link></li>
             </ul>
           </div>
         </div>
         <div className='w-full lg:w-1/3 space-y-4'>
-          <h3 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text '>Contact Us</h3>
-          <Input className='bg-gray-800/50 border-gray-700 focus:border-purple-400 text-white placeholder-gray-400' placeholder='Your Email...'/>
-          <textarea 
-            rows={4} 
-            placeholder='Your Message...'
-            className='w-full p-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 resize-none'
-          />
-          <Button className='w-full bg-gradient-to-r from-purple-500 to-teal-500 hover:scale-105 transition-all duration-300'>Send Message</Button>
+          <h3 className='text-xl font-semibold text-white mb-4 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text'>Contact Us</h3>
+          {isSubmitted ? (
+            <div className='text-center py-4'>
+              <CheckCircle className='w-8 h-8 text-green-400 mx-auto mb-2' />
+              <p className='text-green-400 text-sm'>Message sent successfully!</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className='space-y-4'>
+              <Input 
+                type='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className='bg-gray-800/50 border-gray-700 focus:border-purple-400 text-white placeholder-gray-400' 
+                placeholder='Your Email...'
+                required
+              />
+              <textarea 
+                rows={4} 
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder='Your Message...'
+                className='w-full p-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 resize-none'
+                required
+              />
+              <Button 
+                type='submit'
+                disabled={isSubmitting || !email || !message}
+                className='w-full bg-gradient-to-r from-purple-500 to-teal-500 hover:scale-105 transition-all duration-300 disabled:opacity-50'
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className='w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2' />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <Send className='w-4 h-4 mr-2' />
+                    Send Message
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
         </div>
       </div>
       <div className='text-center py-4 border-t border-gray-800 text-gray-400'>

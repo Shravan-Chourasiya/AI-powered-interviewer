@@ -23,6 +23,9 @@ function Navbar() {
         <Link href='/contact' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
           Contact
         </Link>
+        <Link href='/termsandpolicy' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
+          Terms
+        </Link>
         {isSessionActive.status === 'authenticated' ? (
           <>
             <Link href='/dashboard' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
