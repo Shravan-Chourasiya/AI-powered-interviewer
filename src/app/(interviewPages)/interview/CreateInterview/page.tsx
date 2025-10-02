@@ -1,5 +1,7 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -29,6 +31,17 @@ const interviewSchema = z.object({
 const CreateInterview = () => {
   const [currentStep, setCurrentStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  
+  // Auth check
+  useEffect(() => {
+    if (status === 'loading') return
+    if (!session) {
+      router.push('/sign-in')
+      return
+    }
+  }, [session, status, router])
   
   const form = useForm<z.infer<typeof interviewSchema>>({
     resolver: zodResolver(interviewSchema),

@@ -84,7 +84,7 @@ const FAQs = () => {
         },
         {
           question: "What if I encounter technical issues?",
-          answer: "Contact our support team at support@syntheview.com or use the chat feature for immediate assistance."
+          answer: "Contact our support team at syntheview.ai@gmail.com or use the contact form for immediate assistance."
         },
         {
           question: "Can I use SyntheView on mobile devices?",

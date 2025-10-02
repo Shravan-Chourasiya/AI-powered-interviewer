@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Clock, ChevronLeft, ChevronRight, Flag, Loader2, Brain, Code, MessageCircle } from 'lucide-react'
@@ -17,6 +18,16 @@ interface Question {
 export default function InterviewPage() {
     const { id } = useParams()
     const router = useRouter()
+    const { data: session, status } = useSession()
+    
+    // Auth check
+    useEffect(() => {
+        if (status === 'loading') return
+        if (!session) {
+            router.push('/sign-in')
+            return
+        }
+    }, [session, status, router])
     const [questions, setQuestions] = useState<Question[] | null>(null)
     const [currentQ, setCurrentQ] = useState(0)
     const [answers, setAnswers] = useState<Record<number, string>>({})
@@ -134,6 +145,16 @@ export default function InterviewPage() {
     }
 
 
+    
+    if (status === 'loading' || !session) {
+        return (
+            <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-6">
+                <div className="text-center">
+                    <div className="text-white text-xl sm:text-2xl font-semibold mb-2">Checking Authentication...</div>
+                </div>
+            </div>
+        )
+    }
     
     if (loading) {
         return (

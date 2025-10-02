@@ -15,6 +15,7 @@ import {
 import { Home, FileText, Bookmark, LogOut, User, Download, Calendar, Settings, Users, TrendingUp, Trophy, Loader2, BarChart3, Clock, Award, Zap, Activity } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import DoughnutChart from '@/components/DoughnutChart'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
@@ -29,7 +30,17 @@ interface InterviewData {
 }
 
 const Dashboard = () => {
-    const { data: session } = useSession()
+    const { data: session, status } = useSession()
+    const router = useRouter()
+    
+    // Auth check
+    useEffect(() => {
+        if (status === 'loading') return
+        if (!session) {
+            router.push('/sign-in')
+            return
+        }
+    }, [session, status, router])
     const [interviewHistory, setInterviewHistory] = useState<InterviewData[]>([])
     const [isAdmin, setIsAdmin] = useState(false)
     const [isLoading, setIsLoading] = useState(true)

@@ -13,25 +13,34 @@ function Navbar() {
           SyntheView
         </Link>
       </div>
-      <div className='flex items-center space-x-4 sm:space-x-8'>
+      <div className='flex items-center space-x-2 sm:space-x-6'>
+        <Link href='/about' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
+          About
+        </Link>
+        <Link href='/faqs' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
+          FAQs
+        </Link>
+        <Link href='/contact' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
+          Contact
+        </Link>
         {isSessionActive.status === 'authenticated' ? (
           <>
-            <Link href='/homepage' className='px-4 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline'>
+            <Link href='/dashboard' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
               Dashboard
             </Link>
             <Button 
               onClick={() => signOut()} 
-              className='px-6 py-2 bg-gradient-to-r from-purple-500 to-teal-500 text-white rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg'
+              className='px-4 py-2 bg-gradient-to-r from-purple-500 to-teal-500 text-white rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base'
             >
               Logout
             </Button>
           </>
         ) : (
           <>
-            <Link href='/sign-up' className='px-4 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline'>
+            <Link href='/sign-up' className='px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200 hover:underline text-sm sm:text-base'>
               Sign Up
             </Link>
-            <Link href='/sign-in' className='px-6 py-2 bg-gradient-to-r from-purple-500 to-teal-500 text-white rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg'>
+            <Link href='/sign-in' className='px-4 py-2 bg-gradient-to-r from-purple-500 to-teal-500 text-white rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base'>
               Sign In
             </Link>
           </>

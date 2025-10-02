@@ -1,12 +1,23 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState, useCallback } from 'react'
+import { useSession } from 'next-auth/react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle, XCircle, Download, Home, Trophy, Award, TrendingUp, Target, Zap } from 'lucide-react'
 
 export default function ResultsPage() {
     const router = useRouter()
+    const { data: session, status } = useSession()
+    
+    // Auth check
+    useEffect(() => {
+        if (status === 'loading') return
+        if (!session) {
+            router.push('/sign-in')
+            return
+        }
+    }, [session, status, router])
     const [results, setResults] = useState<{
         finalDecision?: { selected?: boolean; message?: string };
         technicalRound?: { score?: number; correctAnswers?: number; totalQuestions?: number };
@@ -62,8 +73,7 @@ export default function ResultsPage() {
                 }
                 localStorage.setItem(`interview_${interviewId}`, JSON.stringify(historyData))
                 
-                // Auto-download PDF after setting results
-                setTimeout(() => downloadPDF(resultData), 1000)
+
             } catch (error) {
                 console.error('Error parsing URL data:', error)
             }
@@ -87,8 +97,7 @@ export default function ResultsPage() {
                     }
                     localStorage.setItem(`interview_${interviewId}`, JSON.stringify(historyData))
                     
-                    // Auto-download PDF after setting results
-                    setTimeout(() => downloadPDF(resultData), 1000)
+
                 } catch (error) {
                     console.error('Error parsing stored results:', error)
                 }
