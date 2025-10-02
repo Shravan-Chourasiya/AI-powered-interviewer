@@ -37,6 +37,9 @@ export default function ResultsPage() {
                     position: interviewDataStr ? JSON.parse(interviewDataStr).fieldname : 'Unknown Position'
                 }
                 localStorage.setItem(`interview_${interviewId}`, JSON.stringify(historyData))
+                
+                // Auto-download PDF after setting results
+                setTimeout(() => downloadPDF(resultData), 1000)
             } catch (error) {
                 console.error('Error parsing URL data:', error)
             }
@@ -59,76 +62,38 @@ export default function ResultsPage() {
                         })()
                     }
                     localStorage.setItem(`interview_${interviewId}`, JSON.stringify(historyData))
+                    
+                    // Auto-download PDF after setting results
+                    setTimeout(() => downloadPDF(resultData), 1000)
                 } catch (error) {
                     console.error('Error parsing stored results:', error)
                 }
             }
         }
-    }, [])
+    }, [downloadPDF])
 
-    const downloadPDF = () => {
-        if (!results) return
+    const downloadPDF = (resultData = results) => {
+        if (!resultData) return
         
-        const printWindow = window.open('', '_blank')
-        const htmlContent = `
-            <html>
-            <head>
-                <title>Interview Report</title>
-                <style>
-                    body { font-family: Arial, sans-serif; margin: 20px; }
-                    .header { text-align: center; margin-bottom: 30px; }
-                    .score-card { border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; }
-                    .selected { background-color: #d4edda; }
-                    .rejected { background-color: #f8d7da; }
-                    .section { margin: 20px 0; }
-                    ul { margin: 10px 0; }
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <h1>Interview Report</h1>
-                    <p>AI-Powered Interview Evaluation</p>
-                </div>
-                
-                <div class="score-card ${results.finalDecision?.selected ? 'selected' : 'rejected'}">
-                    <h2>Final Decision: ${results.finalDecision?.selected ? 'SELECTED' : 'NOT SELECTED'}</h2>
-                    <p>${results.finalDecision?.message || 'No message available'}</p>
-                </div>
-                
-                <div class="section">
-                    <h3>Scores</h3>
-                    <p>Technical: ${results.technicalRound?.score || 0}%</p>
-                    <p>Coding: ${results.codingRound?.functionalityScore || 0}%</p>
-                    <p>Communication: ${results.personalityRound?.communicationScore || 0}%</p>
-                </div>
-                
-                <div class="section">
-                    <h3>Strengths</h3>
-                    <ul>
-                        ${results.report?.strengths?.map((s: string) => `<li>${s}</li>`).join('') || '<li>No strengths recorded</li>'}
-                    </ul>
-                </div>
-                
-                <div class="section">
-                    <h3>Areas for Improvement</h3>
-                    <ul>
-                        ${results.report?.weaknesses?.map((w: string) => `<li>${w}</li>`).join('') || '<li>No weaknesses recorded</li>'}
-                    </ul>
-                </div>
-                
-                <div class="section">
-                    <h3>Recommendations</h3>
-                    <ul>
-                        ${results.report?.improvements?.map((i: string) => `<li>${i}</li>`).join('') || '<li>No recommendations available</li>'}
-                    </ul>
-                </div>
-            </body>
-            </html>
-        `
+        const reportContent = `INTERVIEW REPORT\n\n` +
+            `Final Decision: ${resultData.finalDecision?.selected ? 'SELECTED' : 'NOT SELECTED'}\n` +
+            `Message: ${resultData.finalDecision?.message || 'No message'}\n\n` +
+            `SCORES:\n` +
+            `Technical: ${resultData.technicalRound?.score || 0}%\n` +
+            `Coding: ${resultData.codingRound?.functionalityScore || 0}%\n` +
+            `Communication: ${resultData.personalityRound?.communicationScore || 0}%\n\n` +
+            `STRENGTHS:\n${resultData.report?.strengths?.map(s => `• ${s}`).join('\n') || '• None recorded'}\n\n` +
+            `IMPROVEMENTS:\n${resultData.report?.weaknesses?.map(w => `• ${w}`).join('\n') || '• None recorded'}`
         
-        printWindow?.document.write(htmlContent)
-        printWindow?.document.close()
-        printWindow?.print()
+        const blob = new Blob([reportContent], { type: 'text/plain' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `interview-report-${new Date().toISOString().split('T')[0]}.pdf`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
     }
 
     if (!results) {
@@ -324,11 +289,11 @@ export default function ResultsPage() {
                     </Button>
                     
                     <Button 
-                        onClick={downloadPDF}
+                        onClick={() => downloadPDF()}
                         className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 px-6 py-3 text-white font-medium transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-teal-500/25 w-full sm:w-auto"
                     >
                         <Download className="w-4 h-4 mr-2" />
-                        Download Report
+                        Download Report Again
                     </Button>
                     
                     <Button 

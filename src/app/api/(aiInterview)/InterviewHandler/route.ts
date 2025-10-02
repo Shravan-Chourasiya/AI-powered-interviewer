@@ -21,7 +21,7 @@ export async function POST(req: Request) {
         const InterviewQuest=JSON.stringify(interviewQuestions)
         return retRes(true, InterviewQuest, 200)
     } catch (error) {
-        console.log(error," An Error Occured");
+        console.error('Interview Handler Error:', error)
         return retRes(false, "Interview Handler Failed ", 500)
     }
 }

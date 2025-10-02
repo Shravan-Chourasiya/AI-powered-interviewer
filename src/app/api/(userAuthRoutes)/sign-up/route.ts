@@ -73,7 +73,7 @@ export async function POST(request: Request) {
             const emailResponse = await sendVerificationEmail(email, username, verifyCode)
 
             if (!emailResponse.success) return retRes(false, emailResponse.message, 500)
-            console.log(emailResponse, emailResponse.success);
+
             return retRes(true, 'User registered Successfully | Please verify your Email!!', 201)
         }
 

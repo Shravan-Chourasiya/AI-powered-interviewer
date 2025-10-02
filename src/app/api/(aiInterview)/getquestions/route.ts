@@ -11,24 +11,13 @@ export const maxDuration = 30;
 interface getQuestionsParams {
   fieldname: string,
   position: string,
-  company: string,
+  duration:number,
   experience: string
 }
 
 export async function POST(req: Request) {
-  const { fieldname, position, company, experience }: getQuestionsParams = await req.json();
-  const getQuestionsPrompt: string = `Generate interview questions for ${position} (${fieldname}, ${experience} level) at ${company}.
-
-Structure (40min total):
-- Technical: 8 questions () - core concepts, system design, advanced topics
-- Coding: ${experience.includes('senior') ? '1 comprehensive problem ()' : '3-4 short problems )'} - intermediate difficulty
-- Behavioral: 5 questions () - leadership, teamwork, problem-solving, culture fit
-
-Return JSON array ONLY (no markdown):
-[{"qid":1,"content":"question text","difficulty":"beginner|intermediate|expert","round":"technical|coding|behavioral","timeLimit":180}]
-
-Requirements: Job-relevant, practical, scenario-based, professional.`;
-  const prompt: string = `You are an expert technical interviewer hiring a ${fieldname} ${experience}. Generate questions for a ${position} role at ${company}.
+  const { fieldname, position, duration, experience }: getQuestionsParams = await req.json();
+  const getQuestionsPrompt: string = `You are an expert technical interviewer hiring a ${fieldname} ${experience}. Generate questions for a ${position} role at ${duration}.
     Interview Structure (70 minutes total):
     - **Technical Round**: 25 minutes (10 questions)
     - **Coding Round**: 30 minutes 
@@ -51,7 +40,7 @@ Requirements: Job-relevant, practical, scenario-based, professional.`;
         "content": "question text",
         "difficulty": "beginner|intermediate|expert",
         "round": "technical|coding|behavioral",
-        "timeLimit": 180
+        "durationLimit": 180
       }
     ]
     Requirements:
@@ -59,7 +48,8 @@ Requirements: Job-relevant, practical, scenario-based, professional.`;
     - Coding: Practical problems suitable for screen sharing
     - Behavioral: Use scenario-based questions
     - All questions should be professional and assess real job capabilities
-    Generate questions that effectively evaluate candidates while providing a positive interview experience.and return the questions in text format following the above json structure only .And dont wrp thejson array in tildes or quots`
+    Generate questions that effectively evaluate candidates while providing a positive interview experience.and return the questions in text format following the above json structure only .And dont wrp thejson array in tildes or quots`;
+
   const result = await generateText({
     model: google("gemini-2.5-flash"),
     prompt: getQuestionsPrompt

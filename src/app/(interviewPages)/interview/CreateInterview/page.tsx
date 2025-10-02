@@ -71,7 +71,6 @@ const CreateInterview = () => {
       // Store interview data in localStorage for the interview page
       localStorage.setItem('interviewData', JSON.stringify({
         position: data.jobTitle,
-        company: 'General',
         fieldname: data.experienceLevel,
         duration: data.duration
       }))

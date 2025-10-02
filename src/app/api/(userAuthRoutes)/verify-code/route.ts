@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         })
         
         if (!unverifiedUser) {
-            console.log("user not found!")
+
             return retRes(false, 'User Not Found!', 404)
         }
 
@@ -42,14 +42,14 @@ export async function POST(request: Request) {
             await unverifiedUser.save()
             return retRes(true, "User verified Successfully | Please Log In.", 200)
         } else if (!isVerifyCodeNotExpired) {
-            console.log("Verification Code Expired | Please Sign Up again!")
+
             return retRes(false, 'Verification Code Expired | Please Sign Up again!', 410)
         } else {
-            console.log('Invalid Verification Code | Please Check Your Code!')
+
             return retRes(false, 'Invalid Verification Code | Please Check Your Code!', 400)
         }
     } catch (error) {
-        console.log("error verifying user!", error)
+        console.error('Error verifying user:', error)
         return retRes(false, 'Error Verifying User!', 500)
     }
 }

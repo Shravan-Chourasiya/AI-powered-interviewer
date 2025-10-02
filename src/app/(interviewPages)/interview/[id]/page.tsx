@@ -45,7 +45,7 @@ export default function InterviewPage() {
                 })
                 // API returns {success: true, message: Array(18)}
                 const questionsArray = response.data?.message || response.data?.data || []
-                console.log('Questions Array:', questionsArray)
+
                 
                 if (Array.isArray(questionsArray) && questionsArray.length > 0) {
                     setQuestions(questionsArray)

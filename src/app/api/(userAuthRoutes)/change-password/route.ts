@@ -16,7 +16,7 @@ export async function POST(request: Request) {
             username: decodedUsername, isVerified: true, password: parsedOldPass
         })
         if (!user) {
-            console.log("user not found ! ");
+
             return retRes(false, 'User Not Found ! ', 404)
         }
         user.password=newpassword
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         //send a mail notifying user bout password updation with the username and the newpaswrod in it
 
     } catch (error) {
-        console.log("error changing password ! ", error);
+        console.error('Error changing password:', error)
         return retRes(false, 'Error Changing Password!!', 500)
     }
 }

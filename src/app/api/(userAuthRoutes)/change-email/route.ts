@@ -15,7 +15,7 @@ export async function POST(request: Request) {
             password, isVerified: true, email: parsedOldEmail
         })
         if (!user) {
-            console.log("user not found ! ");
+
             return retRes(false, 'User Not Found ! ', 404)
         }
         user.email = newemail
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
         //send a mail notifying user bout email updation with the username and the newpaswrod in it
 
     } catch (error) {
-        console.log("error changing email ! ", error);
+        console.error('Error changing email:', error)
         return retRes(false, 'Error Changing email!!', 500)
     }
 }

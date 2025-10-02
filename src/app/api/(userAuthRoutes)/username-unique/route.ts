@@ -16,7 +16,7 @@ export async function GET(request: Request) {
         const result = usernameUniqueQuery.safeParse(queryParam)
         if (!result.success) {
             const usernameErrors = result.error.format().username?._errors || []
-            console.log();
+
             return retRes(false, usernameErrors.length > 0 ? usernameErrors.join(' , ') : 'Invalid Username Format | Username Should not contain Special Characters !', 400)
         }
         const { username: validUsername } = result.data
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
         
         return retRes(true, "Username Is Available", 200)
     } catch (error) {
-        console.log("Error Checking Username availability ! ", error);
+        console.error('Error checking username availability:', error)
         return retRes(false, 'Error Checking Username availability !! ', 500)
     }
 }

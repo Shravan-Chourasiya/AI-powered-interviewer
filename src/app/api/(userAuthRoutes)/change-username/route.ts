@@ -20,7 +20,7 @@ export async function POST(request: Request) {
             username: decodedUsername, isVerified: true, password: parsedPassword
         })
         if (!user) {
-            console.log("user not found ! ");
+
             return retRes(false, 'User Not Found ! ', 404)
         }
         if (!parsedUsername.success) {
@@ -32,7 +32,7 @@ export async function POST(request: Request) {
         //send a mail notifying user bout username updation with the username and the newpaswrod in it
 
     } catch (error) {
-        console.log("error changing username ! ", error);
+        console.error('Error changing username:', error)
         return retRes(false, 'Error Changing username!!', 500)
     }
 }

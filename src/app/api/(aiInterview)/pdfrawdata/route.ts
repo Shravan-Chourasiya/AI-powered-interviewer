@@ -9,15 +9,11 @@ interface PdfHtmlParams {
 }
 export async function POST(req: Request) {
     try {
-        console.log('=== PDFRAWDATA API START ===')
         const body = await req.json();
-        console.log('Request body:', body)
         if (!body || typeof body.pdfdata !== 'string') {
-            console.log('Invalid request body')
             return retRes(false, "Invalid request body", 400);
         }
         const pdfRawData: PdfHtmlParams = body;
-        console.log('Calling AI for HTML generation...')
         const PdfHtmlPrompt: string = `
     Generate an array of two professional HTML strings for PDF generation using ${pdfRawData}:
         **First HTML** - Answer Keys Document (Technical Q&A + Coding Solution)
@@ -56,7 +52,7 @@ export async function POST(req: Request) {
             model: google("gemini-2.5-flash"),
             prompt: PdfHtmlPrompt
         });
-        console.log('AI response received:', result.text?.substring(0, 200) + '...')
+
         
         let generatedData;
         try {
@@ -66,8 +62,7 @@ export async function POST(req: Request) {
             return retRes(false, `Failed to parse AI response`, 500);
         }
         
-        console.log('HTML generation successful')
-        console.log('=== PDFRAWDATA API END ===')
+
         return retRes(true, generatedData, 200)
     } catch (error) {
         console.error('PDFRAWDATA API Error:', error)
