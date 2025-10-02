@@ -1,9 +1,85 @@
 'use client'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Zap, BarChart3, Clock, Settings, Calendar, Award, Activity, Bookmark } from 'lucide-react'
+
+function RecentActivity() {
+    const [activities, setActivities] = useState<any[]>([])
+    
+    useEffect(() => {
+        const loadActivities = () => {
+            const recentActivities = []
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i)
+                if (key?.startsWith('interview_')) {
+                    try {
+                        const data = JSON.parse(localStorage.getItem(key) || '{}')
+                        const activity = {
+                            id: key,
+                            position: data.position || 'Interview',
+                            score: data.technicalRound?.score || 0,
+                            date: data.date || new Date().toISOString(),
+                            selected: data.finalDecision?.selected || false
+                        }
+                        recentActivities.push(activity)
+                    } catch {
+                        // Ignore parsing errors
+                    }
+                }
+            }
+            
+            const sortedActivities = recentActivities
+                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .slice(0, 3)
+            
+            setActivities(sortedActivities)
+        }
+        
+        loadActivities()
+    }, [])
+    
+    if (activities.length === 0) {
+        return (
+            <div className="text-center py-8">
+                <p className="text-slate-600 dark:text-gray-400 mb-4">No recent activity</p>
+                <Link href="/interview/CreateInterview" className="text-purple-600 dark:text-purple-400 hover:underline">
+                    Start your first interview
+                </Link>
+            </div>
+        )
+    }
+    
+    return (
+        <div className="space-y-4">
+            {activities.map((activity) => (
+                <div key={activity.id} className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                        activity.selected 
+                            ? 'bg-green-100 dark:bg-green-500/20' 
+                            : 'bg-blue-100 dark:bg-blue-500/20'
+                    }`}>
+                        {activity.selected ? (
+                            <Award className="w-5 h-5 text-green-600 dark:text-green-400" />
+                        ) : (
+                            <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                        )}
+                    </div>
+                    <div className="flex-1">
+                        <p className="text-slate-900 dark:text-white font-medium">
+                            {activity.selected ? 'Completed' : 'Attempted'} {activity.position} Interview
+                        </p>
+                        <p className="text-slate-600 dark:text-gray-400 text-sm">
+                            Score: {activity.score}% • {new Date(activity.date).toLocaleDateString()}
+                        </p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
 
 export default function Homepage() {
     const { data: session, status } = useSession()
@@ -25,6 +101,10 @@ export default function Homepage() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950 text-slate-900 dark:text-white theme-transition">
+            {/* Notice Bar */}
+            <div className="bg-gradient-to-r from-purple-600 to-teal-600 text-white py-2 px-4 text-center text-sm">
+                <p>💡 Recommended: Use dark mode for better experience • Report bugs to our email on contact page • Stay tuned for exciting updates!</p>
+            </div>
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
                 {/* Hero Section */}
                 <div className="text-center mb-16">
@@ -77,35 +157,7 @@ export default function Homepage() {
                         <Calendar className="w-6 h-6 text-purple-600 dark:text-purple-400" />
                         Recent Activity
                     </h2>
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                            <div className="w-10 h-10 bg-green-100 dark:bg-green-500/20 rounded-lg flex items-center justify-center">
-                                <Award className="w-5 h-5 text-green-600 dark:text-green-400" />
-                            </div>
-                            <div className="flex-1">
-                                <p className="text-slate-900 dark:text-white font-medium">Completed Frontend Developer Interview</p>
-                                <p className="text-slate-600 dark:text-gray-400 text-sm">Score: 85% • 2 hours ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-500/20 rounded-lg flex items-center justify-center">
-                                <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                            </div>
-                            <div className="flex-1">
-                                <p className="text-slate-900 dark:text-white font-medium">Started Data Science Practice Session</p>
-                                <p className="text-slate-600 dark:text-gray-400 text-sm">In progress • 1 day ago</p>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
-                            <div className="w-10 h-10 bg-purple-100 dark:bg-purple-500/20 rounded-lg flex items-center justify-center">
-                                <Bookmark className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                            </div>
-                            <div className="flex-1">
-                                <p className="text-slate-900 dark:text-white font-medium">Saved Backend Engineer Questions</p>
-                                <p className="text-slate-600 dark:text-gray-400 text-sm">Draft saved • 3 days ago</p>
-                            </div>
-                        </div>
-                    </div>
+                    <RecentActivity />
                 </div>
 
                 {/* CTA Section */}

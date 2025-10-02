@@ -85,7 +85,7 @@ const ContactUs = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
-                    placeholder="John" 
+                    placeholder="Your first name" 
                     required
                   />
                 </div>
@@ -96,7 +96,7 @@ const ContactUs = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
-                    placeholder="Doe" 
+                    placeholder="Your last name" 
                     required
                   />
                 </div>
@@ -109,7 +109,7 @@ const ContactUs = () => {
                   value={formData.email}
                   onChange={handleChange}
                   className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
-                  placeholder="john@example.com" 
+                  placeholder="your.email@domain.com" 
                   required
                 />
               </div>

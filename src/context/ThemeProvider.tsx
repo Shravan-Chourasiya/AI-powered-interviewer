@@ -1,42 +1,18 @@
 'use client'
-import { createContext, useContext, useEffect, useState } from 'react'
-
-type Theme = 'dark' | 'light'
-
-const ThemeContext = createContext<{
-  theme: Theme
-  toggleTheme: () => void
-}>({
-  theme: 'light',
-  toggleTheme: () => {}
-})
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>('light')
-
-  useEffect(() => {
-    const stored = localStorage.getItem('theme') as Theme
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const initialTheme = stored || (systemPrefersDark ? 'dark' : 'light')
-    
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark')
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark')
-  }
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <NextThemesProvider 
+      attribute="class" 
+      defaultTheme="light" 
+      enableSystem={false}
+      disableTransitionOnChange={false}
+      storageKey="theme"
+      enableColorScheme={false}
+      nonce=""
+    >
       {children}
-    </ThemeContext.Provider>
+    </NextThemesProvider>
   )
 }
-
-export const useTheme = () => useContext(ThemeContext)

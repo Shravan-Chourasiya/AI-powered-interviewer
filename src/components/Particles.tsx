@@ -1,5 +1,5 @@
 'use client'
-import { useTheme } from '@/context/ThemeProvider'
+import { useTheme } from 'next-themes'
 
 export default function Particles() {
     const { theme } = useTheme()

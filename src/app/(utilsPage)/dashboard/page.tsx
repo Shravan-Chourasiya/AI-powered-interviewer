@@ -19,7 +19,7 @@ import { useRouter } from 'next/navigation'
 import DoughnutChart from '@/components/DoughnutChart'
 
 import Link from 'next/link'
-import { useTheme } from '@/context/ThemeProvider'
+import { useTheme } from 'next-themes'
 
 interface InterviewData {
     id: string
@@ -33,7 +33,11 @@ interface InterviewData {
 const Dashboard = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
-    const { theme, toggleTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
+    
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
     
     // Auth check
     useEffect(() => {

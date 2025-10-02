@@ -4,11 +4,15 @@ import { useState } from 'react'
 import { Users, FileText, TrendingUp, Home, Shield, Database, Activity, Lock, Eye, EyeOff, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useTheme } from '@/context/ThemeProvider'
+import { useTheme } from 'next-themes'
 
 export default function AdminDashboard() {
     const router = useRouter()
-    const { theme, toggleTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
+    
+    const toggleTheme = () => {
+        setTheme(theme === 'dark' ? 'light' : 'dark')
+    }
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -212,26 +216,9 @@ export default function AdminDashboard() {
                             User Management
                         </h3>
                         <div className="space-y-3">
-                            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-800 rounded-lg transition-all duration-200 hover:bg-slate-100 dark:hover:bg-gray-700">
-                                <div>
-                                    <p className="text-slate-900 dark:text-white font-medium">john.doe@company.com</p>
-                                    <p className="text-slate-600 dark:text-gray-400 text-sm">Last active: 2 hours ago</p>
-                                </div>
-                                <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded text-xs border border-green-300 dark:border-green-700">Active</span>
-                            </div>
-                            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-800 rounded-lg transition-all duration-200 hover:bg-slate-100 dark:hover:bg-gray-700">
-                                <div>
-                                    <p className="text-slate-900 dark:text-white font-medium">sarah.wilson@company.com</p>
-                                    <p className="text-slate-600 dark:text-gray-400 text-sm">Last active: 1 day ago</p>
-                                </div>
-                                <span className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded text-xs border border-yellow-300 dark:border-yellow-700">Away</span>
-                            </div>
-                            <div className="flex items-center justify-between p-3 bg-slate-50 dark:bg-gray-800 rounded-lg transition-all duration-200 hover:bg-slate-100 dark:hover:bg-gray-700">
-                                <div>
-                                    <p className="text-slate-900 dark:text-white font-medium">mike.johnson@company.com</p>
-                                    <p className="text-slate-600 dark:text-gray-400 text-sm">Last active: 3 days ago</p>
-                                </div>
-                                <span className="px-2 py-1 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded text-xs border border-red-300 dark:border-red-700">Inactive</span>
+                            <div className="text-center py-4 text-slate-600 dark:text-gray-400">
+                                <p>Real user data would be displayed here</p>
+                                <p className="text-sm mt-1">Connect to database to show actual users</p>
                             </div>
                         </div>
                     </div>
@@ -277,27 +264,9 @@ export default function AdminDashboard() {
                 {/* Recent Activity */}
                 <div className="bg-white dark:bg-gray-900 border border-slate-200 dark:border-gray-800 rounded-2xl p-6">
                     <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">Recent System Activity</h3>
-                    <div className="space-y-3">
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-gray-800 rounded-lg">
-                            <div className="w-2 h-2 bg-green-500 dark:bg-green-400 rounded-full"></div>
-                            <span className="text-slate-700 dark:text-gray-300">New user registered: alex.smith@company.com</span>
-                            <span className="text-slate-500 dark:text-gray-500 text-sm ml-auto">2 min ago</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-gray-800 rounded-lg">
-                            <div className="w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full"></div>
-                            <span className="text-slate-700 dark:text-gray-300">Interview completed: Senior Frontend Developer</span>
-                            <span className="text-slate-500 dark:text-gray-500 text-sm ml-auto">5 min ago</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-gray-800 rounded-lg">
-                            <div className="w-2 h-2 bg-purple-500 dark:bg-purple-400 rounded-full"></div>
-                            <span className="text-slate-700 dark:text-gray-300">System backup completed successfully</span>
-                            <span className="text-slate-500 dark:text-gray-500 text-sm ml-auto">1 hour ago</span>
-                        </div>
-                        <div className="flex items-center gap-3 p-3 bg-slate-50 dark:bg-gray-800 rounded-lg">
-                            <div className="w-2 h-2 bg-yellow-500 dark:bg-yellow-400 rounded-full"></div>
-                            <span className="text-slate-700 dark:text-gray-300">High API usage detected - scaling initiated</span>
-                            <span className="text-slate-500 dark:text-gray-500 text-sm ml-auto">2 hours ago</span>
-                        </div>
+                    <div className="text-center py-4 text-slate-600 dark:text-gray-400">
+                        <p>Real system activity would be displayed here</p>
+                        <p className="text-sm mt-1">Connect to logging system for actual events</p>
                     </div>
                 </div>
 

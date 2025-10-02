@@ -3,12 +3,16 @@ import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from '@/components/ui/button'
-import { useTheme } from '@/context/ThemeProvider'
+import { useTheme } from 'next-themes'
 import { Sun, Moon } from 'lucide-react'
 
 function Navbar() {
   const isSessionActive=useSession()
-  const { theme, toggleTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
+  
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
   return (
     <div className='h-[10vh] w-full flex justify-between items-center bg-white/95 dark:bg-gray-900 backdrop-blur-sm border-b border-slate-200 dark:border-gray-800 px-6 sm:px-24 shadow-sm theme-transition'>
       <div className='text-2xl sm:text-4xl'>
