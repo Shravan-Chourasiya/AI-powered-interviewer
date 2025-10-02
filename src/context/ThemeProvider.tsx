@@ -6,16 +6,13 @@ type Theme = 'dark' | 'light'
 const ThemeContext = createContext<{
   theme: Theme
   toggleTheme: () => void
-  isLoading: boolean
 }>({
-  theme: 'dark',
-  toggleTheme: () => {},
-  isLoading: true
+  theme: 'light',
+  toggleTheme: () => {}
 })
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light')
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     const stored = localStorage.getItem('theme') as Theme
@@ -23,26 +20,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const initialTheme = stored || (systemPrefersDark ? 'dark' : 'light')
     
     setTheme(initialTheme)
-    setMounted(true)
+    document.documentElement.classList.toggle('dark', initialTheme === 'dark')
   }, [])
 
   useEffect(() => {
-    if (mounted) {
-      document.documentElement.classList.toggle('dark', theme === 'dark')
-      localStorage.setItem('theme', theme)
-    }
-  }, [theme, mounted])
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    localStorage.setItem('theme', theme)
+  }, [theme])
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark')
   }
 
-  if (!mounted) {
-    return <div className="no-transition">{children}</div>
-  }
-
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme, isLoading: !mounted }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )
