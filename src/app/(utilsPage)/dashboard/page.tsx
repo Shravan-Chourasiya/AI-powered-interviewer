@@ -12,12 +12,12 @@ import {
     SidebarInset,
     SidebarTrigger
 } from '@/components/ui/sidebar'
-import { Home, FileText, Bookmark, LogOut, User, Download, Calendar, Settings, Users, TrendingUp, Trophy, Loader2, BarChart3, Clock, Award, Zap, Activity, Sun, Moon } from 'lucide-react'
+import { Home, FileText, Bookmark, LogOut, User, Download, Calendar, Settings, Loader2, BarChart3, Clock, Award, Zap, Activity, Sun, Moon } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import DoughnutChart from '@/components/DoughnutChart'
-import Footer from '@/components/Footer'
+
 import Link from 'next/link'
 import { useTheme } from '@/context/ThemeProvider'
 

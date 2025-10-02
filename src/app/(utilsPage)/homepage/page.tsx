@@ -32,7 +32,7 @@ export default function Homepage() {
                         Welcome Back, {session.user?.username || session.user?.email?.split('@')[0]}!
                     </h1>
                     <p className="text-xl text-slate-600 dark:text-gray-400 max-w-3xl mx-auto">
-                        Ready to ace your next interview? Let's continue your journey to success.
+                        Ready to ace your next interview? Let&apos;s continue your journey to success.
                     </p>
                 </div>
 

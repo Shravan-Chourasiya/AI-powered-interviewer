@@ -1,14 +1,12 @@
 'use client'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Users, FileText, TrendingUp, Home, Shield, Database, Activity, Lock, Eye, EyeOff, Sun, Moon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useTheme } from '@/context/ThemeProvider'
 
 export default function AdminDashboard() {
-    const { data: session } = useSession()
     const router = useRouter()
     const { theme, toggleTheme } = useTheme()
     const [isAuthenticated, setIsAuthenticated] = useState(false)
