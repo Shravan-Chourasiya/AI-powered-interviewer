@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { CheckCircle, XCircle, Download, Home, Trophy, Award, TrendingUp, Target, Zap } from 'lucide-react'
@@ -14,6 +14,30 @@ export default function ResultsPage() {
         personalityRound?: { communicationScore?: number; culturalFit?: number };
         report?: { strengths?: string[]; weaknesses?: string[]; improvements?: string[]; nextSteps?: string[] };
     } | null>(null)
+    
+    const downloadPDF = useCallback((resultData = results) => {
+        if (!resultData) return
+        
+        const reportContent = `INTERVIEW REPORT\n\n` +
+            `Final Decision: ${resultData.finalDecision?.selected ? 'SELECTED' : 'NOT SELECTED'}\n` +
+            `Message: ${resultData.finalDecision?.message || 'No message'}\n\n` +
+            `SCORES:\n` +
+            `Technical: ${resultData.technicalRound?.score || 0}%\n` +
+            `Coding: ${resultData.codingRound?.functionalityScore || 0}%\n` +
+            `Communication: ${resultData.personalityRound?.communicationScore || 0}%\n\n` +
+            `STRENGTHS:\n${resultData.report?.strengths?.map(s => `• ${s}`).join('\n') || '• None recorded'}\n\n` +
+            `IMPROVEMENTS:\n${resultData.report?.weaknesses?.map(w => `• ${w}`).join('\n') || '• None recorded'}`
+        
+        const blob = new Blob([reportContent], { type: 'text/plain' })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `interview-report-${new Date().toISOString().split('T')[0]}.pdf`
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        URL.revokeObjectURL(url)
+    }, [results])
     
     useEffect(() => {
         // Check if URL has old data parameter and extract it
@@ -71,30 +95,6 @@ export default function ResultsPage() {
             }
         }
     }, [downloadPDF])
-
-    const downloadPDF = (resultData = results) => {
-        if (!resultData) return
-        
-        const reportContent = `INTERVIEW REPORT\n\n` +
-            `Final Decision: ${resultData.finalDecision?.selected ? 'SELECTED' : 'NOT SELECTED'}\n` +
-            `Message: ${resultData.finalDecision?.message || 'No message'}\n\n` +
-            `SCORES:\n` +
-            `Technical: ${resultData.technicalRound?.score || 0}%\n` +
-            `Coding: ${resultData.codingRound?.functionalityScore || 0}%\n` +
-            `Communication: ${resultData.personalityRound?.communicationScore || 0}%\n\n` +
-            `STRENGTHS:\n${resultData.report?.strengths?.map(s => `• ${s}`).join('\n') || '• None recorded'}\n\n` +
-            `IMPROVEMENTS:\n${resultData.report?.weaknesses?.map(w => `• ${w}`).join('\n') || '• None recorded'}`
-        
-        const blob = new Blob([reportContent], { type: 'text/plain' })
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-        a.href = url
-        a.download = `interview-report-${new Date().toISOString().split('T')[0]}.pdf`
-        document.body.appendChild(a)
-        a.click()
-        document.body.removeChild(a)
-        URL.revokeObjectURL(url)
-    }
 
     if (!results) {
         return (
