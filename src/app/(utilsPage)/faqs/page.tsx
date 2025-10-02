@@ -95,11 +95,11 @@ const FAQs = () => {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-900 relative overflow-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-purple-500/10 rounded-full animate-pulse"></div>
-      <div className="absolute bottom-20 left-20 w-40 h-40 bg-teal-500/10 rounded-full animate-pulse"></div>
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/5 rounded-full animate-pulse"></div>
+      <div className="absolute top-20 right-20 w-32 h-32 bg-purple-500/20 dark:bg-purple-500/10 rounded-full animate-pulse"></div>
+      <div className="absolute bottom-20 left-20 w-40 h-40 bg-teal-500/20 dark:bg-teal-500/10 rounded-full animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/10 dark:bg-purple-500/5 rounded-full animate-pulse"></div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
         {/* Hero Section */}
@@ -107,7 +107,7 @@ const FAQs = () => {
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-6">
             Frequently Asked Questions
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-600 dark:text-gray-400 max-w-3xl mx-auto">
             Find answers to common questions about SyntheView and get the help you need.
           </p>
         </div>
@@ -117,14 +117,14 @@ const FAQs = () => {
           {faqCategories.map((category, categoryIndex) => (
             <div 
               key={categoryIndex}
-              className="bg-gray-800 border border-gray-700 rounded-2xl p-6 shadow-lg hover:border-purple-400 transition-all duration-300 animate-fade-in"
+              className="bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-2xl p-6 shadow-lg hover:border-purple-500 hover:shadow-xl transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${categoryIndex * 0.1}s` }}
             >
               <div className="flex items-center space-x-3 mb-6">
                 <div className="p-3 rounded-lg bg-gradient-to-r from-purple-500 to-teal-500">
                   <category.icon className="w-6 h-6 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold text-white">{category.title}</h2>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{category.title}</h2>
               </div>
               
               <Accordion type="single" collapsible className="space-y-2">
@@ -132,12 +132,12 @@ const FAQs = () => {
                   <AccordionItem 
                     key={faqIndex} 
                     value={`${categoryIndex}-${faqIndex}`}
-                    className="border border-gray-600 rounded-lg px-4 hover:border-purple-400 transition-colors duration-200"
+                    className="border border-slate-300 dark:border-gray-600 rounded-lg px-4 hover:border-purple-500 transition-colors duration-200"
                   >
-                    <AccordionTrigger className="text-left text-white hover:text-purple-400 transition-colors duration-200 py-4">
+                    <AccordionTrigger className="text-left text-slate-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200 py-4">
                       {faq.question}
                     </AccordionTrigger>
-                    <AccordionContent className="text-gray-300 pb-4 leading-relaxed">
+                    <AccordionContent className="text-slate-600 dark:text-gray-300 pb-4 leading-relaxed">
                       {faq.answer}
                     </AccordionContent>
                   </AccordionItem>
@@ -155,7 +155,7 @@ const FAQs = () => {
               Can&apos;t find the answer you&apos;re looking for? Our support team is here to help.
             </p>
             <a href="/contact">
-              <Button className="bg-white text-gray-900 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+              <Button className="bg-white text-purple-600 px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
                 📞 Contact Support
               </Button>
             </a>

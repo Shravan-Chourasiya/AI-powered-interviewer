@@ -26,11 +26,7 @@ const SignIn = () => {
   
   useEffect(() => {
     if (session) {
-      if (session.user?.username === 'AdminDev' || session.user?.email === 'AdminDev') {
-        router.replace('/admin')
-      } else {
-        router.replace('/dashboard')
-      }
+      router.replace('/homepage')
     }
   }, [session, router])
   
@@ -56,21 +52,17 @@ const SignIn = () => {
     )
     
     if (result?.url) {
-      if (data.identifier === 'AdminDev') {
-        router.replace('/admin')
-      } else {
-        router.replace('/dashboard')
-      }
+      router.replace('/homepage')
     }
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen dark-main-container">
-      <div className="w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl border border-gray-800 backdrop-blur-sm relative overflow-hidden dark-card-container">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950">
+      <div className="w-full max-w-md space-y-8 p-8 rounded-2xl shadow-2xl border border-slate-200 dark:border-gray-800 backdrop-blur-sm relative overflow-hidden bg-white dark:bg-gray-900">
         
         {/* Animated Background Elements */}
-        <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-20 animate-pulse dark-top-circle"></div>
-        <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full opacity-10 animate-pulse dark-bottom-circle"></div>
+        <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/20 dark:bg-purple-500/10 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-teal-500/20 dark:bg-teal-500/10 rounded-full opacity-10 animate-pulse"></div>
         
         {/* Header Section */}
         <div className="text-center space-y-3 pt-4">
@@ -79,7 +71,7 @@ const SignIn = () => {
               SyntheView - AI Interviewer
             </h1>
           </div>
-          <p className="text-sm opacity-80 dark-description">
+          <p className="text-sm opacity-80 text-slate-600 dark:text-gray-400">
             {`Sign In To Take a Free Mock Interview`}
           </p>
         </div>
@@ -92,10 +84,10 @@ const SignIn = () => {
               name="identifier"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="dark-form-label">Email/Username</FormLabel>
+                  <FormLabel className="text-slate-700 dark:text-gray-300">Email/Username</FormLabel>
                   <FormControl>
                     <Input 
-                      className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 transition-all duration-200" 
+                      className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
                       placeholder="Email/Username ..." 
                       {...field} 
                     />
@@ -109,10 +101,10 @@ const SignIn = () => {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="dark-form-label">Password</FormLabel>
+                  <FormLabel className="text-slate-700 dark:text-gray-300">Password</FormLabel>
                   <FormControl>
                     <Input 
-                      className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 transition-all duration-200" 
+                      className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 transition-all duration-200 shadow-sm" 
                       type='password' 
                       placeholder="Password ..." 
                       {...field} 
@@ -124,7 +116,7 @@ const SignIn = () => {
             />
             <Button 
               type="submit" 
-              className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform dark-submit-button"
+              className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white"
             >
               Sign In
               <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -133,10 +125,10 @@ const SignIn = () => {
         </Form>
         
         {/* Footer Section */}
-        <div className="text-center pt-4 border-t border-gray-800">
-          <h1 className="text-sm dark-footer-text">
+        <div className="text-center pt-4 border-t border-slate-200 dark:border-gray-800">
+          <h1 className="text-sm text-slate-600 dark:text-gray-400">
             New User ? {' '}
-            <Link href="/sign-up" className="font-medium transition-colors duration-200 hover:underline dark-signup-link">
+            <Link href="/sign-up" className="font-medium transition-colors duration-200 hover:underline text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300">
               Click here
             </Link>
             {' '} To Sign Up

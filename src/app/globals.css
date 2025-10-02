@@ -51,31 +51,46 @@
   --color-sidebar: var(--sidebar);
 }
 
-.dark {
-  /* Dark Theme - Supabase Style */
-  --color-background: rgb(15, 23, 42);
-  --color-foreground: rgb(248, 250, 252);
-  --color-card: rgb(30, 41, 59);
-  --color-card-foreground: rgb(248, 250, 252);
-  --color-primary: rgb(62, 207, 142);
-  --color-primary-foreground: rgb(15, 23, 42);
-  --color-secondary: rgb(30, 41, 59);
-  --color-secondary-foreground: rgb(203, 213, 225);
-  --color-muted: rgb(51, 65, 85);
-  --color-muted-foreground: rgb(148, 163, 184);
-  --color-accent: rgb(62, 207, 142);
-  --color-accent-foreground: rgb(15, 23, 42);
-  --color-border: rgb(51, 65, 85);
-  --color-input: rgb(30, 41, 59);
-  --color-ring: rgb(62, 207, 142);
-  --sidebar: hsl(240 5.9% 10%);
-  --sidebar-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-primary: hsl(224.3 76.3% 48%);
-  --sidebar-primary-foreground: hsl(0 0% 100%);
-  --sidebar-accent: hsl(240 3.7% 15.9%);
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
-  --sidebar-border: hsl(240 3.7% 15.9%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+html.dark,
+.dark,
+html.dark *,
+.dark * {
+  --color-background: rgb(15, 23, 42) !important;
+  --color-foreground: rgb(248, 250, 252) !important;
+  --color-card: rgb(30, 41, 59) !important;
+  --color-card-foreground: rgb(248, 250, 252) !important;
+  --color-primary: rgb(62, 207, 142) !important;
+  --color-primary-foreground: rgb(15, 23, 42) !important;
+  --color-secondary: rgb(30, 41, 59) !important;
+  --color-secondary-foreground: rgb(203, 213, 225) !important;
+  --color-muted: rgb(51, 65, 85) !important;
+  --color-muted-foreground: rgb(148, 163, 184) !important;
+  --color-accent: rgb(62, 207, 142) !important;
+  --color-accent-foreground: rgb(15, 23, 42) !important;
+  --color-border: rgb(51, 65, 85) !important;
+  --color-input: rgb(30, 41, 59) !important;
+  --color-ring: rgb(62, 207, 142) !important;
+  --sidebar: hsl(240 5.9% 10%) !important;
+  --sidebar-foreground: hsl(240 4.8% 95.9%) !important;
+  --sidebar-primary: hsl(224.3 76.3% 48%) !important;
+  --sidebar-primary-foreground: hsl(0 0% 100%) !important;
+  --sidebar-accent: hsl(240 3.7% 15.9%) !important;
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%) !important;
+  --sidebar-border: hsl(240 3.7% 15.9%) !important;
+  --sidebar-ring: hsl(217.2 91.2% 59.8%) !important;
+}
+
+html.dark,
+html.dark body,
+.dark,
+.dark body,
+.dark div,
+.dark main,
+.dark section {
+  background: rgb(15, 23, 42) !important;
+  background-image: none !important;
+  color: rgb(248, 250, 252) !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
 }
 
 @layer base {
@@ -102,6 +117,10 @@
   .supabase-glow {
     box-shadow: 0 0 20px rgba(62, 207, 142, 0.3);
   }
+  
+  .theme-transition {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
 }
 
 :root {
@@ -116,10 +135,38 @@
 }
 
 @layer base {
+  html {
+    transition: none;
+  }
+  
+  html:not(.no-transition) *,
+  html:not(.no-transition) *::before,
+  html:not(.no-transition) *::after {
+    transition: background-color 0.15s ease,
+                border-color 0.15s ease,
+                color 0.15s ease,
+                fill 0.15s ease,
+                stroke 0.15s ease,
+                opacity 0.15s ease,
+                box-shadow 0.15s ease !important;
+  }
+  
+  .no-transition *,
+  .no-transition *::before,
+  .no-transition *::after {
+    transition: none !important;
+  }
+  
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
+  }
+  
+  html.dark body {
+    background: rgb(15, 23, 42) !important;
+    color: rgb(248, 250, 252) !important;
   }
 }

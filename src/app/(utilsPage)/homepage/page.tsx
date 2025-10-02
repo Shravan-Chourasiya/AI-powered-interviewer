@@ -1,81 +1,124 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import StackedImageSlider from "@/components/StackedImageSlider";
+'use client'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import Link from 'next/link'
+import { Zap, BarChart3, Clock, Settings, Calendar, Award, Activity, Bookmark } from 'lucide-react'
 
+export default function Homepage() {
+    const { data: session, status } = useSession()
+    const router = useRouter()
+    
+    useEffect(() => {
+        if (status === 'loading') return
+        if (!session) {
+            router.push('/sign-in')
+            return
+        }
+    }, [session, status, router])
 
-const Homepage = () => {
+    if (status === 'loading' || !session) {
+        return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center theme-transition">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-500"></div>
+        </div>
+    }
+
     return (
-        <main className="min-h-screen bg-gray-900 relative overflow-hidden">
-            {/* Animated Background Elements */}
-            <div className="absolute top-20 right-20 w-32 h-32 bg-purple-500/10 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-20 left-20 w-40 h-40 bg-teal-500/10 rounded-full animate-pulse"></div>
-            <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/5 rounded-full animate-pulse"></div>
-            
-            <div className="flex flex-col justify-center items-center min-h-screen px-4 sm:px-6">
-                <div className="text-center flex flex-col justify-center items-center gap-8 max-w-5xl mx-auto">
-                    <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-400 to-teal-400 rounded-full mb-6 animate-bounce">
-                        👋
-                    </div>
-                    <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-teal-400 bg-clip-text text-transparent mb-6 leading-tight">
-                        Ready to Excel?
+        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950 text-slate-900 dark:text-white theme-transition">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+                {/* Hero Section */}
+                <div className="text-center mb-16">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-6">
+                        Welcome Back, {session.user?.username || session.user?.email?.split('@')[0]}!
                     </h1>
-                    <p className="text-xl sm:text-2xl text-gray-300 mb-8 max-w-3xl leading-relaxed">
-                        Your next career breakthrough starts with practice. Choose your path and let our AI help you shine in interviews.
+                    <p className="text-xl text-slate-600 dark:text-gray-400 max-w-3xl mx-auto">
+                        Ready to ace your next interview? Let's continue your journey to success.
                     </p>
                 </div>
-                
-                <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mb-16">
-                    <Link href='/interview/CreateInterview'>
-                        <Button className="px-10 py-5 bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white rounded-2xl font-bold text-xl hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-purple-500/25 min-w-64">
-                            ✨ Start Interview Now
-                        </Button>
-                    </Link>
-                    <Link href='/dashboard'>
-                        <Button className="px-10 py-5 bg-gray-800/50 backdrop-blur-sm border-2 border-gray-600 hover:border-purple-400 text-gray-300 hover:text-white rounded-2xl font-bold text-xl hover:scale-110 transition-all duration-300 shadow-2xl min-w-64">
-                            📈 View Dashboard
-                        </Button>
-                    </Link>
-                </div>
-            </div>
-            
-            <div className="pb-16 px-4">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">Quick Start Options</h2>
-                    <p className="text-gray-400 text-lg mb-8">Choose your interview type and get started immediately</p>
-                </div>
-                
-                {/* Quick Categories */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-6xl mx-auto mb-12">
-                    <Link href='/interview/CreateInterview?field=Frontend' className="bg-gradient-to-br from-purple-900/30 to-purple-800/30 border border-purple-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-purple-400/20 group">
-                        <div className="text-3xl mb-3">💻</div>
-                        <h3 className="text-white font-semibold text-sm">Frontend</h3>
-                    </Link>
-                    <Link href='/interview/CreateInterview?field=Backend' className="bg-gradient-to-br from-teal-900/30 to-teal-800/30 border border-teal-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-teal-400/20 group">
-                        <div className="text-3xl mb-3">⚙️</div>
-                        <h3 className="text-white font-semibold text-sm">Backend</h3>
-                    </Link>
-                    <Link href='/interview/CreateInterview?field=Full Stack' className="bg-gradient-to-br from-blue-900/30 to-blue-800/30 border border-blue-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-blue-400/20 group">
-                        <div className="text-3xl mb-3">🚀</div>
-                        <h3 className="text-white font-semibold text-sm">Full Stack</h3>
-                    </Link>
-                    <Link href='/interview/CreateInterview?field=Data Science' className="bg-gradient-to-br from-green-900/30 to-green-800/30 border border-green-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-green-400/20 group">
-                        <div className="text-3xl mb-3">📈</div>
-                        <h3 className="text-white font-semibold text-sm">Data Science</h3>
-                    </Link>
-                    <Link href='/interview/CreateInterview?field=AI/ML' className="bg-gradient-to-br from-yellow-900/30 to-yellow-800/30 border border-yellow-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-yellow-400/20 group">
-                        <div className="text-3xl mb-3">🤖</div>
-                        <h3 className="text-white font-semibold text-sm">AI/ML</h3>
-                    </Link>
-                    <Link href='/interview/CreateInterview?field=DSA' className="bg-gradient-to-br from-red-900/30 to-red-800/30 border border-red-400/30 rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-red-400/20 group">
-                        <div className="text-3xl mb-3">🧠</div>
-                        <h3 className="text-white font-semibold text-sm">DSA</h3>
-                    </Link>
-                </div>
-                
-                <StackedImageSlider />
-            </div>
-        </main>
-    );
-}
 
-export default Homepage
+                {/* Quick Actions */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <Link href="/interview/CreateInterview" className="group bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-xl hover:border-purple-500 theme-transition">
+                        <div className="w-16 h-16 bg-purple-100 dark:bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 dark:group-hover:bg-purple-500/30 theme-transition">
+                            <Zap className="w-8 h-8 text-purple-600 dark:text-purple-400 theme-transition" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2 theme-transition">Start Interview</h3>
+                        <p className="text-slate-600 dark:text-gray-400 text-sm theme-transition">Begin a new mock interview session</p>
+                    </Link>
+                    
+                    <Link href="/dashboard" className="group bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-xl hover:border-teal-500 theme-transition">
+                        <div className="w-16 h-16 bg-teal-100 dark:bg-teal-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-teal-200 dark:group-hover:bg-teal-500/30 theme-transition">
+                            <BarChart3 className="w-8 h-8 text-teal-600 dark:text-teal-400 theme-transition" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2 theme-transition">Dashboard</h3>
+                        <p className="text-slate-600 dark:text-gray-400 text-sm theme-transition">View your progress and analytics</p>
+                    </Link>
+                    
+                    <div className="group bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-xl hover:border-blue-500 cursor-pointer theme-transition">
+                        <div className="w-16 h-16 bg-blue-100 dark:bg-blue-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-500/30 theme-transition">
+                            <Clock className="w-8 h-8 text-blue-600 dark:text-blue-400 theme-transition" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2 theme-transition">History</h3>
+                        <p className="text-slate-600 dark:text-gray-400 text-sm theme-transition">Review past interview sessions</p>
+                    </div>
+                    
+                    <div className="group bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-105 hover:shadow-xl hover:border-amber-500 cursor-pointer theme-transition">
+                        <div className="w-16 h-16 bg-amber-100 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-200 dark:group-hover:bg-amber-500/30 theme-transition">
+                            <Settings className="w-8 h-8 text-amber-600 dark:text-amber-400 theme-transition" />
+                        </div>
+                        <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2 theme-transition">Settings</h3>
+                        <p className="text-slate-600 dark:text-gray-400 text-sm theme-transition">Customize your preferences</p>
+                    </div>
+                </div>
+
+                {/* Recent Activity */}
+                <div className="bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/50 rounded-2xl p-8 mb-16 shadow-lg theme-transition">
+                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-3">
+                        <Calendar className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                        Recent Activity
+                    </h2>
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                            <div className="w-10 h-10 bg-green-100 dark:bg-green-500/20 rounded-lg flex items-center justify-center">
+                                <Award className="w-5 h-5 text-green-600 dark:text-green-400" />
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-slate-900 dark:text-white font-medium">Completed Frontend Developer Interview</p>
+                                <p className="text-slate-600 dark:text-gray-400 text-sm">Score: 85% • 2 hours ago</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-500/20 rounded-lg flex items-center justify-center">
+                                <Activity className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-slate-900 dark:text-white font-medium">Started Data Science Practice Session</p>
+                                <p className="text-slate-600 dark:text-gray-400 text-sm">In progress • 1 day ago</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl">
+                            <div className="w-10 h-10 bg-purple-100 dark:bg-purple-500/20 rounded-lg flex items-center justify-center">
+                                <Bookmark className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                            </div>
+                            <div className="flex-1">
+                                <p className="text-slate-900 dark:text-white font-medium">Saved Backend Engineer Questions</p>
+                                <p className="text-slate-600 dark:text-gray-400 text-sm">Draft saved • 3 days ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* CTA Section */}
+                <div className="bg-gradient-to-r from-purple-500 to-teal-500 rounded-2xl p-8 text-center text-white">
+                    <h2 className="text-3xl font-bold mb-4">Ready for Your Next Challenge?</h2>
+                    <p className="text-white/90 mb-6 text-lg">
+                        Practice makes perfect. Start a new interview session and improve your skills.
+                    </p>
+                    <Link href="/interview/CreateInterview" className="inline-block bg-white text-purple-600 px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                        🚀 Start New Interview
+                    </Link>
+                </div>
+            </div>
+        </div>
+    )
+}

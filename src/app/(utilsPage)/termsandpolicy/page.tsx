@@ -66,7 +66,7 @@ const TermsAndPrivacyPage: React.FC = () => {
       className={`flex items-center space-x-2 px-4 py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base whitespace-nowrap transform hover:scale-105 ${
         activeSection === id
           ? 'bg-gradient-to-r from-purple-500 to-teal-500 text-white shadow-lg'
-          : 'bg-gray-800 border border-gray-700 text-gray-300 hover:text-white hover:border-purple-400 hover:shadow-lg'
+          : 'bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 text-slate-600 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white hover:border-purple-500 hover:shadow-lg'
       }`}
       type="button"
     >
@@ -150,14 +150,14 @@ const TermsAndPrivacyPage: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 relative overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-900 relative overflow-x-hidden">
       {/* Animated Background Elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 bg-purple-500/10 rounded-full animate-pulse"></div>
-      <div className="absolute bottom-20 left-20 w-40 h-40 bg-teal-500/10 rounded-full animate-pulse"></div>
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/5 rounded-full animate-pulse"></div>
+      <div className="absolute top-20 right-20 w-32 h-32 bg-purple-500/20 dark:bg-purple-500/10 rounded-full animate-pulse"></div>
+      <div className="absolute bottom-20 left-20 w-40 h-40 bg-teal-500/20 dark:bg-teal-500/10 rounded-full animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-500/10 dark:bg-purple-500/5 rounded-full animate-pulse"></div>
 
       {/* Progress bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
+      <div className="fixed top-0 left-0 w-full h-1 bg-slate-200 dark:bg-gray-800 z-50">
         <div 
           className="h-full bg-gradient-to-r from-purple-500 to-teal-500 transition-all duration-200 shadow-lg"
           style={{ width: `${scrollProgress}%` }}
@@ -168,24 +168,24 @@ const TermsAndPrivacyPage: React.FC = () => {
       <div className="relative pt-16 sm:pt-20 pb-12 sm:pb-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="text-center">
-            <div className="inline-flex items-center space-x-2 bg-gray-800 border border-gray-700 rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-6 sm:mb-8 shadow-lg">
+            <div className="inline-flex items-center space-x-2 bg-white dark:bg-gray-800 border border-slate-200 dark:border-gray-700 rounded-full px-4 py-2 sm:px-6 sm:py-3 mb-6 sm:mb-8 shadow-lg">
               <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-purple-400" />
-              <span className="text-sm sm:text-base text-gray-300 font-medium">Legal Documentation</span>
+              <span className="text-sm sm:text-base text-slate-600 dark:text-gray-300 font-medium">Legal Documentation</span>
             </div>
             
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
               SyntheView - AI Interviewer
             </h1>
             
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-white">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold mb-6 text-slate-900 dark:text-white">
               Terms & Privacy Policy
             </h2>
             
-            <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
+            <p className="text-base sm:text-lg lg:text-xl text-slate-600 dark:text-gray-400 max-w-2xl mx-auto mb-6 sm:mb-8 px-4">
               Transparency and trust are at the core of SyntheView. Review our policies to understand how we protect your data and ensure a secure interview preparation experience.
             </p>
             
-            <div className="text-sm sm:text-base text-gray-500 flex items-center justify-center space-x-2">
+            <div className="text-sm sm:text-base text-slate-500 dark:text-gray-500 flex items-center justify-center space-x-2">
               <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Last updated: August 29, 2025</span>
             </div>
@@ -194,7 +194,7 @@ const TermsAndPrivacyPage: React.FC = () => {
       </div>
 
       {/* Navigation */}
-      <div className="sticky top-1 z-40 bg-gray-900/90 border-b border-gray-800">
+      <div className="sticky top-1 z-40 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm border-b border-slate-200 dark:border-gray-800">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="flex flex-wrap gap-3 sm:gap-6 justify-center">
             <NavButton id="terms" label="Terms of Service" icon={FileText} />
