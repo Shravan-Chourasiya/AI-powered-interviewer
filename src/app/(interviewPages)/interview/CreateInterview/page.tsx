@@ -130,8 +130,8 @@ const CreateInterview = () => {
     <div className="space-y-6 animate-in slide-in-from-right-5 duration-500">
       <div className="text-center mb-8">
         <BrainCircuit className="w-16 h-16 mx-auto mb-4 text-purple-400 animate-pulse" />
-        <h2 className="text-2xl font-bold text-white mb-2">Interview Basics</h2>
-        <p className="text-gray-400">Let&apos;s start with the fundamentals</p>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Interview Basics</h2>
+        <p className="text-slate-600 dark:text-gray-400">Let&apos;s start with the fundamentals</p>
       </div>
       
       <FormField
@@ -139,12 +139,12 @@ const CreateInterview = () => {
         name="jobTitle"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-white text-lg">Job Title</FormLabel>
+            <FormLabel className="text-slate-900 dark:text-white text-lg">Job Title</FormLabel>
             <FormControl>
               <Input 
                 {...field}
                 placeholder="e.g., Senior Frontend Developer"
-                className="bg-gray-800/50 border-gray-700 focus:border-purple-400 focus:ring-2 focus:ring-purple-400/20 text-white placeholder-gray-400 h-12 text-lg transition-all duration-200"
+                className="bg-white dark:bg-gray-800/50 border-slate-300 dark:border-gray-700 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 dark:focus:ring-purple-400/20 text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-gray-400 h-12 text-lg transition-all duration-200 shadow-sm"
               />
             </FormControl>
             <FormMessage />
@@ -158,8 +158,8 @@ const CreateInterview = () => {
     <div className="space-y-8 animate-in slide-in-from-right-5 duration-500">
       <div className="text-center mb-8">
         <Target className="w-16 h-16 mx-auto mb-4 text-teal-400 animate-bounce" />
-        <h2 className="text-2xl font-bold text-white mb-2">Interview Configuration</h2>
-        <p className="text-gray-400">Customize your interview settings</p>
+        <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Interview Configuration</h2>
+        <p className="text-slate-600 dark:text-gray-400">Customize your interview settings</p>
       </div>
       
       <FormField
@@ -167,7 +167,7 @@ const CreateInterview = () => {
         name="experienceLevel"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-white text-lg mb-4 block">Experience Level</FormLabel>
+            <FormLabel className="text-slate-900 dark:text-white text-lg mb-4 block">Experience Level</FormLabel>
             <div className="grid grid-cols-2 gap-4">
               {experienceLevels.map((level) => (
                 <div
@@ -175,12 +175,12 @@ const CreateInterview = () => {
                   onClick={() => field.onChange(level.value)}
                   className={`p-4 rounded-xl border cursor-pointer transition-all duration-300 hover:scale-[1.02] ${
                     field.value === level.value
-                      ? 'border-purple-500/50 bg-purple-500/20 shadow-lg shadow-purple-500/25'
-                      : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50 hover:bg-slate-800/50'
+                      ? 'border-purple-500/50 bg-purple-100/50 dark:bg-purple-500/20 shadow-lg shadow-purple-500/25'
+                      : 'border-slate-300/50 dark:border-slate-700/50 bg-slate-50/30 dark:bg-slate-800/30 hover:border-slate-400/50 dark:hover:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="text-2xl mb-2">{level.icon}</div>
-                  <div className="text-white font-medium">{level.label}</div>
+                  <div className="text-slate-900 dark:text-white font-medium">{level.label}</div>
                 </div>
               ))}
             </div>
@@ -194,7 +194,7 @@ const CreateInterview = () => {
         name="duration"
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-white text-lg mb-4 block">Interview Duration</FormLabel>
+            <FormLabel className="text-slate-900 dark:text-white text-lg mb-4 block">Interview Duration</FormLabel>
             <div className="grid grid-cols-4 gap-3">
               {durations.map((duration) => (
                 <div
@@ -202,12 +202,12 @@ const CreateInterview = () => {
                   onClick={() => field.onChange(duration.value)}
                   className={`p-3 rounded-lg border cursor-pointer transition-all duration-300 hover:scale-[1.02] text-center ${
                     field.value === duration.value
-                      ? 'border-teal-500/50 bg-teal-500/20 shadow-lg shadow-teal-500/25'
-                      : 'border-slate-700/50 bg-slate-800/30 hover:border-slate-600/50 hover:bg-slate-800/50'
+                      ? 'border-teal-500/50 bg-teal-100/50 dark:bg-teal-500/20 shadow-lg shadow-teal-500/25'
+                      : 'border-slate-300/50 dark:border-slate-700/50 bg-slate-50/30 dark:bg-slate-800/30 hover:border-slate-400/50 dark:hover:border-slate-600/50 hover:bg-slate-100/50 dark:hover:bg-slate-800/50'
                   }`}
                 >
                   <div className="text-xl mb-1">{duration.icon}</div>
-                  <div className="text-white text-sm font-medium">{duration.label}</div>
+                  <div className="text-slate-900 dark:text-white text-sm font-medium">{duration.label}</div>
                 </div>
               ))}
             </div>
@@ -218,7 +218,7 @@ const CreateInterview = () => {
     </div>
   )
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 p-3 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 p-3 sm:p-6">
       <div className="max-w-5xl mx-auto">
         {/* Enhanced Header */}
         <div className="text-center mb-8 sm:mb-12">
@@ -228,14 +228,14 @@ const CreateInterview = () => {
           <h1 className="text-3xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-4">
             Create AI Interview
           </h1>
-          <p className="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Design your personalized AI-powered interview experience with advanced evaluation</p>
+          <p className="text-slate-600 dark:text-gray-400 text-base sm:text-lg max-w-2xl mx-auto">Design your personalized AI-powered interview experience with advanced evaluation</p>
         </div>
 
         {/* Step Indicator */}
         {renderStepIndicator()}
 
         {/* Enhanced Main Form Card */}
-        <Card className="bg-slate-900/80 border-slate-700/50 backdrop-blur-sm shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
+        <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm shadow-2xl hover:shadow-purple-500/20 transition-all duration-300">
           <CardContent className="p-4 sm:p-8">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -243,13 +243,13 @@ const CreateInterview = () => {
                 {currentStep === 2 && renderStep2()}
                 
                 {/* Navigation Buttons */}
-                <div className="flex justify-between pt-8 border-t border-gray-800">
+                <div className="flex justify-between pt-8 border-t border-slate-200 dark:border-gray-800">
                   <Button
                     type="button"
                     onClick={prevStep}
                     disabled={currentStep === 1}
                     variant="outline"
-                    className="bg-slate-800/50 border-slate-700/50 text-white hover:bg-slate-700/50 disabled:opacity-50 hover:scale-[1.02] transition-all duration-300"
+                    className="bg-slate-100/50 dark:bg-slate-800/50 border-slate-300/50 dark:border-slate-700/50 text-slate-900 dark:text-white hover:bg-slate-200/50 dark:hover:bg-slate-700/50 disabled:opacity-50 hover:scale-[1.02] transition-all duration-300"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Previous
@@ -291,26 +291,26 @@ const CreateInterview = () => {
 
         {/* Enhanced Feature Highlights */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8 sm:mt-12">
-          <div className="group bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50">
-            <div className="w-16 h-16 bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
-              <Code className="w-8 h-8 text-purple-400" />
+          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50">
+            <div className="w-16 h-16 bg-purple-100/80 dark:bg-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200/80 dark:group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
+              <Code className="w-8 h-8 text-purple-600 dark:text-purple-400" />
             </div>
-            <h3 className="text-white font-semibold mb-3 text-lg group-hover:text-purple-300 transition-colors">AI-Powered Questions</h3>
-            <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">Dynamic questions tailored to your role and experience level</p>
+            <h3 className="text-slate-900 dark:text-white font-semibold mb-3 text-lg group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">AI-Powered Questions</h3>
+            <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">Dynamic questions tailored to your role and experience level</p>
           </div>
-          <div className="group bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50">
-            <div className="w-16 h-16 bg-teal-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-teal-500/30 transition-all group-hover:scale-110">
-              <MessageSquare className="w-8 h-8 text-teal-400" />
+          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50">
+            <div className="w-16 h-16 bg-teal-100/80 dark:bg-teal-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-teal-200/80 dark:group-hover:bg-teal-500/30 transition-all group-hover:scale-110">
+              <MessageSquare className="w-8 h-8 text-teal-600 dark:text-teal-400" />
             </div>
-            <h3 className="text-white font-semibold mb-3 text-lg group-hover:text-teal-300 transition-colors">Real-time Feedback</h3>
-            <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">Instant analysis and improvement suggestions</p>
+            <h3 className="text-slate-900 dark:text-white font-semibold mb-3 text-lg group-hover:text-teal-700 dark:group-hover:text-teal-300 transition-colors">Real-time Feedback</h3>
+            <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">Instant analysis and improvement suggestions</p>
           </div>
-          <div className="group bg-slate-900/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-amber-500/20 hover:border-amber-500/50 sm:col-span-2 lg:col-span-1">
-            <div className="w-16 h-16 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-500/30 transition-all group-hover:scale-110">
-              <Users className="w-8 h-8 text-amber-400" />
+          <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-amber-500/20 hover:border-amber-500/50 sm:col-span-2 lg:col-span-1">
+            <div className="w-16 h-16 bg-amber-100/80 dark:bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:bg-amber-200/80 dark:group-hover:bg-amber-500/30 transition-all group-hover:scale-110">
+              <Users className="w-8 h-8 text-amber-600 dark:text-amber-400" />
             </div>
-            <h3 className="text-white font-semibold mb-3 text-lg group-hover:text-amber-300 transition-colors">Industry Standards</h3>
-            <p className="text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">Questions based on real industry practices</p>
+            <h3 className="text-slate-900 dark:text-white font-semibold mb-3 text-lg group-hover:text-amber-700 dark:group-hover:text-amber-300 transition-colors">Industry Standards</h3>
+            <p className="text-slate-600 dark:text-gray-400 text-sm leading-relaxed group-hover:text-slate-700 dark:group-hover:text-gray-300 transition-colors">Questions based on real industry practices</p>
           </div>
         </div>
       </div>

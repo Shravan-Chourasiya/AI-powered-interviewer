@@ -17,12 +17,14 @@ import { useRouter } from "next/navigation"
 import { signInSchema } from "@/schemas/signInSchema"
 import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { Loader2Icon } from 'lucide-react'
 import '../../App.css'
 
 const SignIn = () => {
   const router = useRouter()
   const { data: session } = useSession()
+  const [isSubmitting, setIsSubmitting] = useState(false)
   
   useEffect(() => {
     if (session) {
@@ -39,20 +41,25 @@ const SignIn = () => {
   })
 
   const onSubmit = async (data: z.infer<(typeof signInSchema)>) => {
-    const result = await signIn('credentials', {
-      redirect: false,
-      identifier: data.identifier,
-      password: data.password
-    })
-    
-    if (result?.error) {
-      toast("Failed Signing In user ")
-    } else (
-      toast("User Signed In Successfully")
-    )
-    
-    if (result?.url) {
-      router.replace('/homepage')
+    setIsSubmitting(true)
+    try {
+      const result = await signIn('credentials', {
+        redirect: false,
+        identifier: data.identifier,
+        password: data.password
+      })
+      
+      if (result?.error) {
+        toast("Failed Signing In user ")
+      } else {
+        toast("User Signed In Successfully")
+      }
+      
+      if (result?.url) {
+        router.replace('/homepage')
+      }
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -116,10 +123,20 @@ const SignIn = () => {
             />
             <Button 
               type="submit" 
-              className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white"
+              disabled={isSubmitting}
+              className="w-full py-3 rounded-lg font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 text-white disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Sign In
-              <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+              {isSubmitting ? (
+                <>
+                  <Loader2Icon className="animate-spin mr-2" />
+                  Signing In...
+                </>
+              ) : (
+                <>
+                  Sign In
+                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </>
+              )}
             </Button>
           </form>
         </Form>
