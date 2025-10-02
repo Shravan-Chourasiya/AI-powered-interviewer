@@ -83,12 +83,8 @@ html.dark *,
 html.dark,
 html.dark body,
 .dark,
-.dark body,
-.dark div,
-.dark main,
-.dark section {
+.dark body {
   background: rgb(15, 23, 42) !important;
-  background-image: none !important;
   color: rgb(248, 250, 252) !important;
   transition: background-color 0.2s ease, color 0.2s ease !important;
 }
