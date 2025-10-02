@@ -73,7 +73,7 @@ export default function InterviewPage() {
             }
         }
         fetchQuestions()
-    }, [])
+    }, [router])
 
     // Timer countdown
     useEffect(() => {
@@ -318,7 +318,7 @@ export default function InterviewPage() {
                                 <div className="w-16 h-16 bg-amber-100 dark:bg-amber-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <Clock className="w-8 h-8 text-amber-600 dark:text-amber-400" />
                                 </div>
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Time's Up!</h3>
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Time&apos;s Up!</h3>
                                 <p className="text-slate-600 dark:text-gray-400 mb-6">
                                     The suggested time for this question has ended. You can continue answering without a timer.
                                 </p>
