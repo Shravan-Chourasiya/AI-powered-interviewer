@@ -55,7 +55,7 @@ const ContactUs = () => {
             Contact Us
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+            Have questions? We&apos;d love to hear from you. Send us a message and we&apos;ll respond as soon as possible.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ const ContactUs = () => {
               <div className="text-center py-8">
                 <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
                 <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                <p className="text-gray-300">Thank you for contacting us. We'll get back to you soon.</p>
+                <p className="text-gray-300">Thank you for contacting us. We&apos;ll get back to you soon.</p>
                 <Button 
                   onClick={() => setIsSubmitted(false)}
                   className="mt-4 bg-gradient-to-r from-purple-500 to-teal-500"

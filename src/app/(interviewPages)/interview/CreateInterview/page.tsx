@@ -131,7 +131,7 @@ const CreateInterview = () => {
       <div className="text-center mb-8">
         <BrainCircuit className="w-16 h-16 mx-auto mb-4 text-purple-400 animate-pulse" />
         <h2 className="text-2xl font-bold text-white mb-2">Interview Basics</h2>
-        <p className="text-gray-400">Let's start with the fundamentals</p>
+        <p className="text-gray-400">Let&apos;s start with the fundamentals</p>
       </div>
       
       <FormField
