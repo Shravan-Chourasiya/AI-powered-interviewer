@@ -1,15 +1,7 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:is(.dark *));
-
-@font-face {
-  font-family: worksans;
-  src: url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Zen+Dots&display=swap')
-}
 
 @theme inline {
-  /* Supabase Brand Colors */
+  /* Brand Colors */
   --color-brand: #3ECF8E;
   --color-brand-dark: #2DD672;
   --color-brand-light: #4FD999;
@@ -18,116 +10,48 @@
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "SF Mono", Monaco, Inconsolata, "Roboto Mono", Consolas, "Courier New", monospace;
 
-  /* Light Theme */
-  --color-background: rgb(255, 255, 255);
-  --color-foreground: rgb(31, 41, 55);
-  --color-card: rgb(255, 255, 255);
-  --color-card-foreground: rgb(31, 41, 55);
+  /* Dark Theme Only */
+  --color-background: rgb(15, 23, 42);
+  --color-foreground: rgb(248, 250, 252);
+  --color-card: rgb(30, 41, 59);
+  --color-card-foreground: rgb(248, 250, 252);
   --color-primary: rgb(62, 207, 142);
-  --color-primary-foreground: rgb(255, 255, 255);
-  --color-secondary: rgb(248, 250, 252);
-  --color-secondary-foreground: rgb(71, 85, 105);
-  --color-muted: rgb(241, 245, 249);
-  --color-muted-foreground: rgb(100, 116, 139);
+  --color-primary-foreground: rgb(15, 23, 42);
+  --color-secondary: rgb(30, 41, 59);
+  --color-secondary-foreground: rgb(203, 213, 225);
+  --color-muted: rgb(51, 65, 85);
+  --color-muted-foreground: rgb(148, 163, 184);
   --color-accent: rgb(62, 207, 142);
-  --color-accent-foreground: rgb(255, 255, 255);
-  --color-border: rgb(226, 232, 240);
-  --color-input: rgb(255, 255, 255);
+  --color-accent-foreground: rgb(15, 23, 42);
+  --color-border: rgb(51, 65, 85);
+  --color-input: rgb(30, 41, 59);
   --color-ring: rgb(62, 207, 142);
 
   /* Radius */
-  --radius: 0.375rem;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.375rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
+  --radius: 0.5rem;
+
+  /* Sidebar */
+  --sidebar: rgb(15, 23, 42);
+  --sidebar-foreground: rgb(248, 250, 252);
+  --sidebar-primary: rgb(62, 207, 142);
+  --sidebar-primary-foreground: rgb(15, 23, 42);
+  --sidebar-accent: rgb(30, 41, 59);
+  --sidebar-accent-foreground: rgb(248, 250, 252);
+  --sidebar-border: rgb(51, 65, 85);
+  --sidebar-ring: rgb(62, 207, 142);
 }
-
-html.dark,
-.dark,
-html.dark *,
-.dark * {
-  --color-background: rgb(15, 23, 42) !important;
-  --color-foreground: rgb(248, 250, 252) !important;
-  --color-card: rgb(30, 41, 59) !important;
-  --color-card-foreground: rgb(248, 250, 252) !important;
-  --color-primary: rgb(62, 207, 142) !important;
-  --color-primary-foreground: rgb(15, 23, 42) !important;
-  --color-secondary: rgb(30, 41, 59) !important;
-  --color-secondary-foreground: rgb(203, 213, 225) !important;
-  --color-muted: rgb(51, 65, 85) !important;
-  --color-muted-foreground: rgb(148, 163, 184) !important;
-  --color-accent: rgb(62, 207, 142) !important;
-  --color-accent-foreground: rgb(15, 23, 42) !important;
-  --color-border: rgb(51, 65, 85) !important;
-  --color-input: rgb(30, 41, 59) !important;
-  --color-ring: rgb(62, 207, 142) !important;
-  --sidebar: hsl(240 5.9% 10%) !important;
-  --sidebar-foreground: hsl(240 4.8% 95.9%) !important;
-  --sidebar-primary: hsl(224.3 76.3% 48%) !important;
-  --sidebar-primary-foreground: hsl(0 0% 100%) !important;
-  --sidebar-accent: hsl(240 3.7% 15.9%) !important;
-  --sidebar-accent-foreground: hsl(240 4.8% 95.9%) !important;
-  --sidebar-border: hsl(240 3.7% 15.9%) !important;
-  --sidebar-ring: hsl(217.2 91.2% 59.8%) !important;
-}
-
-
 
 @layer base {
   * {
     @apply border-border;
   }
 
+  html,
   body {
     @apply bg-background text-foreground font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    touch-action: manipulation;
-  }
-  
-  /* Mobile-first responsive base styles */
-  html {
     scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Improve mobile touch targets */
-  button, 
-  [role="button"], 
-  input[type="submit"], 
-  input[type="button"], 
-  input[type="reset"] {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Better mobile link handling */
-  a {
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Prevent horizontal scroll on mobile */
-  body {
-    overflow-x: hidden;
-  }
-  
-  /* Mobile-optimized form elements */
-  input, textarea, select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
   }
 }
 
@@ -136,165 +60,7 @@ html.dark *,
     background: linear-gradient(135deg, #3ECF8E 0%, #2DD672 100%);
   }
 
-  .supabase-gradient-light {
-    background: linear-gradient(135deg, #7fe39f 0%, #67eed1 100%);
-  }
-
   .supabase-glow {
     box-shadow: 0 0 20px rgba(62, 207, 142, 0.3);
-  }
-  
-  .theme-transition {
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  }
-  
-  /* Mobile-first responsive utilities */
-  .touch-manipulation {
-    touch-action: manipulation;
-  }
-  
-  .tap-highlight-none {
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .scroll-smooth {
-    scroll-behavior: smooth;
-  }
-  
-  /* Mobile-optimized text sizes */
-  .text-mobile-xs { font-size: 0.75rem; line-height: 1rem; }
-  .text-mobile-sm { font-size: 0.875rem; line-height: 1.25rem; }
-  .text-mobile-base { font-size: 1rem; line-height: 1.5rem; }
-  .text-mobile-lg { font-size: 1.125rem; line-height: 1.75rem; }
-  .text-mobile-xl { font-size: 1.25rem; line-height: 1.75rem; }
-  
-  /* Touch-friendly button sizes */
-  .btn-touch {
-    min-height: 44px;
-    min-width: 44px;
-    padding: 0.75rem 1rem;
-  }
-  
-  /* Mobile-optimized spacing */
-  .mobile-padding { padding: 1rem; }
-  .mobile-margin { margin: 1rem; }
-  
-  /* Prevent zoom on input focus (iOS) */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  input[type="number"],
-  input[type="tel"],
-  input[type="url"],
-  input[type="search"],
-  textarea,
-  select {
-    font-size: 16px !important;
-  }
-  
-  /* Mobile-friendly scrollbars */
-  .mobile-scroll {
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: thin;
-  }
-  
-  /* Improved mobile focus states */
-  .mobile-focus:focus {
-    outline: 2px solid #8B5CF6;
-    outline-offset: 2px;
-  }
-}
-
-:root {
-  --sidebar: hsl(0 0% 98%);
-  --sidebar-foreground: hsl(240 5.3% 26.1%);
-  --sidebar-primary: hsl(240 5.9% 10%);
-  --sidebar-primary-foreground: hsl(0 0% 98%);
-  --sidebar-accent: hsl(240 4.8% 95.9%);
-  --sidebar-accent-foreground: hsl(240 5.9% 10%);
-  --sidebar-border: hsl(220 13% 91%);
-  --sidebar-ring: hsl(217.2 91.2% 59.8%);
-}
-
-@layer base {
-  html {
-    transition: none;
-  }
-  
-  html:not(.no-transition) *,
-  html:not(.no-transition) *::before,
-  html:not(.no-transition) *::after {
-    transition: background-color 0.15s ease,
-                border-color 0.15s ease,
-                color 0.15s ease,
-                fill 0.15s ease,
-                stroke 0.15s ease,
-                opacity 0.15s ease,
-                box-shadow 0.15s ease !important;
-  }
-  
-  .no-transition *,
-  .no-transition *::before,
-  .no-transition *::after {
-    transition: none !important;
-  }
-  
-  * {
-    @apply border-border outline-ring/50;
-  }
-  
-  body {
-    @apply bg-background text-foreground;
-  }
-  
-  html.dark,
-  html.dark body {
-    background: rgb(15, 23, 42) !important;
-    color: rgb(248, 250, 252) !important;
-  }
-  
-  /* Mobile-specific dark mode optimizations */
-  @media (max-width: 768px) {
-    .dark {
-      background: rgb(15, 23, 42) !important;
-    }
-    
-    .dark .mobile-card {
-      background: rgba(30, 41, 59, 0.8) !important;
-      backdrop-filter: blur(8px);
-    }
-  }
-  
-  .dark,
-  .dark * {
-    transition: all 0.2s ease !important;
-  }
-  
-  .dark [class*="bg-white"],
-  .dark [class*="bg-slate-50"],
-  .dark [class*="bg-gray-50"],
-  .dark [class*="bg-blue-50"],
-  .dark [class*="from-blue-50"],
-  .dark [class*="via-white"],
-  .dark [class*="to-indigo-50"] {
-    background: rgb(30, 41, 59) !important;
-    background-image: none !important;
-  }
-  
-  .dark [class*="text-slate-900"],
-  .dark [class*="text-gray-900"],
-  .dark [class*="text-slate-800"] {
-    color: rgb(248, 250, 252) !important;
-  }
-  
-  .dark [class*="text-slate-600"],
-  .dark [class*="text-gray-600"],
-  .dark [class*="text-slate-700"] {
-    color: rgb(148, 163, 184) !important;
-  }
-  
-  .dark [class*="border-slate-200"],
-  .dark [class*="border-gray-200"] {
-    border-color: rgb(51, 65, 85) !important;
   }
 }

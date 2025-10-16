@@ -12,14 +12,14 @@ import {
     SidebarInset,
     SidebarTrigger
 } from '@/components/ui/sidebar'
-import { Home, FileText, Bookmark, LogOut, User, Download, Calendar, Settings, Loader2, BarChart3, Clock, Award, Zap, Activity, Sun, Moon } from 'lucide-react'
+import { Home, FileText, Bookmark, LogOut, User, Download, Calendar, Settings, Loader2, BarChart3, Clock, Award, Zap, Activity } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import DoughnutChart from '@/components/DoughnutChart'
 
 import Link from 'next/link'
-import { useTheme } from 'next-themes'
+
 
 interface InterviewData {
     id: string
@@ -33,11 +33,7 @@ interface InterviewData {
 const Dashboard = () => {
     const { data: session, status } = useSession()
     const router = useRouter()
-    const { theme, setTheme } = useTheme()
-    
-    const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark')
-    }
+
     
     // Auth check
     useEffect(() => {
@@ -160,15 +156,15 @@ const Dashboard = () => {
 
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950 text-slate-900 dark:text-white">
+        <div className="min-h-screen bg-background text-foreground">
             <SidebarProvider>
-                <Sidebar className="bg-white dark:bg-gray-950 border-slate-200 dark:border-gray-800 transition-all duration-300 w-64 lg:w-72">
-                    <SidebarHeader className="p-3 sm:p-4 border-b border-slate-200 dark:border-gray-800 bg-white dark:bg-gray-950 transition-all duration-300">
-                        <h2 className="text-base sm:text-lg font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+                <Sidebar className="bg-card border-border transition-all duration-300 w-72">
+                    <SidebarHeader className="p-4 border-b border-border bg-card transition-all duration-300">
+                        <h2 className="text-lg font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
                             SyntheView
                         </h2>
                     </SidebarHeader>
-                    <SidebarContent className="bg-white dark:bg-gray-950 transition-all duration-300">
+                    <SidebarContent className="bg-card transition-all duration-300">
                         <SidebarGroup>
                             <SidebarMenu>
                                 <SidebarMenuItem>
@@ -227,31 +223,21 @@ const Dashboard = () => {
                         </div>
                     </SidebarFooter>
                 </Sidebar>
-                <SidebarInset className="bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950">
-                    <div className="p-4 sm:p-6 space-y-6 sm:space-y-8">
-                        <div className="bg-gradient-to-r from-slate-100 to-slate-200 dark:from-gray-900/50 dark:to-gray-800/50 backdrop-blur-sm border border-slate-200 dark:border-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-6 sm:mb-8 shadow-2xl">
+                <SidebarInset className="bg-background">
+                    <div className="p-6 space-y-8">
+                        <div className="bg-gradient-to-r from-muted/50 to-muted backdrop-blur-sm border border-border rounded-2xl p-6 mb-8 shadow-2xl">
                             <div className="flex flex-col gap-4">
-                                <div className="flex items-center gap-3 sm:gap-4">
-                                    <SidebarTrigger className="text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-gray-800 p-2 rounded-lg touch-manipulation" />
+                                <div className="flex items-center gap-4">
+                                    <SidebarTrigger className="text-foreground hover:bg-accent p-2 rounded-lg" />
                                     <div className="flex-1">
-                                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
+                                        <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent">
                                             Welcome Back!
                                         </h1>
-                                        <p className="text-slate-600 dark:text-gray-400 mt-1 text-sm sm:text-base">Ready to practice your interview skills?</p>
+                                        <p className="text-muted-foreground mt-1">Ready to practice your interview skills?</p>
                                     </div>
                                 </div>
-                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-                                    <button 
-                                        onClick={toggleTheme}
-                                        className="p-3 sm:p-2 rounded-lg bg-slate-100 dark:bg-gray-800 hover:bg-slate-200 dark:hover:bg-gray-700 border border-slate-300 dark:border-gray-700 transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md touch-manipulation flex items-center justify-center sm:w-auto"
-                                    >
-                                        {theme === 'dark' ? (
-                                            <Sun className="w-5 h-5 text-yellow-500" />
-                                        ) : (
-                                            <Moon className="w-5 h-5 text-slate-600" />
-                                        )}
-                                    </button>
-                                    <Link href="/interview/CreateInterview" className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-6 sm:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl text-white font-bold text-base sm:text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 text-center touch-manipulation flex-1 sm:flex-none">
+                                <div className="flex items-center gap-4">
+                                    <Link href="/interview/CreateInterview" className="bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600 px-8 py-4 rounded-2xl text-white font-bold text-lg transition-all duration-200 hover:scale-105 shadow-lg hover:shadow-purple-500/25 text-center">
                                         ✨ Start Interview
                                     </Link>
                                 </div>
@@ -259,15 +245,15 @@ const Dashboard = () => {
                         </div>
 
                         {/* Quick Actions */}
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                            <Link href="/interview/CreateInterview" className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 overflow-hidden touch-manipulation">
+                        <div className="grid grid-cols-4 gap-4 mb-8">
+                            <Link href="/interview/CreateInterview" className="group relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 border border-slate-700/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50 overflow-hidden">
                                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div className="relative z-10">
-                                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-500/20 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-2 sm:mb-3 group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
-                                        <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400" />
+                                    <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
+                                        <Zap className="w-6 h-6 text-purple-400" />
                                     </div>
-                                    <h3 className="text-white font-semibold mb-1 group-hover:text-purple-300 transition-colors text-sm sm:text-base">New Interview</h3>
-                                    <p className="text-gray-400 text-xs sm:text-sm group-hover:text-gray-300 transition-colors">Start fresh interview</p>
+                                    <h3 className="text-white font-semibold mb-1 group-hover:text-purple-300 transition-colors">New Interview</h3>
+                                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">Start fresh interview</p>
                                 </div>
                             </Link>
                             
@@ -306,14 +292,14 @@ const Dashboard = () => {
                         </div>
 
                         {/* Enhanced Statistics Section */}
-                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
                             {/* Doughnut Chart */}
-                            <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
+                            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-6 shadow-2xl hover:shadow-purple-500/10 transition-all duration-300">
                                 {isLoading ? (
-                                    <div className="flex items-center justify-center h-48 sm:h-64">
+                                    <div className="flex items-center justify-center h-64">
                                         <div className="flex flex-col items-center gap-4">
-                                            <Loader2 className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400 animate-spin" />
-                                            <p className="text-gray-400 text-xs sm:text-sm">Loading analytics...</p>
+                                            <Loader2 className="w-8 h-8 text-purple-400 animate-spin" />
+                                            <p className="text-gray-400 text-sm">Loading analytics...</p>
                                         </div>
                                     </div>
                                 ) : (
@@ -322,14 +308,14 @@ const Dashboard = () => {
                             </div>
 
                             {/* Enhanced Statistics Cards */}
-                            <div className="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-1 gap-3 sm:gap-4">
+                            <div className="grid grid-cols-1 gap-4">
                                 {isLoading ? (
                                     Array.from({ length: 3 }).map((_, i) => (
-                                        <div key={i} className="bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center animate-pulse">
-                                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-slate-300 dark:bg-slate-700 rounded-lg sm:rounded-xl mx-auto mb-3 sm:mb-4"></div>
-                                            <div className="h-6 sm:h-8 bg-slate-300 dark:bg-slate-700 rounded mb-2"></div>
-                                            <div className="h-3 sm:h-4 bg-slate-300 dark:bg-slate-700 rounded mb-2 sm:mb-3"></div>
-                                            <div className="h-2 bg-slate-300 dark:bg-slate-700 rounded"></div>
+                                        <div key={i} className="bg-card/80 border border-border/50 rounded-2xl p-6 text-center animate-pulse">
+                                            <div className="w-16 h-16 bg-muted rounded-xl mx-auto mb-4"></div>
+                                            <div className="h-8 bg-muted rounded mb-2"></div>
+                                            <div className="h-4 bg-muted rounded mb-3"></div>
+                                            <div className="h-2 bg-muted rounded"></div>
                                         </div>
                                     ))
                                 ) : (

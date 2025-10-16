@@ -1,18 +1,14 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { Users, FileText, TrendingUp, Home, Shield, Database, Activity, Lock, Eye, EyeOff, Sun, Moon } from 'lucide-react'
+import { Users, FileText, TrendingUp, Home, Shield, Database, Activity, Lock, Eye, EyeOff } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useTheme } from 'next-themes'
+
 
 export default function AdminDashboard() {
     const router = useRouter()
-    const { theme, setTheme } = useTheme()
-    
-    const toggleTheme = () => {
-        setTheme(theme === 'dark' ? 'light' : 'dark')
-    }
+
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
@@ -163,16 +159,7 @@ export default function AdminDashboard() {
                                 Admin Dashboard
                             </h1>
                         </div>
-                        <button 
-                            onClick={toggleTheme}
-                            className="p-2 rounded-lg bg-white dark:bg-gray-800 hover:bg-slate-100 dark:hover:bg-gray-700 border border-slate-300 dark:border-gray-700 transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md touch-manipulation self-start sm:self-center"
-                        >
-                            {theme === 'dark' ? (
-                                <Sun className="w-5 h-5 text-yellow-500" />
-                            ) : (
-                                <Moon className="w-5 h-5 text-slate-600" />
-                            )}
-                        </button>
+
                     </div>
                     <p className="text-slate-600 dark:text-gray-400 text-sm sm:text-base">System overview and management controls</p>
                 </div>
