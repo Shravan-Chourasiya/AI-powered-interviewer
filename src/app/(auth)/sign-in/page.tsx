@@ -19,7 +19,7 @@ import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { Loader2Icon } from 'lucide-react'
-import '../../App.css'
+
 
 const SignIn = () => {
   const router = useRouter()

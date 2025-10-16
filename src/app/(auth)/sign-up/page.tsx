@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation"
 import { Loader2Icon } from 'lucide-react'
 import { useSession } from "next-auth/react"
 import Link from "next/link"
-import '../../App.css'
+
 
 const SignUp = () => {
     const [username, setUsername] = useState('')
