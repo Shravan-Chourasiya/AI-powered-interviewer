@@ -320,11 +320,11 @@ const Dashboard = () => {
                                     ))
                                 ) : (
                                     <>
-                                        <div className="group bg-white/80 dark:bg-slate-900/80 border border-slate-200/50 dark:border-slate-700/50 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-emerald-500/20 hover:border-emerald-500/50 touch-manipulation">
-                                            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-emerald-100/80 dark:bg-emerald-500/20 rounded-lg sm:rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 group-hover:bg-emerald-200/80 dark:group-hover:bg-emerald-500/30 transition-all group-hover:scale-110">
-                                                <Award className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600 dark:text-emerald-400" />
+                                        <div className="group bg-card/80 border border-border/50 rounded-2xl p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-purple-500/20 hover:border-purple-500/50">
+                                            <div className="w-16 h-16 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-500/30 transition-all group-hover:scale-110">
+                                                <Award className="w-8 h-8 text-purple-400" />
                                             </div>
-                                            <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-emerald-600 dark:text-emerald-400 mb-1 sm:mb-2 group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">{stats.completed}</div>
+                                            <div className="text-4xl font-bold text-purple-400 mb-2 group-hover:text-purple-300 transition-colors">{stats.completed}</div>
                                             <div className="text-slate-600 dark:text-gray-300 font-medium group-hover:text-slate-700 dark:group-hover:text-gray-200 transition-colors text-xs sm:text-sm lg:text-base">Completed Interviews</div>
                                             <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 mt-2 sm:mt-3 overflow-hidden">
                                                 <div className="bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full transition-all duration-1000" style={{ width: `${Math.min((stats.completed / (stats.completed + stats.failed)) * 100, 100)}%` }} />

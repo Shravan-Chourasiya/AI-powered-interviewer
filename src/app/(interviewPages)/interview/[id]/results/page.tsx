@@ -154,20 +154,20 @@ export default function ResultsPage() {
                 {/* Enhanced Final Decision */}
                 <Card className={`bg-gradient-to-r backdrop-blur-sm border-2 p-6 sm:p-10 mb-8 text-center shadow-2xl transition-all duration-500 ${
                     isSelected 
-                        ? 'from-green-100/80 to-emerald-100/80 dark:from-green-900/30 dark:to-emerald-900/30 border-green-500/70 dark:border-green-400/50 hover:shadow-green-400/20' 
+                        ? 'from-purple-100/80 to-purple-100/80 border-purple-500/70 hover:shadow-purple-400/20' 
                         : 'from-red-100/80 to-rose-100/80 dark:from-red-900/30 dark:to-rose-900/30 border-red-500/70 dark:border-red-400/50 hover:shadow-red-400/20'
                 }`}>
                     <div className={`inline-flex items-center gap-3 text-2xl sm:text-4xl font-bold mb-6 animate-bounce ${
-                        isSelected ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+                        isSelected ? 'text-purple-600' : 'text-red-600'
                     }`}>
                         {isSelected ? <CheckCircle className="w-8 h-8 sm:w-12 sm:h-12" /> : <XCircle className="w-8 h-8 sm:w-12 sm:h-12" />}
                         <span className={`bg-gradient-to-r bg-clip-text text-transparent ${
-                            isSelected ? 'from-green-600 to-emerald-600 dark:from-green-300 dark:to-emerald-300' : 'from-red-600 to-rose-600 dark:from-red-300 dark:to-rose-300'
+                            isSelected ? 'from-purple-600 to-purple-600' : 'from-red-600 to-rose-600'
                         }`}>
                             {isSelected ? 'CONGRATULATIONS!' : 'KEEP IMPROVING!'}
                         </span>
                     </div>
-                    <div className={`text-lg sm:text-2xl mb-6 font-semibold flex items-center justify-center gap-2 ${isSelected ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
+                    <div className={`text-lg sm:text-2xl mb-6 font-semibold flex items-center justify-center gap-2 ${isSelected ? 'text-purple-700' : 'text-red-700'}`}>
                         {isSelected ? (
                             <>
                                 <Zap className="w-6 h-6" />
@@ -206,16 +206,16 @@ export default function ResultsPage() {
                         </div>
                     </Card>
 
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-green-500/20 hover:border-green-500/50 touch-manipulation">
-                        <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100/80 dark:bg-green-500/20 rounded-xl sm:rounded-2xl flex items-center justify-center mx-auto mb-3 sm:mb-4">
-                            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 dark:text-green-400" />
+                    <Card className="bg-card/80 border border-border/50 p-6 text-center hover:scale-[1.02] transition-all duration-300 shadow-xl hover:shadow-teal-500/20 hover:border-teal-500/50">
+                        <div className="w-16 h-16 bg-teal-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <TrendingUp className="w-8 h-8 text-teal-400" />
                         </div>
-                        <h3 className="text-green-700 dark:text-green-300 font-bold text-base sm:text-lg mb-2 sm:mb-3">Skills Round</h3>
-                        <div className="relative mb-3 sm:mb-4">
-                            <div className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-600 dark:text-green-400 mb-2">{codingScore}%</div>
-                            <div className="w-full bg-slate-200 dark:bg-gray-800 rounded-full h-2">
+                        <h3 className="text-teal-400 font-bold text-lg mb-3">Skills Round</h3>
+                        <div className="relative mb-4">
+                            <div className="text-5xl font-bold text-teal-400 mb-2">{codingScore}%</div>
+                            <div className="w-full bg-muted rounded-full h-2">
                                 <div 
-                                    className="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full transition-all duration-1000"
+                                    className="bg-gradient-to-r from-teal-400 to-teal-500 h-2 rounded-full transition-all duration-1000"
                                     style={{ width: `${codingScore}%` }}
                                 />
                             </div>
@@ -248,15 +248,15 @@ export default function ResultsPage() {
                 {/* Detailed Report */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
                     {/* Strengths */}
-                    <Card className="bg-white/80 dark:bg-slate-900/80 border-slate-200/50 dark:border-slate-700/50 p-4 sm:p-6 hover:shadow-emerald-500/10 transition-all">
-                        <h3 className="text-emerald-600 dark:text-emerald-400 font-bold text-lg sm:text-xl mb-3 sm:mb-4 flex items-center gap-2">
-                            <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Card className="bg-card/80 border border-border/50 p-6 hover:shadow-purple-500/10 transition-all">
+                        <h3 className="text-purple-400 font-bold text-xl mb-4 flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5" />
                             Strengths
                         </h3>
                         <ul className="space-y-2">
                             {results.report?.strengths?.map((strength, index) => (
-                                <li key={index} className="text-slate-700 dark:text-gray-300 flex items-start gap-2 text-sm sm:text-base">
-                                    <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
+                                <li key={index} className="text-muted-foreground flex items-start gap-2">
+                                    <CheckCircle className="w-4 h-4 text-purple-400 mt-1 flex-shrink-0" />
                                     <span className="leading-relaxed">{strength}</span>
                                 </li>
                             )) || <li className="text-slate-600 dark:text-gray-400 text-sm sm:text-base">No strengths recorded</li>}

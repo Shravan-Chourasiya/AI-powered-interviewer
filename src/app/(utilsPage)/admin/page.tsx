@@ -173,7 +173,7 @@ export default function AdminDashboard() {
                         <div className="mt-1 sm:mt-2 text-xs sm:text-sm text-green-600 dark:text-green-400">+12% this month</div>
                     </div>
                     
-                    <div className="bg-gradient-to-br from-green-100/50 dark:from-green-900/30 to-green-200/50 dark:to-green-800/30 border border-green-300/50 dark:border-green-400/30 rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-green-500/20">
+                    <div className="bg-gradient-to-br from-purple-100/50 to-purple-200/50 border border-purple-300/50 rounded-2xl p-6 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-purple-500/20">
                         <FileText className="w-8 h-8 text-green-600 dark:text-green-400 mb-3" />
                         <h3 className="text-3xl font-bold text-slate-900 dark:text-white">{stats.totalInterviews.toLocaleString()}</h3>
                         <p className="text-slate-600 dark:text-gray-400">Interviews Conducted</p>

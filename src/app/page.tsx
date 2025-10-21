@@ -90,7 +90,7 @@ export default function LandingPage() {
             </Button>
           </Link>
           <Link href='/about'>
-            <Button className="group px-10 py-5 bg-card backdrop-blur-sm border-2 border-border hover:border-purple-500 hover:bg-accent text-foreground hover:text-purple-700 rounded-2xl font-bold text-xl hover:scale-[1.05] transition-all duration-300 shadow-lg hover:shadow-xl min-w-64">
+            <Button className="group px-10 py-5 bg-card backdrop-blur-sm border-2 border-border hover:border-purple-500 hover:bg-accent text-foreground hover:text-purple-400 rounded-2xl font-bold text-xl hover:scale-[1.05] transition-all duration-300 shadow-lg hover:shadow-xl min-w-64">
               <BookOpen className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
               Learn More
             </Button>
@@ -113,9 +113,9 @@ export default function LandingPage() {
             <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-2">{stats.successRate}%</div>
             <div className="text-muted-foreground font-medium group-hover:text-foreground transition-colors leading-tight">Success Rate</div>
           </div>
-          <div className="group text-center bg-card backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-emerald-400 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
-            <div className="w-12 h-12 bg-emerald-500/20 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-emerald-500/30 transition-all">
-              <Target className="w-6 h-6 text-emerald-400" />
+          <div className="group text-center bg-card backdrop-blur-sm border border-border rounded-2xl p-6 hover:border-purple-400 hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
+            <div className="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:bg-purple-500/30 transition-all">
+              <Target className="w-6 h-6 text-purple-400" />
             </div>
             <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-teal-400 bg-clip-text text-transparent mb-2">50+</div>
             <div className="text-muted-foreground font-medium group-hover:text-foreground transition-colors leading-tight">Job Categories</div>
