@@ -100,13 +100,13 @@ export default function Homepage() {
     }, [session, status, router])
 
     if (status === 'loading' || !session) {
-        return <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 flex items-center justify-center theme-transition">
-            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-500"></div>
+        return <div className="min-h-screen bg-background flex items-center justify-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary"></div>
         </div>
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 dark:bg-gray-950 text-slate-900 dark:text-white theme-transition">
+        <div className="min-h-screen bg-background text-foreground">
             {/* Notice Bar */}
             <div className="bg-gradient-to-r from-purple-600 to-teal-600 text-white py-3 px-4 text-center text-xs sm:text-sm">
                 <p className="max-w-4xl mx-auto">
